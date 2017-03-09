@@ -1,9 +1,97 @@
-<header ng-include="'template/core/header.html'"></header>
-<div class="main-container">
-	<div class="sidebar" ng-include="'template/core/sidebar.html'"></div>
-	<div class="right-content">
-		<!-- <breadcrumbs display-name="data.displayName" front-msg="当前页面"></breadcrumbs> -->
-		<!-- <div class="content-main" ui-view></div> -->
-		<div class="search"></div>
-	</div>
+<!---------------------------------------------component-base构件库简写---------------------------------->
+<div class="component-base">
+	<!-------------------------------------header 页面中的头部--------------------------------------->
+	<header class="component-logo  ">
+		<div class=" component-sys-close" >
+			<div class="close-tool">
+				<span class="glyphicon glyphicon-minus"></span>
+				<span class="glyphicon glyphicon-book"></span>
+				<span class="glyphicon glyphicon-remove"></span>
+			</div>
+		</div>
+		<div class="component-computer-logo  clearfix">
+			<div class="col-xs-3">
+				<span class=""><img src="imgs/logo.png">  <h1 class="">云构件库</h1></span>
+			</div>
+			<div class="col-xs-8 component-search ">
+				<form >
+					<input type="text" placeholder="输入构件名称">
+					<img src="imgs/logo.png" alt="">
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-------------------------------------页面内容main----------------------------------------------->
+	<article class="componet-base-main">
+		<aside class="main-siderbar">
+			<ul>
+				<p>构件来源</p>
+				<li ng-repeat="menusList in menusArr track by $index" >
+					{{menusList.menus}}
+					<div class="menus-childs" ng-if="menusList.child">
+						<p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
+					</div>
+				</li>
+			</ul>
+			<div class="component-btns">
+				<div>上传构件</div>
+				<div>我的上传</div>
+				<div>我的审核</div>
+			</div>
+		</aside>
+		<section class="container-fluid">
+			<div class="component-filter">
+				<div class="filter-status">
+					<div class="filter-ele"><span>全部</span></div>
+				</div>
+				<div class="filter-infoList">
+					<!--筛选标题-->
+					<p><b>类型：</b></p>
+					<!--筛选内容-->
+					<div class="filter-condition row" style="width:calc(100% - 45px )">
+						<div class="filter-ele"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
+						<div class="filter-tool">
+							<span>+多选</span><span>更多</span>
+						</div>
+					</div>
+				</div>
+				<div class="filter-infoList">
+					<!--筛选标题-->
+					<p><b>风格：</b></p>
+					<!--筛选内容-->
+					<div class="filter-condition row" style="width:calc(100% - 45px )">
+						<div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span></div>
+						<div class="filter-tool">
+							<span>+多选</span><span>更多</span>
+						</div>
+					</div>
+				</div>
+				<div class="filter-brand">
+					<h1>品牌</h1>
+				</div>
+				<p class="filter-down">更多选项</p>
+			</div>
+			<div class="component-info">
+				<ul class="clearfix">
+					<!--<li>-->
+					<!--<div class="preview-model">-->
+					<!--<div class="preview-big"><img src="images/1.png"><b></b></div>-->
+					<!--<div class="preview-small">-->
+					<!--<span><img src="images/1.png" alt=""></span>-->
+					<!--<span><img src="images/2.png" alt=""></span>-->
+					<!--<span><img src="images/3.png" alt=""></span>-->
+					<!--<span><img src="images/4.png" alt=""></span>-->
+					<!--</div>-->
+					<!--<p class="preview-descText">米白色双人沙发</p>-->
+					<!--</div>-->
+					<!--<div class="preview-tool">-->
+					<!--<a >更多详情</a>-->
+					<!--<a >应用</a>-->
+					<!--</div>-->
+					<!--</li>-->
+				</ul>
+			</div>
+		</section>
+	</article>
 </div>
+<!--<script src="js/index.js"></script>-->

@@ -7,19 +7,13 @@
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
 	<!-- project core CSS -->
-	<link rel="stylesheet" href="./css/main.css">
+	<!--<link rel="stylesheet" href="./css/main.css">-->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/index.css">
+
+
 </head>
 <body>
-<!-- <header ng-include="'core/header.html'"></header>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-2 col-md2 sidebar" ng-include="'core/sidebar.html'"></div>
-		<div class="col-sm10 col-md-10">
-			<breadcrumbs display-name="data.displayName" front-msg="当前页面"></breadcrumbs>
-			<div class="content-main" ui-view></div>
-		</div>
-	</div>
-</div> -->
 <div class="content-main" ui-view></div>
 
 <!-- vendor -->
@@ -29,9 +23,12 @@
 <!-- main -->
 <script type="text/javascript" src="./modules/config.js"></script>
 <script type="text/javascript" src="./modules/application.js"></script>
+
 <!-- core -->
 <script type="text/javascript" src="./modules/core/core.module.js"></script>
 <script type="text/javascript" src="./modules/core/core.routes.js"></script>
+<!--directive-->
+<script src="./modules/directive/directive.js"></script>
 
 <!-- home -->
 <script type="text/javascript" src="./modules/controller/component.ctrl.js"></script>

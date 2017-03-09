@@ -14,6 +14,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		}).state('component', {
 			url:'/component',
 			templateUrl: 'template/component/component.html',
+			controller:'componentCtrl',
 			data: {
 				displayName: 'component'
 			}

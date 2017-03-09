@@ -1,0 +1,251 @@
+*{
+    padding:0;margin:0;
+}
+/*----------------------------------component-base(构件库)----------------------------------------*/
+.component-base{
+    width:100%;
+    height:auto;
+}
+.container-fluid{
+    padding:0 !important;margin:0;
+}
+/*.component-base component-logo(logo部分)*/
+.component-base .component-logo{
+    /*height:150px;*/
+    /*background:red;*/
+}
+/*--- component-sys-close（系统最小化)----*/
+.component-base .component-logo .component-sys-close{
+    height:40px;
+    background:#ddd;
+}
+.component-base .component-logo .component-sys-close .close-tool{
+    float:right;
+    line-height:40px;
+}
+.component-base .component-logo .component-sys-close .close-tool>span{
+    padding:0 5px;
+}
+/*component-computer-logo*/
+.component-base .component-computer-logo{
+    height:110px;
+    line-height:110px;padding:0 30px;background:#fff;clear:both;
+}
+.component-computer-logo span{
+    display:inline-block;float:left;width:272px;
+}
+.component-computer-logo span img{
+    float:left;margin:18px 0 0;height:84px;
+}
+.component-computer-logo span h1{
+    display: inline-block;
+    float: left;
+    margin-top: 34px;
+    margin-left: 23px;
+}
+/*.component-search(搜索框)*/
+.component-computer-logo .component-search{
+    height:100%;
+}
+.component-computer-logo .component-search form{
+    width:500px;height:40px;line-height:112px;position:relative;margin: 35px 0 0 39px;
+}
+.component-computer-logo form input{
+    width: 500px;
+    height: 100%;
+    padding: 0 10px;vertical-align: top;
+}
+.component-computer-logo form>img{
+    width:20px;
+    height:20px;
+    position:absolute;
+    right:10px;
+    top:9px
+}
+/*---------------------------------------------main------------------------------------------------*/
+.component-base article.componet-base-main{
+    height:calc(100vh - 150px) ;background:lightpink;
+}
+/*---------------------------------------------aside-------------------------------------*/
+.component-base .componet-base-main aside.main-siderbar{
+    width:200px;height:100%;background:#1a1a1a;float:left;
+}
+.menus-childs{
+    display:none;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>li,.component-base .componet-base-main aside.main-siderbar>ul>li p{
+    color:#fff;line-height:40px;padding:0 20px;
+}
+.component-base .componet-base-main aside.main-siderbar>ul{
+    height: 461px;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>p{
+    height: 40px;
+    color: #fff;
+    text-align: center;
+    background: #757575;
+    line-height: 40px;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>li:hover{
+    background:#5a5a5a;
+}
+/*.component-btns左侧菜单按钮组*/
+.component-base .component-btns>div{
+    width: 120px;
+    height: 45px;
+    background: #757575;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 45px;
+    color: #fff;    margin: 15px auto;
+}
+.component-base .component-btns>div:hover{
+    cursor:pointer;background:#3c3c3c;
+}
+/*--------------------------------------section(信息展示页面)------------------------------------------*/
+.component-base .componet-base-main section{
+   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;    height: 798px;
+    overflow: auto;
+}
+/*---------------------------------.component-filter-------------------------------------------------*/
+.component-base .component-filter{
+    padding: 0 8px 0 0px;position:relative;
+}
+/*---------------------------------filter-status--------------------------------------*/
+.component-base .filter-status .filter-ele span{
+    height: 30px;
+    width: 76px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #000;margin:0 6px;
+}
+.component-base .filter-infoList>P{
+    padding-left:10px;
+}
+/*--------------------------------------.component-filter(筛选条件的每一项)*/
+.component-base .componet-base-main section .component-filter>div{
+    height:54px;line-height:54px;border-bottom:1px solid #ccc;margin:0;
+}
+.component-base .componet-base-main section .component-filter>div>p{
+    display:inline-block;
+}
+.component-base .componet-base-main section .component-filter .filter-condition{
+    display:inline-block;
+}
+.component-base .componet-base-main section .component-filter .filter-condition>div{
+    display:inline-block;
+}
+.component-base .componet-base-main section .component-filter .filter-ele span{
+    height: 30px;
+    width: 76px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #000;margin:0 6px;
+}
+/*  filter-down*/
+.component-base .filter-down{
+    width: 98px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-top: none;
+    position: absolute;
+    left: 50%;
+    margin-left: 28px;
+    bottom: -27px;
+    background: #fff;
+    border-radius: 5px;
+}
+.component-base  .filter-brand{
+    display:none;
+}
+.component-base .filter-tool{
+    float:right;
+}
+.component-base .filter-tool span{
+    height: 30px;
+    width: 76px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #000;margin:0 6px;
+}
+/*--------------------------component-infoLIst*/
+.component-base .component-info{
+    margin-top: 44px;
+}
+.component-base .component-info ul>li{
+    float:left;width:278px;
+    margin:0 0 10px 10px;position:relative;
+
+}
+.component-base .component-info ul>li:hover{
+    -webkit-box-shadow: 5px 5px 7px rgba(0,0,0,0.5);  -moz-box-shadow:  5px 5px 7px rgba(0,0,0,0.5); box-shadow:  5px 5px 7px rgba(0,0,0,0.5);;
+}
+/*------------.preview-tool(详情显示)--------*/
+.component-base .component-info ul>li:hover .preview-tool{
+    display:block;
+}
+.component-base .component-info ul>li .preview-model{
+    border:1px solid #ddd;
+}
+/*---------------------.preview-big--------------------------*/
+.component-base .component-info ul >li .preview-big{
+    width:100%;
+    height:275px;text-align:center;
+}
+.component-base .component-info ul >li .preview-big img{
+    width:260px;
+    height:260px;
+    vertical-align: middle;
+    display:inline-block;
+}
+/*----------------------------------.preview-big(居中)-----------*/
+.component-base .component-info ul >li  .preview-big b{
+    width:0%;
+    height:100%;
+    display:inline-block;
+    vertical-align: middle;
+}
+/*---------------------preview-small---------------------*/
+.component-base .component-info ul >li .preview-small{
+    margin:15px 0 0 10px;padding:0 0 10px;
+}
+
+.component-base .component-info ul >li .preview-small span{
+    width:50px;
+    height:50px;
+    display:inline-block;margin-right:10px;
+}
+.component-base .component-info ul >li .preview-small img{
+    width:50px;
+    height:50px;
+    display:inline-block;
+}
+/*------------------------------描述信息-------------------*/
+.component-base .component-info ul >li .preview-small+p{
+     padding-bottom: 10px;
+     margin:0 10px;
+ }
+.component-base .component-info ul >li .preview-tool{
+    height: 41px;line-height:40px;
+    padding-left: 11px;
+    display:none;position:absolute;width: 100%;background:#fff;border:1px solid #ddd;border-top:0;bottom: -41px;
+    z-index: 1; -webkit-box-shadow: 5px 5px 7px rgba(0,0,0,0.5);  -moz-box-shadow:  5px 5px 7px rgba(0,0,0,0.5); box-shadow:  5px 5px 7px rgba(0,0,0,0.5);;
+
+}
+.component-base .component-info ul >li .preview-tool a{
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+    border-top: 0 !important;
+    border: 1px solid #ddd;
+    border-left: 0;
+}
+.component-base .component-info ul >li .preview-tool a:last-child{
+    border-right:0;
+}
+
