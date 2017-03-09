@@ -102,7 +102,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http',
             /*ajax
              * ajax请求列表数据
              * */
-            getAjax('data.json')
+            getAjax('json/data.json')
             //插入菜单
             //$('.main-siderbar ul').append(manageMenus(siderbarArr));
 
