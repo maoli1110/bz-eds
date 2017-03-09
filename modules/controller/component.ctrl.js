@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('componentCtrl', ['$scope', '$http',
-    function ($scope, $http) {
+angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal',
+    function ($scope, $http,$uibModal) {
             /*
              * 左侧菜单
              * param:一个带有数据的数组
@@ -131,5 +131,30 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http',
                     $('.filter-brand').hide()
                 }
             })
+        /*
+        * 初始化模态框
+        * 初始化参数配置
+        * */
+        $scope.componetModal = function () {
+            var modalInstance = $uibModal.open({
+                windowClass: 'component-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/core/modal.html',
+                controller: 'modalCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
 
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+
+        }
 }]);
