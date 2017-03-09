@@ -20,13 +20,15 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			}
 		}).state('upload',{
 			url:'/upload',
-			templateUrl:'template/component/component.html',
+			templateUrl:'template/component/upload.html',
+			controller:'uploadCtrl',
 			data:{
 				displayName:"upload"
 			}
 		}).state('audit',{
 			url:'/audit',
-			templateUrl:'template/component/component.html',
+			templateUrl:'template/component/audit.html',
+			controller:'auditCtrl',
 			displayName:{
 				displayName:"audit"
 			}

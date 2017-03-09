@@ -19,13 +19,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			}
 		}).state('upload',{
 			url:'/upload',
-			templateUrl:'template/component/component.html',
+			templateUrl:'template/component/upload.html',
 			data:{
 				displayName:"upload"
 			}
 		}).state('audit',{
 			url:'/audit',
-			templateUrl:'template/component/component.html',
+			templateUrl:'template/component/audit.html',
 			displayName:{
 				displayName:"audit"
 			}

@@ -104,7 +104,7 @@
 }
 /*--------------------------------------section(信息展示页面)------------------------------------------*/
 .component-base .componet-base-main section{
-   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;    height: 798px;
+   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;height: calc(100vh - 150px );
     overflow: auto;
 }
 /*---------------------------------.component-filter-------------------------------------------------*/
@@ -153,8 +153,8 @@
     border: 1px solid #ddd;
     border-top: none;
     position: absolute;
-    left: 50%;
-    margin-left: 28px;
+    left: 46%;
+    /*margin-left: 28px;*/
     bottom: -27px;
     background: #fff;
     border-radius: 5px;

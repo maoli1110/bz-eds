@@ -1,6 +1,6 @@
-<!---------------------------------------------component-base构件库简写---------------------------------->
+<!--component-base构件库简写-->
 <div class="component-base">
-	<!-------------------------------------header 页面中的头部--------------------------------------->
+	<!--header 页面中的头部-->
 	<header class="component-logo  ">
 		<div class=" component-sys-close" >
 			<div class="close-tool">
@@ -21,9 +21,11 @@
 			</div>
 		</div>
 	</header>
-	<!-------------------------------------页面内容main----------------------------------------------->
+	<!---页面内容main-->
 	<article class="componet-base-main">
+		<!--main-siderbar(侧边栏)-->
 		<aside class="main-siderbar">
+			<!--侧边栏菜单-->
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
@@ -33,13 +35,16 @@
 					</div>
 				</li>
 			</ul>
+			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
-				<div>上传构件</div>
-				<div>我的上传</div>
-				<div>我的审核</div>
+				<div ui-sref="upload">上传构件</div>
+				<div ui-sref="upload">我的上传</div>
+				<div ui-sref="audit">我的审核</div>
 			</div>
 		</aside>
+		<!--component-container(右侧内容)-->
 		<section class="container-fluid">
+			<!--component-filter（构件筛选）-->
 			<div class="component-filter">
 				<div class="filter-status">
 					<div class="filter-ele"><span>全部</span></div>
@@ -71,6 +76,7 @@
 				</div>
 				<p class="filter-down">更多选项</p>
 			</div>
+			<!--component-infoList(构件信息展示)-->
 			<div class="component-info">
 				<ul class="clearfix">
 					<!--<li>-->
@@ -94,4 +100,3 @@
 		</section>
 	</article>
 </div>
-<!--<script src="js/index.js"></script>-->
