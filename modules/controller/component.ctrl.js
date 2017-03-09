@@ -32,7 +32,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc)
             })
-        })
+        });
+
             //声明菜单内容
             siderbarArr = [
                 {menus:'全部'},
@@ -65,7 +66,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
 
                     $('.filter-brand').hide()
                 }
-            })
+            });
+
         /*
         * 初始化模态框
         * 初始化参数配置
