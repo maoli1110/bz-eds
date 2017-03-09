@@ -1,0 +1,66 @@
+[
+	{
+		"title": "title1",
+		"children": [
+			{
+				"title": "subTitle1",
+				"dataSet": [1, 2, 3, 4, 5],
+				"children": [
+					{
+						"title": "subsubTitle1",
+						"dataSet": [2, 3, 4, 5, 6],
+						"children": [
+							{
+								"title": "subsubsubTitle1",
+								"dataSet": [4, 5, 6, 7, 8]
+							}
+						]
+					},
+					{
+						"title": "subsubTitle2",
+						"dataSet": [12, 13, 14, 15, 16],
+						"children": [
+							{
+								"title": "subsubsubTitle1",
+								"dataSet": [45, 55, 65, 75, 85]
+							}
+						]
+					}
+				]
+			},
+			{
+				"title": "subTitle2",
+				"dataSet": [1, 2, 3, 4, 5],
+				"children": [
+					{
+						"title": "subsubTitle1",
+						"dataSet": [2, 3, 4, 5, 6],
+						"children": [
+							{
+								"title": "subsubsubTitle1",
+								"dataSet": [4, 5, 6, 7, 8]
+							},
+							{
+								"title": "subsubsubTitle2",
+								"dataSet": [11, 22, 33, 44, 55]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"title": "title2",
+		"children": [
+			{
+				"title": "title2level1",
+				"dataSet": [342, 432, 12, 43, 1]
+			},
+			{
+				"title": "title2level2",
+				"dataSet": [342, 432, 4324231412, 43, 1]
+			}
+		]
+	}
+]
