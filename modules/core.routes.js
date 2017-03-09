@@ -33,13 +33,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				displayName:"audit"
 			}
 		});
-			/*.state('modal',{
-			url:'/modal',
-			templateUrl:'template/core/modal.html',
-			controller:'modalCtrl',
-			displayName:{
-				displayName:"modal"
-			}
-		});*/
+
 	}
 ]);

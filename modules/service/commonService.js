@@ -73,5 +73,19 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-
+    /*
+    *构件数据ajax请求
+    * type:get;
+    * return data
+    * */
+    this.componentList = function(){
+        var  url="json/data.json";
+        var delay = $q.defer();
+        $http.get(url).then(function(data){
+            delay.resolve(data);
+        },function(err){
+            delay.reject(err)
+        });
+        return delay.promise;
+    }
 });

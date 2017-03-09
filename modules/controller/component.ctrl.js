@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal',
-    function ($scope, $http,$uibModal) {
+angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService',
+    function ($scope, $http,$uibModal,commonService) {
             /*
              * 左侧菜单
              * param:一个带有数据的数组
@@ -11,85 +11,27 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
              * */
             var  siderbarArr = [];//菜单项
             var  filterCount = 1;
-            $scope.menusArr = [];
-            //function manageMenus(arr){
-            //    var li = '';
-            //    for(var key in arr){
-            //        console.info(arr[key])
-            //        if(arr[key].child){
-            //            var eleDom = '';
-            //            for(var i = 0;i<arr[key].child.length;i++){
-            //                eleDom += '<p>'+arr[key].child[i]+'</p>'
-            //            }
-            //            li += '<li>'+arr[key].menus+'<div class="menus-childs">'+eleDom+'</div></li>';
-            //        }else{
-            //            li += '<li>'+arr[key].menus+'</li>'
-            //        }
-            //    }
-            //    return li;
-            //}
-            /*
-             *菜单事件动画
-             * */
-            function  menusEvent(obj,event){
-                //menusCliCount =1;
-                obj.on(event,function(){
-                    var menusCliCount =1;
-                    menusCliCount++;
-                    $(this).addClass('active').siblings().removeClass('active');
-                    if($(this).has('.menus-childs')){
-                        $(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
-                    }
-                })
-            }
-            function getAjax(url){
-                $.ajax({
-                    type:'Get',
-                    data:'',
-                    url:url,
-                    success:function(data){
-                        //processData(data);
-                        $('.component-info ul').append(processData(data));
-                        /*
-                         *商品放大镜效果
-                         * */
-                        $('.component-info ul li .preview-small span').hover(function(){
-                            var previewSrc = $(this).find('img').attr('src');
-                            $(this).parent().siblings().find('img').attr('src',previewSrc)
-                        })
-                    },
-                    error:function(error){
-
-                    }
-                })
-            }
-            function processData(data){
-                var li = '';
-                var span = '';
-                for(var i = 0;i<data.length;i++){
-                    span+='<span><img src="'+data[i].previewSrc+'" alt=""></span>'
+            $scope.menusArr = [];//菜单数组
+            $scope.componentList = [];//组件展示数组
+        function  menusEvent(obj,event){
+            //menusCliCount =1;
+            obj.on(event,function(){
+                var menusCliCount =1;
+                menusCliCount++;
+                $(this).addClass('active').siblings().removeClass('active');
+                if($(this).has('.menus-childs')){
+                    $(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
                 }
-                for(var key in data){
-                    li+='<li>'
-                        +'<div class="preview-model">'
-                        +'<div class="preview-big"><img src="'+data[0].previewSrc+'"><b></b></div>'
-                        +'<div class="preview-small">'
-                        +span
-                        +'</div>'
-                        +'<p class="preview-descText">'+data[0].previewText+'</p>'
-                        +'</div>'
-                        +'<div class="preview-tool">'
-                        +'<a >更多详情</a>'
-                        +'<a >应用</a>'
-                        +'</div>'
-                        + '</li>'
-                }
-                return li;
-            }
+            })
+        }
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
             //菜单点击事件
-            menusEvent($('.main-siderbar ul>li'),'click')
+            menusEvent($('.main-siderbar ul>li'),'click');
+            $('.component-info ul li .preview-small span').hover(function(){
+                var previewSrc = $(this).find('img').attr('src');
+                $(this).parent().siblings().find('img').attr('src',previewSrc)
+            })
         })
             //声明菜单内容
             siderbarArr = [
@@ -99,13 +41,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 {menus:'B企业库',child:['甲分公司库','乙分公司库','丙分公司库']},
             ];
              $scope.menusArr = siderbarArr;
-            /*ajax
-             * ajax请求列表数据
-             * */
-            getAjax('json/data.json')
-            //插入菜单
-            //$('.main-siderbar ul').append(manageMenus(siderbarArr));
-
             /*
              *筛选状态
              * */
@@ -155,6 +90,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
-
         }
+        /*
+        * 构件库数据展示
+        * */
+        commonService.componentList().then(function(data){
+            $scope.componentList = data.data;
+            console.info( $scope.componentList)
+        })
 }]);
