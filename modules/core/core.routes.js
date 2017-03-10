@@ -32,6 +32,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			displayName:{
 				displayName:"audit"
 			}
+		}).state('largePattern',{
+			url:'/largePattern',
+			templateUrl:'template/component/largePattern.html',
+			controller:'largePatternCtrl',
+			data:{
+				displayName:"largePattern"
+			}
 		});
 	}
 ]);
