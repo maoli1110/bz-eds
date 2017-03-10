@@ -64,7 +64,7 @@
 }
 /*---------------------------------------------main------------------------------------------------*/
 .component-base article.componet-base-main{
-    height:calc(100vh - 150px) ;background:lightpink;
+    height:calc(100vh - 150px) ;
 }
 /*---------------------------------------------aside-------------------------------------*/
 .component-base .componet-base-main aside.main-siderbar{
@@ -103,8 +103,8 @@
     cursor:pointer;background:#3c3c3c;
 }
 /*--------------------------------------section(信息展示页面)------------------------------------------*/
-.component-base .componet-base-main section{
-   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;height: calc(100vh - 150px );
+.component-base .componet-base-main section .component-list{
+   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;height: calc(100vh - 223px );
     overflow: auto;
 }
 /*---------------------------------.component-filter-------------------------------------------------*/
@@ -248,4 +248,46 @@
 .component-base .component-info ul >li .preview-tool a:last-child{
     border-right:0;
 }
-
+/*分页器*/
+.component-base .pagination {
+    float:left;margin:10px 0 0 6px;width:calc(100% - 230px);
+}
+.component-base .pagination div{
+   display:inline-block;
+}
+.component-base .pagination+div{
+    float:left;
+}
+.component-base .pagination div:nth-child(2){
+    float:right;
+}
+.component-base .pagination  ul{
+    width:500px;
+}
+.component-base .pagination  ul+span{
+    margin: 18px 0 0 3px;
+    float: left;
+    font-size:14px;
+}
+.component-base .pagination-dump{
+    width: 218px;margin-left:20px;
+}
+.component-base .pagination-dump>p{
+    height: 40px;
+    line-height: 46px;
+    font-size: 14px;
+}
+.component-base .pagination-dump>p input{
+    width: 63px;
+    height: 28px;padding:0 10px;
+}
+.component-base .pagination-dump button{
+    float: right;
+    margin-top: -30px;
+    padding: 7px 21px;
+    background: #7b7b7b;
+    border-style: none;
+    font-size: 14px;
+    color: #fff;
+    margin-right: 21px;
+}

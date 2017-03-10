@@ -10,7 +10,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
              * return 一个字符串拼接的变量
              * */
             var  siderbarArr = [];//菜单项
-            var  filterCount = 1;
+            var  filterCount = 1;//筛选开关
+            var  dumpVal;//分页器跳转框的值
             $scope.menusArr = [];//菜单数组
             $scope.componentList = [];//组件展示数组
         function  menusEvent(obj,event){
@@ -24,6 +25,37 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 }
             })
         }
+        /*
+         * 分页器
+         * */
+
+        //function getInitPagination(){
+            $scope.totalItems = 64;
+            $scope.currentPage = 1;
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+            $scope.pageChanged = function() {
+                //console.log('Page changed to: ' + $scope.currentPage);
+            };
+            $scope.maxSize = 5;
+            $scope.bigTotalItems = 175;
+            $scope.bigCurrentPage = 1;
+        //}
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
+        function getDumpVal(){
+            dumpVal =  $('.dump-inp input').val();
+            return dumpVal;
+
+        }
+        $scope.setPage(getDumpVal());
+        $scope.getDumpOk = function(){
+            $scope.setPage(getDumpVal());
+        };
+        //getInitPagination();
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
             //菜单点击事件
@@ -67,6 +99,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     $('.filter-brand').hide()
                 }
             });
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
+
+
 
         /*
         * 初始化模态框
@@ -98,6 +136,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * */
         commonService.componentList().then(function(data){
             $scope.componentList = data.data;
-            console.info( $scope.componentList)
+            //console.info( $scope.componentList)
         })
-}]);
+
+
+
+    }]);
