@@ -26,10 +26,12 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-        $('.component-modal .modal-left ul li .preview-small span').hover(function () {
+
+    $scope.$on('ngComponeted', function (ngRepeatFinishedEvent) {
+        $('.component-modal .modal-left li .preview-small span').hover(function () {
             var previewSrc = $(this).find('img').attr('src');
             $(this).parent().siblings().find('img').attr('src', previewSrc)
         })
+
     })
 }])
