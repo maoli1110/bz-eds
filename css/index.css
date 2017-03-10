@@ -28,19 +28,19 @@
 }
 /*component-computer-logo*/
 .component-base .component-computer-logo{
-    height:110px;
-    line-height:110px;padding:0 30px;background:#fff;clear:both;
+    height:80px;
+    line-height:80px;padding:0 30px;background:#ececec;clear:both;
 }
 .component-computer-logo span{
     display:inline-block;float:left;width:272px;
 }
 .component-computer-logo span img{
-    float:left;margin:18px 0 0;height:84px;
+    float:left;margin:18px 0 0;height:58px;
 }
 .component-computer-logo span h1{
     display: inline-block;
     float: left;
-    margin-top: 34px;
+    margin-top: 21px;
     margin-left: 23px;
 }
 /*.component-search(搜索框)*/
@@ -48,7 +48,7 @@
     height:100%;
 }
 .component-computer-logo .component-search form{
-    width:500px;height:40px;line-height:112px;position:relative;margin: 35px 0 0 39px;
+    width:500px;height:40px;line-height:80px;position:relative;margin: 22px 0 0 39px;
 }
 .component-computer-logo form input{
     width: 500px;
@@ -64,54 +64,61 @@
 }
 /*---------------------------------------------main------------------------------------------------*/
 .component-base article.componet-base-main{
-    height:calc(100vh - 150px) ;
+    height:calc(100vh - 122px) ;
 }
 /*---------------------------------------------aside-------------------------------------*/
 .component-base .componet-base-main aside.main-siderbar{
-    width:200px;height:100%;background:#1a1a1a;float:left;
+    width:200px;height:100%;background:#ececec;float:left;font-size:14px;
 }
 .menus-childs{
     display:none;
 }
 .component-base .componet-base-main aside.main-siderbar>ul>li,.component-base .componet-base-main aside.main-siderbar>ul>li p{
-    color:#fff;line-height:40px;padding:0 20px;
+    color:#333;line-height:40px;padding:0 20px;
 }
 .component-base .componet-base-main aside.main-siderbar>ul{
     height: 461px;
 }
 .component-base .componet-base-main aside.main-siderbar>ul>p{
     height: 40px;
-    color: #fff;
-    text-align: center;
-    background: #757575;
+    color: #333;
+    text-align: left;
+    background: #ddd;
     line-height: 40px;
+    padding-left:20px;
 }
 .component-base .componet-base-main aside.main-siderbar>ul>li:hover{
-    background:#5a5a5a;
+    background:#ccc;
 }
 /*.component-btns左侧菜单按钮组*/
 .component-base .component-btns>div{
     width: 120px;
-    height: 45px;
-    background: #757575;
+    height: 36px;
+    background: #ddd;
     border-radius: 5px;
     text-align: center;
-    line-height: 45px;
-    color: #fff;    margin: 15px auto;
+    line-height: 36px;
+    color: #333;    margin: 15px 20px;font-size:14px;
 }
 .component-base .component-btns>div:hover{
-    cursor:pointer;background:#3c3c3c;
+    cursor:pointer;background:#ccc;
 }
 /*--------------------------------------section(信息展示页面)------------------------------------------*/
 .component-base .componet-base-main section .component-list{
-   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;height: calc(100vh - 223px );
+   /* height:calc(100vh - 150px);*/background:#fff;border-top:1px solid #ddd;height: calc(100vh - 183px );
     overflow: auto;
 }
 /*---------------------------------.component-filter-------------------------------------------------*/
 .component-base .component-filter{
-    padding: 0 8px 0 0px;position:relative;
+    padding: 0 8px 0 0px;position:relative;padding-right:0;
 }
 /*---------------------------------filter-status--------------------------------------*/
+.component-base  .filter-ele{
+    width:calc(100% - 186px)
+}
+.component-base .filter-status .filter-ele>span:first-child{
+    margin-left:14px !important;
+}
 .component-base .filter-status .filter-ele span{
     height: 30px;
     width: 76px;
@@ -121,20 +128,23 @@
     border: 1px solid #000;margin:0 6px;
 }
 .component-base .filter-infoList>P{
-    padding-left:10px;
+    padding-left:14px;
 }
 /*--------------------------------------.component-filter(筛选条件的每一项)*/
 .component-base .componet-base-main section .component-filter>div{
-    height:54px;line-height:54px;border-bottom:1px solid #ccc;margin:0;
+    line-height:54px;border-bottom:1px solid #ccc;margin:0;
 }
 .component-base .componet-base-main section .component-filter>div>p{
-    display:inline-block;
+    display:inline-block;vertical-align: top;
 }
 .component-base .componet-base-main section .component-filter .filter-condition{
     display:inline-block;
 }
 .component-base .componet-base-main section .component-filter .filter-condition>div{
     display:inline-block;
+}
+.component-base .componet-base-main section .component-filter{
+    font-size:14px;
 }
 .component-base .componet-base-main section .component-filter .filter-ele span{
     height: 30px;
@@ -143,6 +153,10 @@
     text-align: center;
     line-height: 30px;
     border: 1px solid #000;margin:0 6px;
+    font-size:14px;
+}
+.component-base .componet-base-main section .component-filter .filter-ele span:hover{
+    color:#00b3ee;border-color:#00b3ee;
 }
 /*  filter-down*/
 .component-base .filter-down{
@@ -162,6 +176,9 @@
 .component-base  .filter-brand{
     display:none;
 }
+.component-base  .filter-brand>p{
+    padding-left:14px;
+}
 .component-base .filter-tool{
     float:right;
 }
@@ -175,11 +192,11 @@
 }
 /*--------------------------component-infoLIst*/
 .component-base .component-info{
-    margin-top: 44px;
+    margin-top: 44px;padding:0 14px 0 7px;
 }
 .component-base .component-info ul>li{
-    float:left;width:278px;
-    margin:0 0 5px 5px;position:relative;
+    float:left;width:270px;
+    margin:0 0 10px 10px;position:relative;
 
 }
 .component-base .component-info ul>li:hover{
@@ -195,11 +212,11 @@
 /*---------------------.preview-big--------------------------*/
 .component-base .component-info ul >li .preview-big{
     width:100%;
-    height:275px;text-align:center;
+    height:270px;text-align:center;
 }
 .component-base .component-info ul >li .preview-big img{
-    width:260px;
-    height:260px;
+    width:254px;
+    height:254px;
     vertical-align: middle;
     display:inline-block;
 }
@@ -289,7 +306,7 @@
     border-style: none;
     font-size: 14px;
     color: #fff;
-    margin-right: 21px;
+    margin-right: 14px;
 }
 /*返回顶部*/
 .return-top{

@@ -51,7 +51,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             return dumpVal;
 
         }
-
+        function setFilterStyle(obj,event){
+            obj.on(event,function(){
+                $(this).parent().siblings().css({'height':'auto','overflow':''})
+            })
+        }
         /*分页器跳转
          * params  value
          * return currentPage
@@ -84,8 +88,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             /*
              *筛选状态
              * */
+        //setFilterStyle($('.filter-condition .filter-ele>span'),'click')
             $('.filter-condition .filter-ele>span').click(function(){
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><span>'+$(this).text()+'</span>');
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><span>'+$(this).text()+'<span></span></span></span>');
                 $(this).parent().parent().parent().hide()
             })
             /*
@@ -106,6 +111,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     $('.filter-brand').hide()
                 }
             });
+            $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
+            $('.filter-tool .filter-more').click(function(){
+               $(this).parent().parent().parent().css({'height':'auto','overflow':''})
+            })
 
 
         /*
@@ -133,6 +142,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 //console.info('Modal dismissed at: ' + new Date());
             });
         };
+
         /*
          * 返回顶部
          * */
