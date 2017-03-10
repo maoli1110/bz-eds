@@ -13,6 +13,9 @@
 .component-modal .modal-dialog .modal-body .preview-model .preview-small span{
     margin:0 10px 0 0 ;
 }
+/*.component-modal .modal-dialog .modal-body .preview-model .preview-small span:hover{
+    opacity:0.4;
+}*/
 .component-modal .modal-dialog .modal-body .preview-model .preview-small img{
     height:100px;width:100px;
 }

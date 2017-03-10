@@ -1,14 +1,14 @@
-
+<div >
     <div class="modal-header">
         <p class="modal-title modal-close" ng-click="cancel()" id="modal-title"></p>
     </div>
-    <div class="modal-body" id="modal-body">
-        <ul class="clearfix modal-left">
+    <div class="modal-body" id="modal-body" >
+        <ul class="clearfix modal-left" >
             <li>
               <div class="preview-model">
                     <div class="preview-big"><img ng-src={{componentDescr.previewSrc}}/><b></b></div>
                     <div class="preview-small">
-                        <span ng-repeat="itemList in componentList track by $index" profit><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                        <span ng-repeat="itemList in componentList" component-finish><img ng-src={{itemList.previewSrc}} alt=""/></span>
                     </div>
                 </div>
             </li>
@@ -36,4 +36,4 @@
         <button class="btn btn-primary" type="button" ng-click="ok()">应用</button>
         <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
     </div>
-
+</div>

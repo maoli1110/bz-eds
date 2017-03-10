@@ -90,7 +90,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                //console.info('Modal dismissed at: ' + new Date());
             });
         }
         /*
