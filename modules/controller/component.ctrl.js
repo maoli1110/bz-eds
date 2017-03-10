@@ -51,10 +51,17 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             return dumpVal;
 
         }
+
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
         $scope.setPage(getDumpVal());
         $scope.getDumpOk = function(){
             $scope.setPage(getDumpVal());
         };
+
+
         //getInitPagination();
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
@@ -99,11 +106,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     $('.filter-brand').hide()
                 }
             });
-        /*分页器跳转
-         * params  value
-         * return currentPage
-         * */
-
 
 
         /*
@@ -130,7 +132,13 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             }, function () {
                 //console.info('Modal dismissed at: ' + new Date());
             });
-        }
+        };
+        /*
+         * 返回顶部
+         * */
+        $('.return-top').click(function() {
+            $('.component-list').animate({ scrollTop: 0 }, 500);
+        })
         /*
         * 构件库数据展示
         * */

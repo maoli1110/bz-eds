@@ -179,7 +179,7 @@
 }
 .component-base .component-info ul>li{
     float:left;width:278px;
-    margin:0 0 10px 10px;position:relative;
+    margin:0 0 5px 5px;position:relative;
 
 }
 .component-base .component-info ul>li:hover{
@@ -262,7 +262,7 @@
     float:right;
 }
 .component-base .pagination  ul{
-    width:500px;
+    width:auto;margin-right:10px;
 }
 .component-base .pagination  ul+span{
     margin: 18px 0 0 3px;
@@ -290,4 +290,10 @@
     font-size: 14px;
     color: #fff;
     margin-right: 21px;
+}
+/*返回顶部*/
+.return-top{
+    position: absolute;
+    bottom: 90px;
+    right: 0px;
 }
