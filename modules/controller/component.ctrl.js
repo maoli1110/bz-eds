@@ -56,6 +56,25 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $(this).parent().siblings().css({'height':'auto','overflow':''})
             })
         }
+        /*
+        * typeFilter 样式
+        * params obj event
+        *
+        * */
+        function setFilterStyle(obj){
+           obj.on('mouseenter',function(){
+                $(this).children().css({'color':'blue','border-color':'blue'});
+                $(this).children().find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'});
+                $(this).find('.filter-trigger').css({'height':'33px','border-bottom':'0'});
+                $(this).find('.switch-filter').show();
+            })
+           obj.on('mouseleave',function(){
+                $(this).children().css({'color':'','border-color':''});
+                $(this).children().find('.glyphicon-menu-up').css({'transform':''});
+                $(this).find('.filter-trigger').css({'height':'30px','border-bottom':'1px solid #000'});
+                $(this).find('.switch-filter').hide();
+            })
+        }
         /*分页器跳转
          * params  value
          * return currentPage
@@ -74,6 +93,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $('.component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc)
+            });
+            //菜单选项
+            $('.main-siderbar ul li p').click(function(){
+                var menusText = $(this).text();
+                $('.filter-status .filter-ele div').eq(0).html(menusText)
             })
         });
 
@@ -88,11 +112,16 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             /*
              *筛选状态
              * */
+            $scope.typeFilter  = ['单人沙发','多人沙发','沙发','沙发沙发'];
+
         //setFilterStyle($('.filter-condition .filter-ele>span'),'click')
             $('.filter-condition .filter-ele>span').click(function(){
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><span>'+$(this).text()+'<span></span></span></span>');
-                $(this).parent().parent().parent().hide()
-            })
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+$(this).text()+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
+                $(this).parent().parent().parent().hide();
+                setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseenter');
+                setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseleave');
+            });
+
             /*
              * .filter-down更多选项
              * */
@@ -111,11 +140,35 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     $('.filter-brand').hide()
                 }
             });
+            //筛选条件点击更多显示全部
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-tool .filter-more').click(function(){
                $(this).parent().parent().parent().css({'height':'auto','overflow':''})
             })
+            //筛选条件多选
+            $('.filter-infoList .filter-tool').map(function(i,val){
+               $(this).find('.checkMore').click(function(){
+                  $(this).parent().parent().find('.check-box').show();
+                  $(this).parent().parent().parent().css({'height':'auto','overflow':''});
+                  $(this).parent().parent().find('.btns-item').css({'display':'block'});
+               });
 
+
+            });
+            //是否选中筛选多选框 选中的话可以提交
+            $('.filter-infoList .check-box').click(function(){
+                if($(this).find('input[type="checkbox"]').prop('checked')==true){
+                    $(this).parent().siblings().find('.btn-ok').show();
+                }else{
+                    $(this).parent().siblings().find('.btn-ok').hide();
+                }
+            });
+            //  取消选择的时候条件清空
+            $('.filter-infoList .btn-cancel').click(function(){
+                $(this).parent().siblings().find('.check-box').hide();
+                $(this).parent().css({'display':'none'});
+                $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');
+            })
 
         /*
         * 初始化模态框

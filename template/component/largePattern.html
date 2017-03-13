@@ -1,3 +1,146 @@
-<div class="largePattern">
-    我是大图模式
+<!--大图展示-base构件库简写-->
+<div class="component-base largePattern">
+    <!--header 页面中的头部-->
+    <header class="component-logo  ">
+        <div class=" component-sys-close" >
+            <div class="close-tool">
+                <span class="glyphicon glyphicon-minus"></span>
+                <span class="glyphicon glyphicon-book"></span>
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+        </div>
+        <div class="component-computer-logo  clearfix">
+            <div class="col-xs-3">
+                <span class=""><img src="imgs/logo.png">  <h1 class="">我的上传</h1></span>
+            </div>
+            <div class="col-xs-8 component-search ">
+                <form >
+                    <input type="text" placeholder="输入构件名称">
+                    <img src="imgs/logo.png" alt="">
+                </form>
+            </div>
+        </div>
+    </header>
+    <!---页面内容main-->
+    <article class="componet-base-main">
+        <!--main-siderbar(侧边栏)-->
+        <aside class="main-siderbar">
+            <!--侧边栏菜单-->
+            <ul>
+                <p>审核状态</p>
+                <li>全部</li>
+                <li>待审核</li>
+                <li>已通过</li>
+                <li>未通过</li>
+            </ul>
+            <!--component-btns（侧边栏构件按钮组）-->
+            <div class="component-btns">
+                <div ui-sref="component">云构件库</div>
+                <div ui-sref="upload">上传构件</div>
+                <div ui-sref="audit">我的审核</div>
+            </div>
+        </aside>
+        <!--component-container(右侧内容)-->
+        <section class="container-fluid">
+            <!--component-filter（构件筛选）-->
+            <div class="component-list">
+                <div class="component-filter">
+                    <div class="filter-status">
+                        <div class="filter-ele"><span>全部</span></div>
+                        <span ui-sref="largePattern" class="glyphicon glyphicon-th largePattern" style="font-size: 30px"></span>
+                        <span ui-sref="upload" class="glyphicon glyphicon-th-list listMode" style="font-size: 30px"></span>
+                    </div>
+                    <div class="filter-infoList">
+                        <!--筛选标题-->
+                        <p><b>类型： &nbsp;</b></p>
+                        <!--筛选内容-->
+                        <div class="filter-condition row" style="width:calc(100% - 56px )">
+                            <div class="filter-ele"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
+                            <div class="filter-tool">
+                                <span>+多选</span><span>更多</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-infoList">
+                        <!--筛选标题-->
+                        <p><b>风格 ：&nbsp;</b></p>
+                        <!--筛选内容-->
+                        <div class="filter-condition row" style="width:calc(100% - 56px )">
+                            <div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
+
+                            <div class="filter-tool">
+                                <span>+多选</span><span class="filter-more">更多</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-brand">
+                        <!--筛选标题-->
+                        <p><b>品牌 ：&nbsp;</b></p>
+                        <!--筛选内容-->
+                        <div class="filter-condition row" style="width:calc(100% - 56px )">
+                            <div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
+                            <div class="filter-tool">
+                                <span>+多选</span><span>更多</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="filter-down">更多选项</p>
+                </div>
+                <!--component-infoList(构件信息展示)-->
+                <div class="component-info">
+                    <ul class="clearfix">
+                        <li ng-repeat="itemList in componentList track by $index">
+                            <div class="preview-model">
+                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
+                                <div class="preview-small">
+                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                                </div>
+                                <p class="preview-descText" >{{itemList.previewText}}</p>
+                            </div>
+                            <div class="preview-tool">
+                                <a ng-click="componetModal()">详细信息</a>
+                            </div>
+                        </li>
+                        <li ng-repeat="itemList in componentList track by $index">
+                            <div class="preview-model">
+                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
+                                <div class="preview-small">
+                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                                </div>
+                                <p class="preview-descText" >{{itemList.previewText}}</p>
+                            </div>
+                            <div class="preview-tool">
+                                <a ng-click="componetModal()">详细信息</a>
+                            </div>
+                        </li>
+                        <li ng-repeat="itemList in componentList track by $index">
+                            <div class="preview-model">
+                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
+                                <div class="preview-small">
+                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                                </div>
+                                <p class="preview-descText" >{{itemList.previewText}}</p>
+                            </div>
+                            <div class="preview-tool">
+                                <a ng-click="componetModal()">详细信息</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pagination">
+                <div class="">
+                    <ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+                    <span>共 {{numPages}} 页 </span>
+                </div>
+
+                <div class="pagination-dump">
+                    <p class="dump-inp">跳转  <input type="text">  页</p>
+                    <button type="button" ng-click="getDumpOk()">确定</button>
+                </div>
+            </div>
+        </section>
+
+    </article>
+    <div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
 </div>
