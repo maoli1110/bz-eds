@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div>audit</div>
-</body>
-</html>
+<!--component-base构件库简写-->
+<div class="component-base audit">
+	<!--header 页面中的头部-->
+	<header ng-include="'template/core/header.html'" class="component-logo"></header>
+	<!---页面内容main-->
+	<article class="componet-base-main">
+		<!--main-siderbar(侧边栏)-->
+		<aside ng-include="'template/core/sidebar.html'" class="main-siderbar"></aside>
+		<!--component-container(右侧内容)-->
+		<section class="container-fluid">
+			<!--component-filter（构件筛选）-->
+			<div class="audit-list">
+				<div class="table-list table-simulate">
+					<table class="table">
+						<thead>
+						<tr style="background:#d2d7de;height:47px;">
+							<th width="10%">构件名称</th>
+							<th width="10%">大类</th>
+							<th width="10%">小类</th>
+							<th width="10%">品牌</th>
+							<th width="10%">型号</th>
+							<th width="10%">图形</th>
+							<th width="10%">作者</th>
+							<th width="10%">审核状态</th>
+							<th width="10%">审核意见</th>
+							<th width="10%">上传时间</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table-list table-simulate">
+					<table class="table">
+						<tbody>
+							<tr ng-repeat="item in auditList track by $index">
+								<td width="10%">
+									<label class="rela multi-choice" >
+										<input type="checkbox" class="remove-signal" ng-click="updateSelection($event, item)" >
+										<div class="absol check-funnel" style="margin-top: 4px;"></div>
+									</label>
+									<span>{{item.componentName}}</span>
+								</td>
+								<td width="10%">{{item.largeClass}}</td>
+								<td width="10%">{{item.smallClass}}</td>
+								<td width="10%">{{item.brand}}</td>
+								<td width="10%">{{item.model}}</td>
+								<td width="10%">{{item.picture}}</td>
+								<td width="10%">{{item.author}}</td>
+								<td width="10%">{{item.status}}</td>
+								<td width="10%">{{item.comment}}</td>
+								<td width="10%">{{item.updateTime}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="pagination">
+				<div class="clearfix">
+					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<span>共 {{numPages}} 页 </span>
+				</div>
+
+				<div class="pagination-dump">
+					<p class="dump-inp">跳转  <input type="text">  页</p>
+					<button type="button" ng-click="getDumpOk()">确定</button>
+				</div>
+			</div>
+		</section>
+
+	</article>
+	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
+</div>
