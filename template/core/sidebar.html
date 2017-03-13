@@ -1,42 +1,22 @@
-<div style="width:300px;line-height:40px;">2016年7月20 星期三</div>
-<ul class="">
-    <li>
-        <a class="first-title" ng-click="a = !a">
-            <span> 土建项目部1（30）</span>
-        </a>
-        <ul class="sub-nav" ng-show="a">
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-        </ul>
-    </li>
-    <li>
-        <a class="first-title" ng-click="b = !b">
-            <span> 土建项目部1（30）</span>
-        </a>
-        <ul class="sub-nav" ng-show="b">
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-        </ul>
-    </li>
-    <li>
-        <a class="first-title" ng-click="c = !c">
-            <span> 土建项目部1（30）</span>
-        </a>
-        <ul class="sub-nav" ng-show="c">
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-            <li><a ui-sref="#"> 土建项目部1（30）</a></li>
-        </ul>
-    </li>
-</ul>
+<aside class="main-siderbar">
+    <!--侧边栏菜单-->
+    <ul>
+        <p>构件来源</p>
+        <li ng-repeat="menusList in menusArr track by $index" >
+            {{menusList.menus}}
+            <div class="menus-childs" ng-if="menusList.child">
+                <p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
+            </div>
+        </li>
+    </ul>
+    <!--component-btns（侧边栏构件按钮组）-->
+    <div class="component-btns" ng-if="sidebar=='component'">
+        <div ui-sref="upload">上传构件</div>
+        <div ui-sref="upload">我的上传</div>
+        <div ui-sref="audit">我的审核</div>
+    </div>
+    <div class="component-btns" ng-if="sidebar=='audit'">
+        <div ui-sref="component">云构件库</div>
+        <div ui-sref="upload">我的上传</div>
+    </div>
+</aside>

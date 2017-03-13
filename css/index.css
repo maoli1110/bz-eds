@@ -116,17 +116,43 @@
 .component-base  .filter-ele{
     width:calc(100% - 186px)
 }
-.component-base .filter-status .filter-ele>span:first-child{
-    margin-left:14px !important;
-}
-.component-base .filter-status .filter-ele span{
-    height: 30px;
-    width: 76px;
+.component-base .filter-status .filter-ele>div:first-child{
+    margin-left:14px !important;   height: 30px;
+    width: 86px;
     display: inline-block;
     text-align: center;
     line-height: 30px;
-    border: 1px solid #000;margin:0 6px;
+    border: 1px solid #000;
 }
+.component-base .filter-status .filter-ele>div{
+    display:inline-block;position:relative; height: 30px;width:86px;
+    line-height:30px;
+}
+.component-base .filter-status .filter-ele .filter-trigger:not(.switch-filter){
+    height: 30px;
+    width: 86px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #000;
+    margin: 0 6px;
+    position: absolute;
+    margin-top: 8px;
+    z-index: 150;
+    background: #fff
+}
+.component-base .filter-status .filter-ele .switch-filter{
+    width:350px;padding:0 10px;
+    height: auto;
+    border: 1px solid #000000;
+    position: absolute;
+    left: 6px;
+    top: 40px;
+    background: #fff;
+    z-index: 1;
+    margin: 0;display:none;
+}
+.component-base .filter-status .filter-ele .switch-filter div{width:auto;display:inline-block;padding:0 10px;}
 .component-base .filter-infoList>P{
     padding-left:14px;
 }
@@ -140,15 +166,30 @@
 .component-base .componet-base-main section .component-filter .filter-condition{
     display:inline-block;
 }
+
 .component-base .componet-base-main section .component-filter .filter-condition>div{
     display:inline-block;
+}
+.component-base .componet-base-main section .component-filter .filter-condition .check-box{
+   display:none;
 }
 .component-base .componet-base-main section .component-filter{
     font-size:14px;
 }
+/*多选按钮组*/
+.component-base .componet-base-main section .component-filter  .filter-condition .btns-item{
+    width:100%;
+    text-align:center;
+    height:40px;
+    line-height:40px;
+    display:none;
+}
+.component-base .componet-base-main section .component-filter  .filter-condition  .btn-ok{
+    display:none;
+}
 .component-base .componet-base-main section .component-filter .filter-ele span{
     height: 30px;
-    width: 76px;
+    width: 82px;
     display: inline-block;
     text-align: center;
     line-height: 30px;
@@ -190,6 +231,21 @@
     line-height: 30px;
     border: 1px solid #000;margin:0 6px;
 }
+/*筛选下拉框*/
+.component-base .glyphicon-menu-up{
+    font-size:12px;
+}
+.component-base .glyphicon-menu-right{
+    margin:0 0 0 10px;
+}
+/*.component-base .filter-status:nth-child(1):hover .glyphicon-menu-up{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}*/
+
 /*--------------------------component-infoLIst*/
 .component-base .component-info{
     margin-top: 44px;padding:0 14px 0 7px;

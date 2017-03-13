@@ -88,4 +88,14 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    this.auditList = function(){
+        var url="json/uploadList.json";
+        var delay = $q.defer();
+        $http.get(url).then(function(data){
+            delay.resolve(data);
+        },function(error){
+            delay.reject(error);
+        });
+        return delay.promise;
+    }
 });
