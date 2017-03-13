@@ -1,6 +1,31 @@
 *{
     padding:0;margin:0;
 }
+/*checkbox(复选框样式)*/
+/*灰色边框*/
+.simulated-box{
+    width:15px;height:15px;border:1px solid #333;position:absolute;top:18px;background:#fff;
+}
+/*input复选框样式*/
+input[type="checkbox"]:checked +:after{
+    content: '';
+    display: block;
+    width: 6px;
+    height: 9px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(227deg);
+    border-left: 2px solid #333;
+    border-top: 2px solid #333;
+    transform-origin: 5px 4px;
+}
+/*一些滑过样式*/
+.simulated-box:hover {
+    color:#00b3ee;border-color:#00b3ee !important;
+}
+.simulated-box:hover:after{
+    color:#00b3ee !important;border-color:#00b3ee !important;
+}
+
 /*----------------------------------component-base(构件库)----------------------------------------*/
 .component-base{
     width:100%;
@@ -173,13 +198,13 @@
 .component-base .componet-base-main section .component-filter .filter-condition .check-box{
    display:none;position:relative;margin-left:6px;
 }
-.component-base .componet-base-main section .component-filter .filter-condition .simulated-box:hover {
-    color:#00b3ee;border-color:#00b3ee !important;
-}
-.component-base .componet-base-main section .component-filter .simulated-box:hover:after{
+/*.component-base .componet-base-main section .component-filter .filter-condition .simulated-box:hover {*/
+    /*color:#00b3ee;border-color:#00b3ee !important;*/
+/*}*/
+/*.component-base .componet-base-main section .component-filter .simulated-box:hover:after{
     color:#00b3ee !important;border-color:#00b3ee !important;
-}
-.component-base .componet-base-main section .component-filter .filter-condition .check-box input[type="checkbox"]:checked +:after{
+}*/
+/*.component-base .componet-base-main section .component-filter .filter-condition .check-box input[type="checkbox"]:checked +:after{
     content: '';
     display: block;
     width: 6px;
@@ -189,7 +214,7 @@
     border-left: 2px solid #333;
     border-top: 2px solid #333;
     transform-origin: 5px 4px;
-}
+}*/
 .component-base .componet-base-main section .component-filter{
     font-size:14px;
 }
@@ -201,9 +226,7 @@
     line-height:40px;
     display:none;
 }
-.simulated-box{
-    width:15px;height:15px;border:1px solid #333;position:absolute;top:18px;background:#fff;
-}
+
 .component-base .componet-base-main section .component-filter  .filter-condition  .btn-ok{
     display:none;
 }
