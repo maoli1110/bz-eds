@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibModal','commonService',
-    function ($scope, $http,$uibModal,commonService) {
+angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibModal','commonService','$timeout',
+    function ($scope, $http,$uibModal,commonService,$timeout) {
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -133,6 +133,24 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             }, function () {
                 //console.info('Modal dismissed at: ' + new Date());
             });
+            $timeout(function () {
+                var template = '<div class="modal-modify"> <p>---------------<span class="modify-text">审核意见</span>------------------</p></div>'+
+                    '<div class="text" style="border: 1px solid black;width: 90%;height: 30%;">暂无</div>'
+                 $('.pro-info').after(template);
+                 $('.modal-footer').css({
+                     'display': 'none'
+                 });
+                $( '.modal-modify').css({
+                    'margin-top': '25px',
+                    'margin-bottom': '25px'
+                });
+                $('.pro-info div >p').css({
+                    'margin-bottom': '9px'
+                });
+
+
+            }, 10);
+
         };
 
         /*

@@ -6,6 +6,7 @@
 }
 .upload .main, .upload .mainLeft{
     padding: 20px;
+    padding-top: 0;
 }
 @media (min-width: 768px) {
     .main {
@@ -31,9 +32,16 @@
 .upload .table>tbody>tr{
     border-top: 1px solid #ddd;
 }
-.upload .main .table tbody tr td:nth-last-child(4):hover, .upload .main .table tbody tr td:nth-last-child(3):hover{
+.upload .main .table tbody tr td:nth-last-child(2):hover, .upload .main .table tbody tr td:nth-last-child(3):hover{
     cursor: pointer;
 }
-.upload .pagination{
-
+.upload .largePattern{
+    position: absolute;
+    right: 5%;
+    top:1%;
+}
+.upload .listMode{
+    position: absolute;
+    right: 1%;
+    top:1%;
 }

@@ -1,0 +1,16 @@
+.largePattern .largePattern{
+    position: absolute;
+    right: 6.5%;
+    top:5%;
+}
+.largePattern .listMode{
+    position: absolute;
+    right: 2.5%;
+    top:5%;
+}
+.largePattern .preview-tool{
+    text-align: center;
+}
+.largePattern .preview-tool:hover {
+    cursor: pointer;
+}

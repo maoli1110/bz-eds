@@ -47,6 +47,8 @@
                 <div class="component-filter">
                     <div class="filter-status">
                         <div class="filter-ele"><span>全部</span></div>
+                        <span ui-sref="largePattern" class="glyphicon glyphicon-th largePattern" style="font-size: 30px"></span>
+                        <span ui-sref="upload" class="glyphicon glyphicon-th-list listMode" style="font-size: 30px"></span>
                     </div>
                     <div class="filter-infoList">
                         <!--筛选标题-->
@@ -108,8 +110,7 @@
                                 <p class="preview-descText" >{{itemList.previewText}}</p>
                             </div>
                             <div class="preview-tool">
-                                <!--<a ng-click="componetModal()">更多详情</a>-->
-                                <!--<a >应用</a>-->
+                                <a ng-click="componetModal()">详细信息</a>
                             </div>
                         </li>
                         <li ng-repeat="itemList in componentList track by $index">
