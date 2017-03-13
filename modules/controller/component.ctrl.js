@@ -156,28 +156,24 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             //是否选中筛选多选框 选中的话可以提交
 
               var  showBtn = 0;
-                $scope.filterCheck = function(event){
+/*                $scope.filterCheck = function(event){
                     showBtn=0;
                     var i=0;
                     $('.filter-infoList .check-box').map(function(i,val){
-                        console.info($(val))
-                        //console.log();
-                        //console.info($(this).parent().find('input[type="checkbox"]').prop('checked'))
                         if($(val).find('input[type="checkbox"]').prop('checked')==true){
                             i=1;
                             showBtn= i;
                         }
                     });
                     if(showBtn==0){
-                        console.info($(event).target)
-                        $(event).target.parent().parent().siblings().find('.btn-ok').hide();
+                        console.info(event.target)
+                        event.target.parent().parent().siblings().find('.btn-ok').hide();
                     }else{
-                        $(this).parent().parent().siblings().find('.btn-ok').show();
+                        //$(this).parent().parent().siblings().find('.btn-ok').show();
                     }
-                    alert(0)
                     event.stopPropagation();
-                 }
-         /*   $('.filter-infoList .check-box>input').click(function(event){
+                 }*/
+            $('.filter-infoList .check-box>input').click(function(event){
                     showBtn=0;
                     var i=0;
                     $('.filter-infoList .check-box').map(function(i,val){
@@ -194,7 +190,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     }else{
                         $(this).parent().parent().siblings().find('.btn-ok').show();
                     }
-            });*/
+            });
             //  取消选择的时候条件清空
             $('.filter-infoList .btn-cancel').click(function(){
                 $(this).parent().siblings().find('.check-box').hide();
