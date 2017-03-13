@@ -6,7 +6,6 @@
 }
 .upload .main, .upload .mainLeft{
     padding: 20px;
-    margin-left: 12%;
 }
 @media (min-width: 768px) {
     .main {
@@ -34,4 +33,7 @@
 }
 .upload .main .table tbody tr td:nth-last-child(4):hover, .upload .main .table tbody tr td:nth-last-child(3):hover{
     cursor: pointer;
+}
+.upload .pagination{
+
 }

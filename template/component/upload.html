@@ -1,9 +1,55 @@
-<div class="upload">
-	<div class="container-fluid">
-		<div class="row" style="position: relative;">
-			<div class="col-sm-9 col-md-10 main">
-				<div class="table-responsive">
-					<table class="table ">
+<div class="component-base upload">
+	<!-- 页面头部-->
+	<header class="component-logo  ">
+		<div class=" component-sys-close" >
+			<div class="close-tool">
+				<span class="glyphicon glyphicon-minus"></span>
+				<span class="glyphicon glyphicon-book"></span>
+				<span class="glyphicon glyphicon-remove"></span>
+			</div>
+		</div>
+		<div class="component-computer-logo  clearfix">
+			<div class="col-xs-3">
+				<span class=""><img src="imgs/logo.png">  <h1 class="">我的上传</h1></span>
+			</div>
+			<div class="col-xs-8 component-search ">
+				<form >
+					<input type="text" placeholder="输入构件名称">
+					<img src="imgs/logo.png" alt="">
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- 页面内容 -->
+	<article class="componet-base-main">
+		<!--main-siderbar(侧边栏)-->
+		<aside class="main-siderbar">
+			<!--侧边栏菜单-->
+			<ul>
+				<p>审核状态</p>
+				<li>全部</li>
+				<li>待审核</li>
+				<li>已通过</li>
+				<li>未通过</li>
+			</ul>
+			<!--component-btns（侧边栏构件按钮组）-->
+			<div class="component-btns">
+				<div ui-sref="component">云构件库</div>
+				<div ui-sref="upload">上传构件</div>
+				<div ui-sref="audit">我的审核</div>
+			</div>
+		</aside>
+		<!--component-container(右侧内容)-->
+		<section class="container-fluid">
+			<!--component-filter（构件筛选）-->
+			<div class="component-list">
+
+				<div class="component-info">
+					<div class="clearfix" style="position: relative;">
+						<div class="main">
+							<div class="table-responsive">
+								<table class="table ">
 						<thead>
 						<tr>
 							<th>构件名称</th>
@@ -268,13 +314,11 @@
 						</tr>
 						</tbody>
 					</table>
-					<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -291,4 +335,19 @@
 			</div>
 		</div>
 	</div>
+			</div>
+			<div class="pagination">
+				<div class="clearfix">
+					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<span>共 {{numPages}} 页 </span>
+				</div>
+
+				<div class="pagination-dump">
+					<p class="dump-inp">跳转  <input type="text">  页</p>
+					<button type="button" ng-click="getDumpOk()">确定</button>
+				</div>
+			</div>
+		</section>
+	</article>
+	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
 </div>
