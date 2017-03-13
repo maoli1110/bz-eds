@@ -152,23 +152,55 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                   $(this).parent().parent().parent().css({'height':'auto','overflow':''});
                   $(this).parent().parent().find('.btns-item').css({'display':'block'});
                });
-
-
             });
             //是否选中筛选多选框 选中的话可以提交
-            $('.filter-infoList .check-box').click(function(){
-                if($(this).find('input[type="checkbox"]').prop('checked')==true){
-                    $(this).parent().siblings().find('.btn-ok').show();
-                }else{
-                    $(this).parent().siblings().find('.btn-ok').hide();
-                }
+
+              var  showBtn = 0;
+              /*  $scope.filterCheck = function(event){
+                    showBtn=0;
+                    var i=0;
+                    $('.filter-infoList .check-box').map(function(i,val){
+                        console.info($(val))
+                        //console.log();
+                        //console.info($(this).parent().find('input[type="checkbox"]').prop('checked'))
+                        if($(val).find('input[type="checkbox"]').prop('checked')==true){
+                            i=1;
+                            showBtn= i;
+                        }
+                    });
+                    if(showBtn==0){
+                        console.info($(event).target)
+                        $(event).target.parent().parent().siblings().find('.btn-ok').hide();
+                    }else{
+                        $(this).parent().parent().siblings().find('.btn-ok').show();
+                    }
+                    alert(0)
+                    event.stopPropagation();
+                 }*/
+            $('.filter-infoList .check-box>input').click(function(event){
+                    showBtn=0;
+                    var i=0;
+                    $('.filter-infoList .check-box').map(function(i,val){
+                        console.info($(val))
+                        //console.log();
+                        //console.info($(this).parent().find('input[type="checkbox"]').prop('checked'))
+                        if($(val).find('input[type="checkbox"]').prop('checked')==true){
+                            i=1;
+                            showBtn= i;
+                        }
+                  });
+                    if(showBtn==0){
+                        $(this).parent().parent().siblings().find('.btn-ok').hide();
+                    }else{
+                        $(this).parent().parent().siblings().find('.btn-ok').show();
+                    }
             });
             //  取消选择的时候条件清空
             $('.filter-infoList .btn-cancel').click(function(){
                 $(this).parent().siblings().find('.check-box').hide();
                 $(this).parent().css({'display':'none'});
                 $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');
-            })
+            });
 
         /*
         * 初始化模态框
