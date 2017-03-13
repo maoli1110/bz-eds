@@ -26,7 +26,6 @@
     vertical-align: middle;
 }
 .upload .main table thead tr th{
-    border-top: 1px solid #ddd!important;
     border-bottom: 0;
 }
 .upload .table>tbody>tr{
@@ -42,6 +41,9 @@
 }
 .upload .listMode{
     position: absolute;
-    right: 1%;
+    right: 2%;
     top:1%;
+}
+.upload .table{
+    border-bottom: 1px solid #ddd;
 }

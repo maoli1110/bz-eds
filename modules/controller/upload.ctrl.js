@@ -18,4 +18,9 @@ angular.module('core').controller('uploadCtrl', ['$scope', '$http',
         $scope.maxSize = 5;
         $scope.bigTotalItems = 175;
         $scope.bigCurrentPage = 1;
+
+        //返回顶部
+        $('.return-top').click(function() {
+            $('.component-list').animate({ scrollTop: 0 }, 500);
+        })
     }]);

@@ -147,8 +147,6 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $('.pro-info div >p').css({
                     'margin-bottom': '9px'
                 });
-
-
             }, 10);
 
         };
