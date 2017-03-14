@@ -1,6 +1,19 @@
 *{
     padding:0;margin:0;
 }
+/* tools */
+.absol {
+    position: absolute;
+}
+.rela {
+    position: relative;
+}
+.inline {
+    display: inline-block;
+}
+label>input{
+    opacity: 0;
+}
 /*checkbox(复选框样式)*/
 /*灰色边框*/
 .simulated-box{
@@ -32,7 +45,8 @@ input[type="checkbox"]:checked +:after{
     height:auto;
 }
 .container-fluid{
-    padding:0 !important;margin:0;
+    padding:0 !important;
+    margin-left: 200px;
 }
 /*.component-base component-logo(logo部分)*/
 .component-base .component-logo{
@@ -105,7 +119,7 @@ input[type="checkbox"]:checked +:after{
     height: 461px;
 }
 .component-base .componet-base-main aside.main-siderbar>ul>p{
-    height: 40px;
+    height: 50px;
     color: #333;
     text-align: left;
     background: #ddd;

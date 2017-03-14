@@ -1,6 +1,41 @@
 .audit .audit-list {
 	background: #fff;
 	border-top: 1px solid #ccc;
-	height:calc(100vh - 183px);
-	overflow: hidden;
+	height:calc(100vh - 295px);
+	overflow: auto;
+}
+.audit .count-overview {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.audit .table-simulate {
+	overflow: auto;
+}
+.audit .tab-list {
+	height: 50px;
+	background: #ddd;
+}
+.audit .tab-list {
+	vertical-align: middle;
+    line-height: 49px;
+
+}
+.audit .tab-list label {
+	margin-right: 13px;
+}
+.audit .tab-list .simulated-box {
+    top: 17px;
+    left: 8px;
+}
+.audit .audit-status {
+	position: absolute;
+    top: 48px;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+.audit .tab-list li {
+	float: left;
+	width: 100px;
 }
