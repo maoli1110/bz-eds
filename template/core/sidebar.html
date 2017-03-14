@@ -1,22 +1,15 @@
-<aside class="main-siderbar">
-    <!--侧边栏菜单-->
-    <ul>
-        <p>构件来源</p>
-        <li ng-repeat="menusList in menusArr track by $index" >
-            {{menusList.menus}}
-            <div class="menus-childs" ng-if="menusList.child">
-                <p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
-            </div>
-        </li>
-    </ul>
-    <!--component-btns（侧边栏构件按钮组）-->
-    <div class="component-btns" ng-if="sidebar=='component'">
-        <div ui-sref="upload">上传构件</div>
-        <div ui-sref="upload">我的上传</div>
-        <div ui-sref="audit">我的审核</div>
-    </div>
-    <div class="component-btns" ng-if="sidebar=='audit'">
-        <div ui-sref="component">云构件库</div>
-        <div ui-sref="upload">我的上传</div>
-    </div>
-</aside>
+<ul>
+<p>构件来源</p>
+<li>
+<p class="menusName"><span class="strioke"></span>全部</p>
+<p class="menusName"><span class="strioke"></span>待审核</p>
+<p class="menusName"><span class="strioke"></span>已通过</p>
+<p class="menusName"><span class="strioke"></span>未通过</p>
+</li>
+</ul>
+<!--component-btns（侧边栏构件按钮组）-->
+<div class="component-btns">
+<div ui-sref="upload">上传构件</div>
+<div ui-sref="upload">我的上传</div>
+<div ui-sref="audit">我的审核</div>
+</div>

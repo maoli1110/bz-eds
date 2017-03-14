@@ -1,6 +1,5 @@
 .audit .audit-list {
 	background: #fff;
-	border-top: 1px solid #ccc;
 	height:calc(100vh - 295px);
 	overflow: auto;
 }
@@ -28,7 +27,7 @@
     top: 17px;
     left: 8px;
 }
-.audit .audit-status {
+.audit .audit-status ul{
 	position: absolute;
     top: 48px;
     left: 0;
@@ -38,4 +37,5 @@
 .audit .tab-list li {
 	float: left;
 	width: 100px;
+	text-align: center;
 }
