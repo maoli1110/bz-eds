@@ -38,7 +38,9 @@ input[type="checkbox"]:checked +:after{
 .simulated-box:hover:after{
     color:#00b3ee !important;border-color:#00b3ee !important;
 }
-
+.strioke{
+    height:100%;width:2px;background:#00b3ee;display:none;position:absolute;left:0;
+}
 /*----------------------------------component-base(构件库)----------------------------------------*/
 .component-base{
     width:100%;
@@ -112,9 +114,6 @@ input[type="checkbox"]:checked +:after{
 .menus-childs{
     display:none;
 }
-.component-base .componet-base-main aside.main-siderbar>ul>li,.component-base .componet-base-main aside.main-siderbar>ul>li p{
-    color:#333;line-height:40px;padding:0 20px;
-}
 .component-base .componet-base-main aside.main-siderbar>ul{
     height: 461px;
 }
@@ -126,8 +125,23 @@ input[type="checkbox"]:checked +:after{
     line-height: 40px;
     padding-left:20px;
 }
-.component-base .componet-base-main aside.main-siderbar>ul>li:hover{
-    background:#ccc;
+.component-base .componet-base-main aside.main-siderbar>ul>li,.component-base .componet-base-main aside.main-siderbar>ul>li p{
+    color:#333;line-height:40px;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>li p{
+    padding:0 20px ;position:relative;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>li>div p{
+    padding-left:30px !important;position:relative;
+}
+.component-base .componet-base-main aside.main-siderbar>ul>li>div p .strioke2{
+    height:100%;width:2px;background:#00b3ee;display:none;position:absolute;left:0;
+}
+/*.active{
+    background:#245580;
+}*/
+.component-base .componet-base-main aside.main-siderbar>ul>li p:hover{
+    background:#ccc !important;
 }
 /*.component-btns左侧菜单按钮组*/
 .component-base .component-btns>div{

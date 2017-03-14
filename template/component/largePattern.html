@@ -52,24 +52,71 @@
                     </div>
                     <div class="filter-infoList">
                         <!--筛选标题-->
-                        <p><b>类型： &nbsp;</b></p>
-                        <!--筛选内容-->
-                        <div class="filter-condition row" style="width:calc(100% - 56px )">
-                            <div class="filter-ele"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
-                            <div class="filter-tool">
-                                <span>+多选</span><span>更多</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-infoList">
-                        <!--筛选标题-->
                         <p><b>风格 ：&nbsp;</b></p>
                         <!--筛选内容-->
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
-                            <div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
+                            <div class="filter-ele">
+                                <label class="check-box" ng-click="filterCheck($event)">
+                                    <input type="checkbox" >
+                                    <div class="simulated-box"></div>
+
+                                </label>
+                                <span>现代</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>中式</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>现代</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>中式</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>现代</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>中式</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>现代</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>中式</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>现代</span>
+                                <label class="check-box">
+                                    <input type="checkbox">
+                                    <div class="simulated-box"></div>
+                                </label>
+                                <span>中式</span>
+
+
+                            </div>
 
                             <div class="filter-tool">
-                                <span>+多选</span><span class="filter-more">更多</span>
+                                <span class="checkMore">+多选</span><span class="filter-more">更多</span>
+                            </div>
+                            <div class="btns-item">
+                                <button type="button" class="btn btn-danger btn-ok">确定</button>
+                                <button type="button" class="btn btn-default btn-cancel">取消</button>
                             </div>
                         </div>
                     </div>
@@ -80,7 +127,11 @@
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
                             <div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
                             <div class="filter-tool">
-                                <span>+多选</span><span>更多</span>
+                                <span class="checkMore">+多选</span><span>更多</span>
+                            </div>
+                            <div class="btns-item">
+                                <button type="button" class="btn btn-danger btn-ok">确定</button>
+                                <button type="button" class="btn btn-default btn-cancel">取消</button>
                             </div>
                         </div>
                     </div>
@@ -89,30 +140,6 @@
                 <!--component-infoList(构件信息展示)-->
                 <div class="component-info">
                     <ul class="clearfix">
-                        <li ng-repeat="itemList in componentList track by $index">
-                            <div class="preview-model">
-                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
-                                <div class="preview-small">
-                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
-                                </div>
-                                <p class="preview-descText" >{{itemList.previewText}}</p>
-                            </div>
-                            <div class="preview-tool">
-                                <a ng-click="componetModal()">详细信息</a>
-                            </div>
-                        </li>
-                        <li ng-repeat="itemList in componentList track by $index">
-                            <div class="preview-model">
-                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
-                                <div class="preview-small">
-                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
-                                </div>
-                                <p class="preview-descText" >{{itemList.previewText}}</p>
-                            </div>
-                            <div class="preview-tool">
-                                <a ng-click="componetModal()">详细信息</a>
-                            </div>
-                        </li>
                         <li ng-repeat="itemList in componentList track by $index">
                             <div class="preview-model">
                                 <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>

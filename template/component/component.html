@@ -29,9 +29,9 @@
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName">{{menusList.menus}}</p>
+					<p class="menusName"><span class="strioke"></span>{{menusList.menus}}</p>
 					<div class="menus-childs" ng-if="menusList.child">
-						<p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
+						<p  ng-repeat="menusChild in menusList.child track by $index" profit><span class="strioke2"></span>{{menusChild}}</p>
 					</div>
 				</li>
 			</ul>
@@ -50,10 +50,10 @@
 					<div class="filter-status">
 						<div class="filter-ele"><div>全部</div></div>
 					</div>
-				<!--	<div class="filter-infoList">
-						&lt;!&ndash;筛选标题&ndash;&gt;
+					<div class="filter-infoList">
+						<!--筛选标题-->
 						<p><b>类型： &nbsp;</b></p>
-						&lt;!&ndash;筛选内容&ndash;&gt;
+						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
 							<div class="filter-tool">
@@ -64,15 +64,15 @@
 								<button type="button" class="btn btn-default btn-cancel">取消</button>
 							</div>
 						</div>
-					</div>-->
+					</div>
 					<div class="filter-infoList">
 						<!--筛选标题-->
 						<p><b>风格 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele">
-								<label class="check-box">
-									<input type="checkbox">
+								<label class="check-box" ng-click="filterCheck($event)">
+									<input type="checkbox" >
 									<div class="simulated-box"></div>
 
 								</label>

@@ -12,23 +12,33 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             var  siderbarArr = [];//菜单项
             var  filterCount = 1;//筛选开关
             var  dumpVal;//分页器跳转框的值
+            var showBtn = 0;//控制筛选条件控制按钮是否显示
             $scope.menusArr = [];//菜单数组
             $scope.componentList = [];//组件展示数组
         function  menusEvent(obj,event){
-            //menusCliCount =1;
-            obj.on(event,function(){
-                var menusCliCount =1;
-                menusCliCount++;
-                $(this).addClass('active').siblings().removeClass('active');
-                if($(this).has('.menus-childs')){
-                    $(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
-                }
-            })
+            $('.menus-childs').unbind('click').click(function(){
+                return false;
+            });
+            obj.off(event).on(event,function(){
+                 $(this).toggleClass('active');
+                 $(this).siblings().removeClass('active');
+                 $(this).siblings().find('.menus-childs').stop().slideUp();
+                 $(".menusName").css({'background':'','color':'#333'});
+                 $(this).siblings().find('.strioke').hide();
+                 $(this).find(".menusName").css({'background':'#666','color':'#fff'});
+                 $(this).find('.strioke').show();
+
+                 if($(this).hasClass('active')){
+                     $(this).find('.menus-childs').stop().slideDown();
+                 }else{
+                     $(this).find('.menus-childs').stop().slideUp();
+                 }
+                     //$(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
+             })
         }
         /*
          * 分页器
          * */
-
         //function getInitPagination(){
             $scope.totalItems = 64;
             $scope.currentPage = 1;
@@ -49,7 +59,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         function getDumpVal(){
             dumpVal =  $('.dump-inp input').val();
             return dumpVal;
-
         }
         function setFilterStyle(obj,event){
             obj.on(event,function(){
@@ -83,8 +92,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.getDumpOk = function(){
             $scope.setPage(getDumpVal());
         };
-
-
         //getInitPagination();
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
@@ -96,11 +103,16 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             });
             //菜单选项
             $('.main-siderbar ul li p').click(function(){
-                var menusText = $(this).text();
-                $('.filter-status .filter-ele div').eq(0).html(menusText)
+                $('.strioke').hide();//隐藏父元素的线条样式
+                $(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
+                $('p').css({'background':'','color':'#333'});//初始化样式
+                $(this).css({'background':'#666','color':'#fff'});//选中样式
+                $(this).siblings().find('.strioke2').hide();//统计子元素清除样式  保留当前样式
+                $(this).find('.strioke2').show();//选中样式线条
+                var menusText = $(this).text();//选中的当前项的内容
+                $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
             })
         });
-
             //声明菜单内容
             siderbarArr = [
                 {menus:'全部'},
@@ -121,7 +133,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseenter');
                 setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseleave');
             });
-
             /*
              * .filter-down更多选项
              * */
@@ -136,7 +147,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 if($(this).hasClass('activeShow')){
                     $('.filter-brand').show()
                 }else{
-
                     $('.filter-brand').hide()
                 }
             });
@@ -154,30 +164,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                });
             });
             //是否选中筛选多选框 选中的话可以提交
-
-              var  showBtn = 0;
-                $scope.filterCheck = function(event){
-                    showBtn=0;
-                    var i=0;
-                    $('.filter-infoList .check-box').map(function(i,val){
-                        console.info($(val))
-                        //console.log();
-                        //console.info($(this).parent().find('input[type="checkbox"]').prop('checked'))
-                        if($(val).find('input[type="checkbox"]').prop('checked')==true){
-                            i=1;
-                            showBtn= i;
-                        }
-                    });
-                    if(showBtn==0){
-                        console.info($(event).target)
-                        $(event).target.parent().parent().siblings().find('.btn-ok').hide();
-                    }else{
-                        $(this).parent().parent().siblings().find('.btn-ok').show();
-                    }
-                    alert(0)
-                    event.stopPropagation();
-                 }
-         /*   $('.filter-infoList .check-box>input').click(function(event){
+            $('.filter-infoList .check-box>input').click(function(event){
                     showBtn=0;
                     var i=0;
                     $('.filter-infoList .check-box').map(function(i,val){
@@ -194,14 +181,13 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     }else{
                         $(this).parent().parent().siblings().find('.btn-ok').show();
                     }
-            });*/
+            });
             //  取消选择的时候条件清空
             $('.filter-infoList .btn-cancel').click(function(){
                 $(this).parent().siblings().find('.check-box').hide();
                 $(this).parent().css({'display':'none'});
                 $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');
             });
-
         /*
         * 初始化模态框
         * 初始化参数配置
@@ -219,7 +205,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                         return $scope.items;
                     }
                 }
-
             });
             modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
@@ -227,7 +212,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 //console.info('Modal dismissed at: ' + new Date());
             });
         };
-
         /*
          * 返回顶部
          * */
@@ -241,7 +225,4 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.componentList = data.data;
             //console.info( $scope.componentList)
         })
-
-
-
     }]);
