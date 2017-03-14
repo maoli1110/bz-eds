@@ -25,3 +25,17 @@ angular.module('core').directive('componentFinish',function($timeout){
         }
     }
 });
+angular.module('core').directive('sideStyle',function($timeout){
+    return{
+        restrict: 'AE',
+        link: function(scope, element, attr) {
+            $(".menusName").each(function(ele){
+                    $(this).click(function(ele){
+                        $(this).find('span').show();
+                        $(this).addClass("side-active").siblings().removeClass("side-active");//选中样式
+                        $(this).siblings().find('.strioke').hide();//统计子元素清除样式  保留当前样式
+                    });
+            })     
+        }
+    }
+});

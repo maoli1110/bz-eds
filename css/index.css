@@ -14,6 +14,11 @@
 label>input{
     opacity: 0;
 }
+/* sidebar */
+.side-active {
+    background: #666;
+    color: #fff;
+}
 /*checkbox(复选框样式)*/
 /*灰色边框*/
 .simulated-box{

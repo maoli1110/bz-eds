@@ -2,18 +2,22 @@
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 		vertical-align: middle;
 	}
+	.table>thead>tr>th {
+	    vertical-align: bottom;
+	    border-bottom: 1px solid #ddd;
+	}
 	.audit .simulated-box {
 		top:3px;
 	}
 </style>
 <!--component-base构件库简写-->
-<div class="component-base audit">
+<div class="component-base audit" side-style>
 	<!--header 页面中的头部-->
 	<header ng-include="'template/core/header.html'" class="component-logo"></header>
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
-		<aside ng-include="'template/core/sidebar.html'" class="main-siderbar"></aside>
+		<aside side-style ng-include="'template/core/sidebar.html'" class="main-siderbar" ng-controller="auditCtrl"></aside>
 		<!--component-container(右侧内容)-->
 		<section class="container-fluid">
 			<div class="rela tab-list">
@@ -23,11 +27,11 @@
 					<li ng-click="allSelected()">全选</li>
 					<li ng-click="invertSelected()">反选</li>
 					<li>下载</li>
-					<li class="rela">
-						<div ng-click="auditStatusShow()">审核<span class="glyphicon glyphicon-chevron-up"></span></div>
-						<ul class="audit-status" ng-show="flag.auditStatus">
-							<li>审核通过</li>
-							<li>审核不通过</li>
+					<li class="rela audit-status pop-signal">
+						<div class="pop-signal" ng-click="auditStatusShow()">审核<span class="glyphicon glyphicon-chevron-up pop-signal"></span></div>
+						<ul ng-show="flag.auditStatus" class="pop-signal">
+							<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
+							<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
 						</ul>
 					</li>
 				</ul>
