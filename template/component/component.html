@@ -48,9 +48,9 @@
 			<div class="component-list">
 				<div class="component-filter">
 					<div class="filter-status">
-						<div class="filter-ele"><div>全部</div></div>
+						<div class="filter-ele" ><div>全部</div></div><span ng-click="cancelFilter()">清空筛选</span>
 					</div>
-					<div class="filter-infoList">
+					<div class="filter-infoList" ng-if="isType" ng-click="isTypeFilter($event)">
 						<!--筛选标题-->
 						<p><b>类型： &nbsp;</b></p>
 						<!--筛选内容-->
@@ -65,7 +65,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-infoList">
+					<div class="filter-infoList" ng-if="isStyle" ng-click="isStyleFilter($event)">
 						<!--筛选标题-->
 						<p><b>风格 ：&nbsp;</b></p>
 						<!--筛选内容-->
@@ -135,7 +135,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-brand">
+					<div class="filter-brand" ng-if="isBrand" ng-click="isBrandFilter($event)">
 						<!--筛选标题-->
 						<p><b>品牌 ：&nbsp;</b></p>
 						<!--筛选内容-->

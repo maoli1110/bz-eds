@@ -13,21 +13,24 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             var  filterCount = 1;//筛选开关
             var  dumpVal;//分页器跳转框的值
             var showBtn = 0;//控制筛选条件控制按钮是否显示
+            var textFilter = '';//筛选条件生成筛选标签的内容
             $scope.menusArr = [];//菜单数组
             $scope.componentList = [];//组件展示数组
+            $scope.isType = true;
+            $scope.isStyle = true;
+            $scope.isBrand = true;
         function  menusEvent(obj,event){
             $('.menus-childs').unbind('click').click(function(){
                 return false;
             });
             obj.off(event).on(event,function(){
+                $(".menusName").css({'background':'','color':'#333'});
                  $(this).toggleClass('active');
                  $(this).siblings().removeClass('active');
                  $(this).siblings().find('.menus-childs').stop().slideUp();
-                 $(".menusName").css({'background':'','color':'#333'});
                  $(this).siblings().find('.strioke').hide();
                  $(this).find(".menusName").css({'background':'#666','color':'#fff'});
                  $(this).find('.strioke').show();
-
                  if($(this).hasClass('active')){
                      $(this).find('.menus-childs').stop().slideDown();
                  }else{
@@ -52,6 +55,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.bigTotalItems = 175;
             $scope.bigCurrentPage = 1;
         //}
+
         /*分页器跳转
          * params  value
          * return currentPage
@@ -60,11 +64,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             dumpVal =  $('.dump-inp input').val();
             return dumpVal;
         }
-        function setFilterStyle(obj,event){
+   /*     function setFilterStyle(obj,event){
             obj.on(event,function(){
                 $(this).parent().siblings().css({'height':'auto','overflow':''})
             })
-        }
+        }*/
         /*
         * typeFilter 样式
         * params obj event
@@ -84,6 +88,14 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $(this).find('.switch-filter').hide();
             })
         }
+        /*
+        * 筛选条件生成条件标签
+        * params function
+        * */
+        function setFilterBlank(textFilter){
+            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+textFilter+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
+            //setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'));
+        }
         /*分页器跳转
          * params  value
          * return currentPage
@@ -91,6 +103,41 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.setPage(getDumpVal());
         $scope.getDumpOk = function(){
             $scope.setPage(getDumpVal());
+        };
+        /*
+        * 清空筛选条件
+        * */
+        //筛选品牌
+        $scope.isBrandFilter = function(event){
+            textFilter = $(event.target).text();
+            setFilterBlank(textFilter);//生成筛选条件
+            setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+            $scope.isBrand = false;
+
+        };
+        //筛选风格
+        $scope.isStyleFilter = function(event){
+            textFilter = $(event.target).text();
+            setFilterBlank(textFilter);
+            setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+            $scope.isStyle =false;
+        };
+        //筛选类型
+        $scope.isTypeFilter = function(event){
+            textFilter = $(event.target).text();
+            setFilterBlank(textFilter);
+            setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+            $scope.isType = false;
+        };
+        //取消筛选
+        $scope.cancelFilter = function(){
+            if($('.filter-trigger').length){
+                $scope.isBrand = true;
+                $scope.isStyle = true;
+                $scope.isType = true;
+            }
+            $('.type-filter').remove();
+            $('.filter-status .filter-ele>b').remove();
         };
         //getInitPagination();
         //监听是否 菜单选项repeat 完成
@@ -127,12 +174,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.typeFilter  = ['单人沙发','多人沙发','沙发','沙发沙发'];
 
         //setFilterStyle($('.filter-condition .filter-ele>span'),'click')
-            $('.filter-condition .filter-ele>span').click(function(){
+        /*    $('.filter-condition .filter-ele>span').click(function(){
                 $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+$(this).text()+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
                 $(this).parent().parent().parent().hide();
                 setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseenter');
                 setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseleave');
-            });
+            });*/
             /*
              * .filter-down更多选项
              * */
@@ -168,9 +215,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     showBtn=0;
                     var i=0;
                     $('.filter-infoList .check-box').map(function(i,val){
-                        console.info($(val))
-                        //console.log();
-                        //console.info($(this).parent().find('input[type="checkbox"]').prop('checked'))
                         if($(val).find('input[type="checkbox"]').prop('checked')==true){
                             i=1;
                             showBtn= i;
