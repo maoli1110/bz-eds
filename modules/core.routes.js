@@ -22,7 +22,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url:'/upload',
 			controller:'uploadCtrl',
 			templateUrl:'template/component/upload.html',
-			data:{
+			displayName:{
 				displayName:"upload"
 			}
 		}).state('audit',{
@@ -31,6 +31,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			templateUrl:'template/component/audit.html',
 			displayName:{
 				displayName:"audit"
+			}
+		}).state('largePattern',{
+			url:'/largePattern',
+			templateUrl:'template/component/largePattern.html',
+			controller:'largePatternCtrl',
+			data:{
+				displayName:"largePattern"
 			}
 		});
 

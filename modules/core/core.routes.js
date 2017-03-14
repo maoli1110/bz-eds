@@ -22,7 +22,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url:'/upload',
 			templateUrl:'template/component/upload.html',
 			controller:'uploadCtrl',
-			data:{
+			displayName:{
 				displayName:"upload"
 			}
 		}).state('audit',{
