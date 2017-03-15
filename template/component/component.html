@@ -29,7 +29,7 @@
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName"><!--<span class="strioke"></span>-->{{menusList.menus}}</p>
+					<p class="menusName"><!--<span class="strioke"></span>--><b class="glyphicon glyphicon-menu-up"></b>{{menusList.menus}}</p>
 					<div class="menus-childs" ng-if="menusList.child">
 						<p  ng-repeat="menusChild in menusList.child track by $index" profit><!--<span class="strioke2"></span>-->{{menusChild}}</p>
 					</div>
@@ -50,14 +50,14 @@
 					<div class="filter-status">
 						<div class="filter-ele" ><div>全部</div></div><span ng-click="cancelFilter()">清空筛选</span>
 					</div>
-					<div class="filter-infoList" ng-if="isType" ng-click="isTypeFilter($event)">
+					<div class="filter-infoList" ng-if="isType">
 						<!--筛选标题-->
-						<p><b>类型： &nbsp;</b></p>
+						<p><b>类型 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
+							<div class="filter-ele" ng-click="isTypeFilter($event)"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
 							<div class="filter-tool">
-								<span class="checkMore">+多选</span><span>更多</span>
+								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span>更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -65,18 +65,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-infoList" ng-if="isStyle" ng-click="isStyleFilter($event)">
+					<div class="filter-infoList" ng-if="isStyle" >
 						<!--筛选标题-->
 						<p><b>风格 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele">
-								<label class="check-box" ng-click="filterCheck($event)">
-									<input type="checkbox" >
+							<div class="filter-ele" ng-click="isStyleFilter($event)">
+								<label class="check-box">
+									<input type="checkbox"  >
 									<div class="simulated-box"></div>
 
 								</label>
-								<span>现代</span>
+								<span data-name="a">现代</span>
 								<label class="check-box">
 									<input type="checkbox">
 									<div class="simulated-box"></div>
@@ -127,7 +127,7 @@
 							</div>
 
 							<div class="filter-tool">
-								<span class="checkMore">+多选</span><span class="filter-more">更多</span>
+								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -135,14 +135,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-brand" ng-if="isBrand" ng-click="isBrandFilter($event)">
+					<div class="filter-brand" ng-show="isBrand" >
 						<!--筛选标题-->
 						<p><b>品牌 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele"><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
+							<div class="filter-ele" ng-click="isBrandFilter($event)"><span>现代</span> <span>中式</span> <span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
 							<div class="filter-tool">
-								<span class="checkMore">+多选</span><span>更多</span>
+								<span class="checkMore"><b>+</b>多选</span><span>更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -157,7 +157,7 @@
 					<ul class="clearfix">
 						<li ng-repeat="itemList in componentList track by $index">
 							<div class="preview-model">
-								<div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
+								<div class="preview-big"><img ng-src="{{itemList.previewSrc}}"/><b></b></div>
 								<div class="preview-small">
 									<span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
 								</div>

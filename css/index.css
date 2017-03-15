@@ -146,6 +146,10 @@ input[type="checkbox"]:checked +:after{
 .component-base .componet-base-main aside.main-siderbar>ul>li p{
     padding:0 20px ;position:relative;
 }
+.component-base .componet-base-main aside.main-siderbar>ul>li p b{
+    float:right;margin-top:10px;
+}
+
 .component-base .componet-base-main aside.main-siderbar>ul >li p:hover{
     color:#4990e2 !important;
 }
@@ -271,25 +275,8 @@ input[type="checkbox"]:checked +:after{
     display:inline-block;
 }
 .component-base .componet-base-main section .component-filter .filter-condition .check-box{
-   display:none;position:relative;margin-left:6px;
+   display:none;position:relative;margin-left:6px;float:left;
 }
-/*.component-base .componet-base-main section .component-filter .filter-condition .simulated-box:hover {*/
-    /*color:#00b3ee;border-color:#00b3ee !important;*/
-/*}*/
-/*.component-base .componet-base-main section .component-filter .simulated-box:hover:after{
-    color:#00b3ee !important;border-color:#00b3ee !important;
-}*/
-/*.component-base .componet-base-main section .component-filter .filter-condition .check-box input[type="checkbox"]:checked +:after{
-    content: '';
-    display: block;
-    width: 6px;
-    height: 9px;
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(227deg);
-    border-left: 2px solid #333;
-    border-top: 2px solid #333;
-    transform-origin: 5px 4px;
-}*/
 .component-base .componet-base-main section .component-filter{
     font-size:14px;border:1px solid #f2f2f2;
 }
@@ -299,7 +286,7 @@ input[type="checkbox"]:checked +:after{
     text-align:center;
     height:40px;
     line-height:40px;
-    display:none;
+    display:none;margin-bottom:20px;
 }
 
 .component-base .componet-base-main section .component-filter  .filter-condition  .btn-ok{
@@ -309,10 +296,11 @@ input[type="checkbox"]:checked +:after{
     height: 30px;
     width: 82px;
     display: inline-block;
-    text-align: center;
+    text-align: left;
     line-height: 30px;
-    margin:0 6px;
     font-size:14px;
+    float: left;
+    margin: 11px 6px 0;
 }
 .component-base .componet-base-main section .component-filter .filter-ele span:hover{
     color:#00b3ee;border-color:#4990e2;
@@ -321,22 +309,40 @@ input[type="checkbox"]:checked +:after{
 .component-base .filter-down{
     width: 98px;
     height: 30px;
-    line-height: 30px;
+    line-height: 25px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #f2f2f2;
     border-top: none;
     position: absolute;
     left: 46%;
     /*margin-left: 28px;*/
-    bottom: -27px;
+    bottom: -30px;
     background: #fff;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.component-base .filter-down:hover{
+    color:#E5383C;
 }
 .component-base  .filter-brand{
     display:none;
 }
+
 .component-base .filter-status .filter-ele .type-filter:nth-of-type(4) .filter-trigger:hover{
-    border-color:red;color:red;
+    border-color:#E5383C;color:#E5383C;
+}
+.component-base .filter-status  .icon-close{
+    width:15px;height:12px;display:inline-block;background:url(../imgs/icon/icon-ele.png) no-repeat 0 -142px;background-size:20px;float:right;margin-top: 9px;
+    margin-right: 10px;
+}
+.component-base .filter-status  .filter-closeStatus{
+    color:#E5383C;
+}
+.component-base .filter-status  .filter-closeStatus:hover{
+    color:#E5383C;border-color:#E5383C !important;
+}
+.component-base .filter-status  .filter-closeStatus:hover b{
+    background-position-y:-130px;
 }
 /*.component-base  .filter-status:nth-child(3){
 
@@ -352,9 +358,29 @@ input[type="checkbox"]:checked +:after{
     height: 30px;
     width: 76px;
     display: inline-block;
-    text-align: center;
     line-height: 30px;
-    border: 1px solid #000;margin:0 6px;
+    border: 1px solid #C9C9C9;margin:0 6px;
+}
+.component-base .filter-tool span:nth-child(1){
+    text-align:left;
+}
+.component-base .filter-tool span:nth-child(2){
+    text-align:center;
+}
+.component-base .filter-tool span:nth-child(2) i{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.component-base .filter-tool span>b{
+    font-size: 19px;
+    float: left;
+    margin-left: 12px;
+}
+.component-base .filter-tool  span:hover{
+    color:#E5383C;border-color:#E5383C;
 }
 /*筛选下拉框*/
 .component-base .glyphicon-menu-up{
