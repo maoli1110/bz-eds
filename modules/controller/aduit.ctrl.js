@@ -2,7 +2,7 @@
 /**
  * audit
  */
-angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http',function ($scope, commonService, $http) {
+angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http','$uibModal', function ($scope, commonService, $http, $uibModal) {
 	$scope.sidebar = 'audit';
     $scope.flag = {};
     //获取auditList
@@ -75,6 +75,7 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             delItems.splice(findIndex,1);
         }
     }
+    
     //auditStatusShow
     $scope.auditStatusShow = function () {
         $scope.flag.auditStatus = !$scope.flag.auditStatus
@@ -91,26 +92,36 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
         }
     });
 
-    function  menusEvent(obj,event){
-            $('.menus-childs').unbind('click').click(function(){
-                return false;
-            });
-            obj.off(event).on(event,function(){
-                 $(this).toggleClass('active');
-                 $(this).siblings().removeClass('active');
-                 $(this).siblings().find('.menus-childs').stop().slideUp();
-                 $(".menusName").css({'background':'','color':'#333'});
-                 $(this).siblings().find('.strioke').hide();
-                 $(this).find(".menusName").css({'background':'#666','color':'#fff'});
-                 $(this).find('.strioke').show();
+    /*
+    * 初始化模态框
+    * 初始化参数配置
+    * */
+    $scope.showModal = function () {
+        var modalInstance = $uibModal.open({
+            windowClass: 'component-modal',
+            backdrop: 'static',
+            animation: false,
+            size: 'lg',
+            templateUrl: 'template/component/modalAudit.html',
+            controller: 'modalCtrl',
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            //console.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
-                 if($(this).hasClass('active')){
-                     $(this).find('.menus-childs').stop().slideDown();
-                 }else{
-                     $(this).find('.menus-childs').stop().slideUp();
-                 }
-                     //$(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
-             })
-        }
+    /*
+     * 返回顶部
+     * */
+    $('.return-top').click(function() {
+        $('.audit-list').animate({ scrollTop: 0 }, 500);
+    })
 
 }]);

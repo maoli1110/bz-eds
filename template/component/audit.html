@@ -1,15 +1,16 @@
 <style>
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 		vertical-align: middle;
+		text-align: center;
 	}
 	.table>thead>tr>th {
 	    vertical-align: bottom;
-	    border-bottom: 1px solid #ddd;
+	    border-bottom: 0px solid #ddd;
 	}
 	.audit .simulated-box {
 		top:3px;
 	}
-</style>
+</style>  
 <!--component-base构件库简写-->
 <div class="component-base audit" side-style>
 	<!--header 页面中的头部-->
@@ -17,7 +18,23 @@
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
-		<aside side-style ng-include="'template/core/sidebar.html'" class="main-siderbar" ng-controller="auditCtrl"></aside>
+		<aside side-style class="main-siderbar">
+			<ul>
+				<p>构件来源</p>
+				<li>
+				<p class="menusName"><span class="strioke"></span>全部</p>
+				<p class="menusName"><span class="strioke"></span>待审核</p>
+				<p class="menusName"><span class="strioke"></span>已通过</p>
+				<p class="menusName"><span class="strioke"></span>未通过</p>
+			</li>
+			</ul>
+				<!--component-btns（侧边栏构件按钮组）-->
+			<div class="component-btns">
+				<div ui-sref="upload">上传构件</div>
+				<div ui-sref="upload">我的上传</div>
+				<div ui-sref="audit">我的审核</div>
+			</div>
+		</aside>
 		<!--component-container(右侧内容)-->
 		<section class="container-fluid">
 			<div class="rela tab-list">
@@ -74,10 +91,10 @@
 								<td width="10%">{{item.smallClass}}</td>
 								<td width="10%">{{item.brand}}</td>
 								<td width="10%">{{item.model}}</td>
-								<td width="10%"><img src="{{item.picture}}" alt=""></td>
+								<td width="10%"><img ng-src="{{item.picture}}" alt=""></td>
 								<td width="10%">{{item.author}}</td>
 								<td width="10%">{{item.status}}</td>
-								<td width="10%">{{item.comment}}</td>
+								<td width="10%" ng-click="showModal()"><span class="glyphicon glyphicon-pencil"></span></td>
 								<td width="10%">{{item.updateTime}}</td>
 							</tr>
 						</tbody>
