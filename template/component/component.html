@@ -11,12 +11,12 @@
 		</div>
 		<div class="component-computer-logo  clearfix">
 			<div class="col-xs-3">
-				<span class=""><img src="imgs/logo.png">  <h1 class="">云构件库</h1></span>
+				<span class=""><img src="imgs/icon-cloud.jpg">  <h1 class="">云构件库</h1></span>
 			</div>
-			<div class="col-xs-8 component-search ">
-				<form>
-					<input type="text" placeholder="输入构件名称">
-					<img src="imgs/logo.png" alt="">
+			<div class="col-xs-9 component-search ">
+				<form role="form">
+					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3">
+					<div class="absol search-btn"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
 				</form>
 			</div>
 		</div>
@@ -29,17 +29,17 @@
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName"><span class="strioke"></span>{{menusList.menus}}</p>
+					<p class="menusName"><!--<span class="strioke"></span>-->{{menusList.menus}}</p>
 					<div class="menus-childs" ng-if="menusList.child">
-						<p  ng-repeat="menusChild in menusList.child track by $index" profit><span class="strioke2"></span>{{menusChild}}</p>
+						<p  ng-repeat="menusChild in menusList.child track by $index" profit><!--<span class="strioke2"></span>-->{{menusChild}}</p>
 					</div>
 				</li>
 			</ul>
 			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
-				<div ui-sref="upload">上传构件</div>
-				<div ui-sref="upload">我的上传</div>
-				<div ui-sref="audit">我的审核</div>
+				<div ui-sref="upload"><span class="icon-tool"></span>上传构件</div>
+				<div ui-sref="upload"><span class="icon-tool"></span>我的上传</div>
+				<div ui-sref="audit"><span class="icon-tool"></span>我的审核</div>
 			</div>
 		</aside>
 		<!--component-container(右侧内容)-->
@@ -164,8 +164,8 @@
 								<p class="preview-descText" >{{itemList.previewText}}</p>
 							</div>
 							<div class="preview-tool">
-								<a ng-click="componetModal()">更多详情</a>
-								<a >应用</a>
+								<a ng-click="componetModal()"><span class="icon-describe"></span>更多详情</a>
+								<a > <span class="icon-describe"></span>应用</a>
 							</div>
 						</li>
 					</ul>
@@ -174,16 +174,17 @@
 			<div class="pagination">
 				<div class="clearfix">
 					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
-					<span>共 {{numPages}} 页 </span>
+					<span>共 {{numPages}} 页 </span>,
+					<div class="pagination-dump">
+						<p class="dump-inp inline">跳转到   <input type="text" class="form-control inline"> </p>
+						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
+					</div>
 				</div>
 
-				<div class="pagination-dump">
-					<p class="dump-inp">跳转  <input type="text">  页</p>
-					<button type="button" ng-click="getDumpOk()">确定</button>
-				</div>
+
 			</div>
 		</section>
 
 	</article>
-	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
+	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/icon-top.jpg" alt=""></div>
 </div>

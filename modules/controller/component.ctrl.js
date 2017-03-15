@@ -28,9 +28,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                  $(this).toggleClass('active');
                  $(this).siblings().removeClass('active');
                  $(this).siblings().find('.menus-childs').stop().slideUp();
-                 $(this).siblings().find('.strioke').hide();
-                 $(this).find(".menusName").css({'background':'#666','color':'#fff'});
-                 $(this).find('.strioke').show();
+                 //$(this).siblings().find('.strioke').hide();
+                 $(this).find(".menusName").css({'color':'#4990e2'});
+                 //$(this).find('.strioke').show();
                  if($(this).hasClass('active')){
                      $(this).find('.menus-childs').stop().slideDown();
                  }else{
@@ -84,7 +84,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
            obj.on('mouseleave',function(){
                 $(this).children().css({'color':'','border-color':''});
                 $(this).children().find('.glyphicon-menu-up').css({'transform':''});
-                $(this).find('.filter-trigger').css({'height':'30px','border-bottom':'1px solid #000'});
+                $(this).find('.filter-trigger').css({'height':'30px','border-bottom':'1px solid #c9c9c9'});
                 $(this).find('.switch-filter').hide();
             })
         }
@@ -94,7 +94,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * */
         function setFilterBlank(textFilter){
             $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+textFilter+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
-            //setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'));
         }
         /*分页器跳转
          * params  value
@@ -110,8 +109,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         //筛选品牌
         $scope.isBrandFilter = function(event){
             textFilter = $(event.target).text();
-            setFilterBlank(textFilter);//生成筛选条件
-            setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+textFilter+'</div>');
+
+            //setFilterBlank(textFilter);//生成筛选条件
+            //setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
             $scope.isBrand = false;
 
         };
@@ -153,9 +154,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $('.strioke').hide();//隐藏父元素的线条样式
                 $(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
                 $('p').css({'background':'','color':'#333'});//初始化样式
-                $(this).css({'background':'#666','color':'#fff'});//选中样式
-                $(this).siblings().find('.strioke2').hide();//统计子元素清除样式  保留当前样式
-                $(this).find('.strioke2').show();//选中样式线条
+                $(this).css({'color':'#4990e2'});//选中样式
+                //$(this).siblings().find('.strioke2').hide();//统计子元素清除样式  保留当前样式
+                //$(this).find('.strioke2').show();//选中样式线条
                 var menusText = $(this).text();//选中的当前项的内容
                 $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
             })
@@ -172,14 +173,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
              *筛选状态
              * */
             $scope.typeFilter  = ['单人沙发','多人沙发','沙发','沙发沙发'];
-
-        //setFilterStyle($('.filter-condition .filter-ele>span'),'click')
-        /*    $('.filter-condition .filter-ele>span').click(function(){
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger">'+$(this).text()+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
-                $(this).parent().parent().parent().hide();
-                setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseenter');
-                setFilterStyle( $('.component-base .filter-status .filter-ele .type-filter'),'mouseleave');
-            });*/
             /*
              * .filter-down更多选项
              * */
