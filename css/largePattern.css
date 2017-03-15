@@ -1,16 +1,27 @@
-.largePattern .largePattern{
-    position: absolute;
-    right: 6.5%;
-    top:5%;
+.largePattern .large-pattern{
+    display: inline-block;
+    width: 24px;
+    font-size: 24px;
+    position: fixed;
+    right: 4%;
+    top:13.5%;
+    z-index: 10;
 }
 .largePattern .listMode{
-    position: absolute;
-    right: 3.5%;
-    top:5%;
+    display: inline-block;
+    width: 24px;
+    font-size: 24px;
+    position: fixed;
+    right: 2%;
+    top:13.5%;
+    z-index: 10;
 }
 .largePattern .preview-tool{
     text-align: center;
 }
 .largePattern .preview-tool:hover {
     cursor: pointer;
+}
+.largePattern .main-siderbar ul p,.largePattern .main-siderbar ul li{
+    padding: 0 20px;
 }
