@@ -2,7 +2,7 @@
 /**
  * audit
  */
-angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http',function ($scope, commonService, $http) {
+angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http','$uibModal', function ($scope, commonService, $http, $uibModal) {
 	$scope.sidebar = 'audit';
     $scope.flag = {};
     //获取auditList
@@ -112,5 +112,37 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
                      //$(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
              })
         }
+
+        /*
+        * 初始化模态框
+        * 初始化参数配置
+        * */
+        $scope.showModal = function () {
+            var modalInstance = $uibModal.open({
+                windowClass: 'component-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/core/modalAudit.html',
+                controller: 'modalCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //console.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        /*
+         * 返回顶部
+         * */
+        $('.return-top').click(function() {
+            $('.audit-list').animate({ scrollTop: 0 }, 500);
+        })
 
 }]);
