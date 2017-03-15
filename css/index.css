@@ -1,6 +1,24 @@
 *{
     padding:0;margin:0;
 }
+/* tools */
+.absol {
+    position: absolute;
+}
+.rela {
+    position: relative;
+}
+.inline {
+    display: inline-block;
+}
+label>input{
+    opacity: 0;
+}
+/* sidebar */
+.side-active {
+    background: #666;
+    color: #fff;
+}
 /*checkbox(复选框样式)*/
 /*灰色边框*/
 .simulated-box{
@@ -34,7 +52,8 @@ input[type="checkbox"]:checked +:after{
     height:auto;
 }
 .container-fluid{
-    padding:0 !important;margin:0;
+    padding:0 !important;
+    margin-left: 200px;
 }
 /*.component-base component-logo(logo部分)*/
 .component-base .component-logo{
@@ -101,10 +120,10 @@ input[type="checkbox"]:checked +:after{
     display:none;
 }
 .component-base .componet-base-main aside.main-siderbar>ul{
-    height: 461px;
+    height: auto;
 }
 .component-base .componet-base-main aside.main-siderbar>ul>p{
-    height: 40px;
+    height: 50px;
     color: #333;
     text-align: left;
     background: #ddd;
@@ -153,7 +172,15 @@ input[type="checkbox"]:checked +:after{
 }
 /*---------------------------------filter-status--------------------------------------*/
 .component-base  .filter-ele{
-    width:calc(100% - 186px)
+    width:calc(100% - 186px);
+}
+/*选上去的筛选条件*/
+.component-base .filter-status .filter-ele {
+    width:auto;margin-right:15px;
+    display:inline-block;
+}
+.component-base .filter-status .filter-ele+span:hover{
+    color:#8c8c8c;cursor:pointer;
 }
 .component-base .filter-status .filter-ele>div:first-child{
     margin-left:14px !important;   height: 30px;
@@ -163,7 +190,7 @@ input[type="checkbox"]:checked +:after{
     line-height: 30px;
     border: 1px solid #000;
 }
-.component-base .filter-status .filter-ele>div{
+.component-base .filter-status .filter-ele >div{
     display:inline-block;position:relative; height: 30px;width:86px;
     line-height:30px;
 }
@@ -192,6 +219,9 @@ input[type="checkbox"]:checked +:after{
     margin: 0;display:none;
 }
 .component-base .filter-status .filter-ele .switch-filter div{width:auto;display:inline-block;padding:0 10px;}
+.component-base .filter-status .filter-ele .switch-filter div:hover{
+    color:red;
+}
 .component-base .filter-infoList>P{
     padding-left:14px;
 }

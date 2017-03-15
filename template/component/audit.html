@@ -1,20 +1,50 @@
+<style>
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		vertical-align: middle;
+	}
+	.table>thead>tr>th {
+	    vertical-align: bottom;
+	    border-bottom: 1px solid #ddd;
+	}
+	.audit .simulated-box {
+		top:3px;
+	}
+</style>
 <!--component-base构件库简写-->
-<div class="component-base audit">
+<div class="component-base audit" side-style>
 	<!--header 页面中的头部-->
 	<header ng-include="'template/core/header.html'" class="component-logo"></header>
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
-		<aside ng-include="'template/core/sidebar.html'" class="main-siderbar"></aside>
+		<aside side-style ng-include="'template/core/sidebar.html'" class="main-siderbar" ng-controller="auditCtrl"></aside>
 		<!--component-container(右侧内容)-->
 		<section class="container-fluid">
-			<!--component-filter（构件筛选）-->
-			<div class="audit-list">
-				<div class="table-list table-simulate">
-					<table class="table">
-						<thead>
-						<tr style="background:#d2d7de;height:47px;">
-							<th width="10%">构件名称</th>
+			<div class="rela tab-list">
+				<!-- <div class="inline"><label class="rela invert-select" ng-click="invertSelected()"><input type="checkbox"><div class="simulated-box"></div></label><span>反选</span></div> -->
+				<div class=""></div>
+				<ul class="tab-list clearfix">
+					<li ng-click="allSelected()">全选</li>
+					<li ng-click="invertSelected()">反选</li>
+					<li>下载</li>
+					<li class="rela audit-status pop-signal">
+						<div class="pop-signal" ng-click="auditStatusShow()">审核<span class="glyphicon glyphicon-chevron-up pop-signal"></span></div>
+						<ul ng-show="flag.auditStatus" class="pop-signal">
+							<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
+							<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
+						</ul>
+					</li>
+				</ul>
+				<div class="count-overview">共361未审核</div>
+			</div>
+			<div class="table-list table-simulate">
+				<table class="table" style="margin-bottom:0">
+					<thead>
+						<tr style="height:47px;">
+							<th width="10%">
+								<!-- <label class="rela all-selected"><input type="checkbox" ng-click="allSelected()"><div class="simulated-box"></div></div></label> -->
+								<span>构件名称</span>
+							</th>
 							<th width="10%">大类</th>
 							<th width="10%">小类</th>
 							<th width="10%">品牌</th>
@@ -25,17 +55,18 @@
 							<th width="10%">审核意见</th>
 							<th width="10%">上传时间</th>
 						</tr>
-						</thead>
-					</table>
-				</div>
-				<div class="table-list table-simulate">
+					</thead>
+				</table>
+			</div>
+			<div class="audit-list">
+				<div class="table-list table-body">
 					<table class="table">
 						<tbody>
 							<tr ng-repeat="item in auditList track by $index">
 								<td width="10%">
-									<label class="rela multi-choice" >
-										<input type="checkbox" class="remove-signal" ng-click="updateSelection($event, item)" >
-										<div class="absol check-funnel" style="margin-top: 4px;"></div>
+									<label class="rela multi-choice">
+										<input type="checkbox" ng-click="updateSelection($event, item)">
+										<div class="simulated-box"></div>
 									</label>
 									<span>{{item.componentName}}</span>
 								</td>
@@ -65,7 +96,6 @@
 				</div>
 			</div>
 		</section>
-
 	</article>
 	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
 </div>
