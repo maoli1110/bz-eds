@@ -22,7 +22,7 @@
 }
 .upload .main table tr th,.upload .main table tr td{
     height: 45px;
-    padding: 0 8px;
+    padding: 0 4% 0 0;
     vertical-align: middle;
 }
 .upload .main table thead tr th{
