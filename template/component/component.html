@@ -1,26 +1,7 @@
 <!--component-base构件库简写-->
 <div class="component-base">
 	<!--header 页面中的头部-->
-	<header class="component-logo  ">
-		<div class=" component-sys-close" >
-			<div class="close-tool">
-				<span class="glyphicon glyphicon-minus"></span>
-				<span class="glyphicon glyphicon-book"></span>
-				<span class="glyphicon glyphicon-remove"></span>
-			</div>
-		</div>
-		<div class="component-computer-logo  clearfix">
-			<div class="col-xs-3">
-				<span class=""><img src="imgs/icon-cloud.jpg">  <h1 class="">云构件库</h1></span>
-			</div>
-			<div class="col-xs-9 component-search ">
-				<form role="form">
-					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3">
-					<div class="absol search-btn"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
-				</form>
-			</div>
-		</div>
-	</header>
+	<header ng-include="'template/core/header.html'" class="component-logo"></header>
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->

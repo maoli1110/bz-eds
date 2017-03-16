@@ -1,6 +1,6 @@
 .audit .audit-list {
 	background: #fff;
-	height:calc(100vh - 295px);
+	height:calc(100vh - 312px);
 	overflow: auto;
 }
 .audit .count-overview {

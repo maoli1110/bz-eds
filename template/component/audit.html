@@ -103,15 +103,16 @@
 			<div class="pagination">
 				<div class="clearfix">
 					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
-					<span>共 {{numPages}} 页 </span>
+					<span>共 {{numPages}} 页 </span>,
+					<div class="pagination-dump">
+						<p class="dump-inp inline">跳转到   <input type="text" class="form-control inline"> </p>
+						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
+					</div>
 				</div>
 
-				<div class="pagination-dump">
-					<p class="dump-inp">跳转  <input type="text">  页</p>
-					<button type="button" ng-click="getDumpOk()">确定</button>
-				</div>
+
 			</div>
 		</section>
 	</article>
-	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
+	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/icon-top.jpg" alt=""></div>
 </div>

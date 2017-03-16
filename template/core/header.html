@@ -1,18 +1,22 @@
-	<div class=" component-sys-close" >
-		<div class="close-tool">
-			<span class="glyphicon glyphicon-minus"></span>
-			<span class="glyphicon glyphicon-book"></span>
-			<span class="glyphicon glyphicon-remove"></span>
-		</div>
+<div class=" component-sys-close" >
+	<div class="close-tool">
+		<span class="glyphicon glyphicon-minus"></span>
+		<span class="glyphicon glyphicon-book"></span>
+		<span class="glyphicon glyphicon-remove"></span>
 	</div>
-	<div class="component-computer-logo  clearfix">
-		<div class="col-xs-3">
-			<span class=""><img src="imgs/logo.png">  <h1 class="">云构件库</h1></span>
-		</div>
-		<div class="col-xs-8 component-search ">
-			<form >
-				<input type="text" placeholder="输入构件名称">
-				<img src="imgs/logo.png" alt="">
-			</form>
-		</div>
+</div>
+<div class="component-computer-logo  clearfix">
+	<div class="col-xs-3">
+		<span class=""><img src="imgs/icon-cloud.jpg">
+			<h1 class="" ng-show=" $state.includes('audit')">我的审核</h1>
+			<h1 class="" ng-show=" $state.includes('upload')">我的上传</h1>
+			<h1 class="" ng-show=" $state.includes('component')">云构件库</h1>
+		</span>
 	</div>
+	<div class="col-xs-9 component-search ">
+		<form role="form">
+			<input type="text" placeholder="输入构件名称" class="form-control col-xs-3">
+			<div class="absol search-btn"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
+		</form>
+	</div>
+</div>
