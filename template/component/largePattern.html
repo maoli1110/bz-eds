@@ -3,8 +3,12 @@
     <!--header 页面中的头部-->
     <header ng-include="'template/core/header.html'" class="component-logo"></header>
 
-    <span ui-sref="largePattern" class="glyphicon glyphicon-th large-pattern"></span>
-    <span ui-sref="upload" class="glyphicon glyphicon-th-list listMode"></span>
+    <div ui-sref="largePattern" class="modelBtn modelBtnl">
+        <span class="large-pattern"></span>
+    </div>
+    <div ui-sref="upload" class="modelBtn modelBtnm">
+        <span class="listMode"></span>
+    </div>
     <!---页面内容main-->
     <article class="componet-base-main">
         <!--main-siderbar(侧边栏)-->

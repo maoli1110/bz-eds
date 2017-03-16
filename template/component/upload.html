@@ -1,8 +1,12 @@
 <div class="component-base upload">
 	<!-- 页面头部-->
 	<header ng-include="'template/core/header.html'" class="component-logo"></header>
-	<span ui-sref="largePattern" class="glyphicon glyphicon-th large-pattern"></span>
-	<span ui-sref="upload" class="glyphicon glyphicon-th-list listMode"></span>
+	<div ui-sref="largePattern" class="modelBtn modelBtnl">
+		<span class="large-pattern"></span>
+	</div>
+	<div ui-sref="upload" class="modelBtn modelBtnm">
+		<span class="listMode"></span>
+	</div>
 
 	<!-- 页面内容 -->
 	<article class="componet-base-main">
@@ -44,6 +48,7 @@
 										<th>审核状态</th>
 										<th>审核意见</th>
 										<th>上传时间</th>
+										<th></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -53,10 +58,11 @@
 											<td>{{item.smallClass}}</td>
 											<td>{{item.brand}}</td>
 											<td>{{item.model}}</td>
-											<td><img src="{{item.picture}}" alt=""></td>
+											<td><img style="width: 66px;height: 66px;" src="{{item.picture}}"></td>
 											<td>{{item.status}}</td>
 											<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
 											<td>{{item.updateTime}}</td>
+											<td></td>
 										</tr>
 									</tbody>
 								</table>
