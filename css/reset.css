@@ -16,7 +16,7 @@ time, mark, audio, video {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    vertical-align: middle;
     font-family: microsoft yahei;
 }
 /* HTML5 display-role reset for older browsers */
