@@ -116,7 +116,6 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             //console.info('Modal dismissed at: ' + new Date());
         });
     };
-
     /*
      * 返回顶部
      * */

@@ -91,6 +91,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             //菜单点击事件
             menusEvent($('.main-siderbar ul>li'),'click');
             console.log($('.largePattern .component-info ul li .preview-small span'));
+
             $('.largePattern .component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc)

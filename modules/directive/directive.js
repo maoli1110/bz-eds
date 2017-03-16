@@ -31,7 +31,6 @@ angular.module('core').directive('sideStyle',function($timeout){
         link: function(scope, element, attr) {
             $(".menusName").each(function(ele){
                     $(this).click(function(ele){
-                        //$(this).css({'color':'#4990e2'});
                         $(this).addClass("side-active").siblings().removeClass("side-active");//选中样式
                     });
             })     
