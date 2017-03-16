@@ -7,6 +7,7 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService', '$ht
         /*
         * 我的上传页面数据
         * */
+        var  num;
         commonService.auditList().then(function(data){
             $scope.auditList = data.data;
         });

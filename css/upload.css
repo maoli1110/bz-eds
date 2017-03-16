@@ -44,9 +44,9 @@
 }
 .upload .icon-fun{
     display: inline-block;
-    width: 20px;
+    width: 25px;
     height: 20px;
-    background: url(../imgs/icon/icon-fun.png) no-repeat 0 1px;
+    background: url(../imgs/icon/icon-mainEle.png) no-repeat 0 -258px;
 }
 /*
     左侧菜单栏

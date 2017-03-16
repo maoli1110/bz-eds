@@ -19,17 +19,6 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isType = true;
         $scope.isStyle = true;
         $scope.isBrand = true;
-        //function  menusEvent(obj,event){
-        //    //menusCliCount =1;
-        //    obj.on(event,function(){
-        //        var menusCliCount =1;
-        //        menusCliCount++;
-        //        $(this).addClass('active').siblings().removeClass('active');
-        //        if($(this).has('.menus-childs')){
-        //            $(this).find('.menus-childs').slideDown().parent().siblings().find('.menus-childs').slideUp();
-        //        }
-        //    })
-        //}
         /*
          * 分页器
          * */
@@ -145,7 +134,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
             //菜单点击事件
             menusEvent($('.main-siderbar ul>li'),'click');
-            $('.component-info ul li .preview-small span').hover(function(){
+            $('.largePattern .component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc)
             });
