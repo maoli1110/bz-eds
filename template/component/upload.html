@@ -48,7 +48,7 @@
 			<!--component-filter（构件筛选）-->
 			<div class="component-list">
 
-				<div class="component-info" style="margin-top: 0">
+				<div class="component-info" style="margin-top: 0;">
 					<div class="clearfix" style="position: relative;">
 						<div class="main">
 							<div class="table-responsive">
@@ -74,14 +74,8 @@
 											<td>{{item.brand}}</td>
 											<td>{{item.model}}</td>
 											<td><img src="{{item.picture}}" alt=""></td>
-											<td>
-												<select>
-													<option value="1">{{item.status}}</option>
-													<option value="2">审核通过</option>
-													<option value="3">审核不通过</option>
-												</select>
-											</td>
-											<td class="btn-lg" data-toggle="modal" data-target="#myModal">{{item.comment}}</td>
+											<td>{{item.status}}</td>
+											<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
 											<td>{{item.updateTime}}</td>
 										</tr>
 									</tbody>
@@ -120,5 +114,5 @@
 			</div>
 		</section>
 	</article>
-	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/top.png" alt=""></div>
+	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/icon-top.jpg" alt=""></div>
 </div>

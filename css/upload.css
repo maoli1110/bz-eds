@@ -52,3 +52,9 @@
 .upload .main-siderbar ul p,.upload .main-siderbar ul li{
     padding: 0 20px;
 }
+.upload .icon-fun{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../imgs/icon/icon-fun.png") no-repeat 0 1px;
+}
