@@ -18,6 +18,12 @@ var ApplicationConfiguration = (function(){
         // loginUrl: 'https://passport.suncloud.cn/index.php?client_id=panel'
     };
 
+    var headerTitle = {
+    	component:'云构件库',
+    	audit:'我的审核',
+    	uoload:"我的上传"
+    }
+
 	return {
 		applicationModuleName: applicationModuleName,
 		applicationModuleVendorDependencies: applicationModuleVendorDependencies,
