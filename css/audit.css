@@ -71,6 +71,10 @@
 .audit table.table tr td>label{
 	margin-right:6px;
 }
+.audit table.table tr td> label+span{
+	display: inline-block;
+	width: 74%;
+}
 .audit table tr td{
 	font-size:14px;font-family:'microsoft yahei'
 }
