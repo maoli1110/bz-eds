@@ -1,3 +1,6 @@
+.table>tbody>tr>td:nth-child(1	){
+	text-align:left;
+}
 .audit .audit-list {
 	background: #fff;
 	height:calc(100vh - 312px);
@@ -5,17 +8,16 @@
 }
 .audit .count-overview {
 	position: absolute;
-	right: 0;
+	right: 30px;
 	top: 0;
 }
 .audit .table-simulate {
 	overflow: auto;
 	padding-right: 10px;
-	border-bottom: 1px solid #ddd;
 }
 .audit .tab-list {
 	height: 50px;
-	background: #ddd;
+	background: #f2f2f2;
 }
 .audit .tab-list {
 	vertical-align: middle;
@@ -35,13 +37,61 @@
     left: 0;
     background: #fff;
     border: 1px solid #ccc;
+	-webkit-box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+	-moz-box-shadow:1px 0px 7px rgba(0,0,0,0.3);
+	box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+}
+.audit .audit-status ul>li{
+	height:35px;
+	line-height:35px;
+	text-align:left;padding:0 10px ;
+}
+.audit .audit-status ul>li:hover{
+	color:#4990e2;
 }
 .audit .tab-list li {
 	float: left;
 	width: 100px;
 	text-align: center;
 }
+.audit .tab-list>li:nth-child(2){
+	width:48px;
+}
+.audit-status>div{
+	background: #fff;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #ddd;
+	margin-top: 10px;
+}
+
+.audit table.table tr{
+	vertical-align: middle !important;
+}
+.audit table.table tr td>label{
+	margin-right:6px;
+}
+.audit table tr td{
+	font-size:14px;font-family:'microsoft yahei'
+}
+
 .modal-audit .modal-body>p{
 	font-size: 20px;
 	margin-bottom: 20px;
+}
+/**/
+.audit  .glyphicon-menu-up{
+	margin:-6px 0 0 6px;
+}
+/*text-warning*/
+.text-orange{
+	color:orange;font-weight:bold;
+}
+/*icon-updown*/
+.icon-updown{
+	width:20px;height:20px;display:inline-block;background:url('../imgs/icon/icon-mainEle.png') no-repeat 0 -279px ;margin-right:3px;
+}
+.icon-sign{
+	width:27px;height:20px;display:inline-block;background:url('../imgs/icon/icon-mainEle.png') no-repeat 0 -257px ;margin-right:3px;
+
 }

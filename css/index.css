@@ -16,8 +16,8 @@ label>input{
 }
 /* sidebar */
 .side-active {
-    background: #666;
-    color: #fff;
+    /*background: #666;*/
+    color: #4990e2 !important;
 }
 /*checkbox(复选框样式)*/
 /*灰色边框*/
@@ -53,7 +53,7 @@ input[type="checkbox"]:checked +:after{
 }
 .container-fluid{
     padding:0 !important;
-    margin-left: 200px;margin-top:30px;
+    margin-left: 200px;margin-top:30px;border: 1px solid #f2f2f2;
 }
 /*.component-base component-logo(logo部分)*/
 .component-base .component-logo{
@@ -120,7 +120,7 @@ input[type="checkbox"]:checked +:after{
 }
 /*---------------------------------------------main------------------------------------------------*/
 .component-base article.componet-base-main{
-    height:calc(100vh - 165px) ;
+    height:calc(100vh - 152px) ;
 }
 /*---------------------------------------------aside-------------------------------------*/
 .component-base .componet-base-main aside.main-siderbar{
@@ -185,33 +185,27 @@ input[type="checkbox"]:checked +:after{
 
 .component-base .component-btns>div:nth-child(1) .icon-tool{
 
-    background-position-y: -116px !important;
+    background-position-y: -116px;
 }
 .component-base .component-btns>div:nth-child(2) .icon-tool{
-    background-position-y: -73px !important;
+    background-position-y: -73px;
 }
 .component-base .component-btns>div:nth-child(3) .icon-tool{
-    background-position-y: -152px !important;height:26px;margin-top:7px;
+    background-position-y: -152px ;height:26px;margin-top:7px;
 
 }
-.component-base .component-btns>div:nth-child(2) .icon-tool{
-    background-position-y: -20px;
-}
-.component-base .component-btns>div:nth-child(3) .icon-tool{
-    background-position-y: -40px;height:26px;margin-top:7px;
-
-}
+/**/
 .component-base .component-btns>div:hover{
     cursor:pointer; background:#4990e2;color:#fff;
 }
 .component-base .component-btns>div:nth-child(1):hover .icon-tool{
-    background-position-y: -136px !important;
+    background-position-y: -136px ;
 }
 .component-base .component-btns>div:nth-child(2):hover .icon-tool{
-    background-position-y: -92px !important;
+    background-position-y: -92px ;
 }
 .component-base .component-btns>div:nth-child(3):hover .icon-tool{
-    background-position-y: -171px !important;
+    background-position-y: -171px ;
 }
 /*--------------------------------------section(信息展示页面)------------------------------------------*/
 .component-base .componet-base-main section .component-list{
@@ -538,7 +532,10 @@ input[type="checkbox"]:checked +:after{
     width: 63px;
     height: 28px;padding:0 10px;
 }
-
+.pagination-dump button{
+    margin-top: 7px;
+    height: 28px;line-height:14px;
+}
 /*返回顶部*/
 .return-top{
     position: absolute;
