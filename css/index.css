@@ -184,6 +184,7 @@ input[type="checkbox"]:checked +:after{
 }
 
 .component-base .component-btns>div:nth-child(1) .icon-tool{
+
     background-position-y: -116px !important;
 }
 .component-base .component-btns>div:nth-child(2) .icon-tool{
@@ -191,6 +192,14 @@ input[type="checkbox"]:checked +:after{
 }
 .component-base .component-btns>div:nth-child(3) .icon-tool{
     background-position-y: -152px !important;height:26px;margin-top:7px;
+
+}
+.component-base .component-btns>div:nth-child(2) .icon-tool{
+    background-position-y: -20px;
+}
+.component-base .component-btns>div:nth-child(3) .icon-tool{
+    background-position-y: -40px;height:26px;margin-top:7px;
+
 }
 .component-base .component-btns>div:hover{
     cursor:pointer; background:#4990e2;color:#fff;
