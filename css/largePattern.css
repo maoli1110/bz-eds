@@ -25,3 +25,25 @@
 .largePattern .main-siderbar ul p,.largePattern .main-siderbar ul li{
     padding: 0 20px;
 }
+.largePattern .component-btns>div span{
+    width: 24px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    background: url(../imgs/icon/icon-tool.png) no-repeat 0 0px;
+    float: left;
+    margin-left: 21px;
+    margin-top: 11px;
+}
+.largePattern .component-btns>div:nth-child(1) .icon-tool{
+    background-position-y: -66px !important;
+}
+.largePattern .component-btns>div:nth-child(2) .icon-tool{
+    background-position-y: -20px !important;
+}
+.largePattern .component-btns>div:nth-child(3) .icon-tool{
+    background-position-y: -40px !important;height:26px;margin-top:7px;
+}
+.largePattern .component-btns>div:hover{
+    cursor:pointer;opacity:0.8;
+}

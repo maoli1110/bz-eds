@@ -183,13 +183,13 @@ input[type="checkbox"]:checked +:after{
     margin-top: 11px;
 }
 .component-base .component-btns>div:nth-child(1) .icon-tool{
-    background-position-y: 0px !important;
+    background-position-y: 0px;
 }
 .component-base .component-btns>div:nth-child(2) .icon-tool{
-    background-position-y: -20px !important;
+    background-position-y: -20px;
 }
 .component-base .component-btns>div:nth-child(3) .icon-tool{
-    background-position-y: -40px !important;height:26px;margin-top:7px;
+    background-position-y: -40px;height:26px;margin-top:7px;
 }
 .component-base .component-btns>div:hover{
     cursor:pointer;opacity:0.8;

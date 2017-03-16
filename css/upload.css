@@ -58,3 +58,25 @@
     height: 20px;
     background: url("../imgs/icon/icon-fun.png") no-repeat 0 1px;
 }
+.upload .component-btns>div span{
+    width: 24px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    background: url(../imgs/icon/icon-tool.png) no-repeat 0 0px;
+    float: left;
+    margin-left: 21px;
+    margin-top: 11px;
+}
+.upload .component-btns>div:nth-child(1) .icon-tool{
+    background-position-y: -66px !important;
+}
+.upload .component-btns>div:nth-child(2) .icon-tool{
+    background-position-y: -20px !important;
+}
+.upload .component-btns>div:nth-child(3) .icon-tool{
+    background-position-y: -40px !important;height:26px;margin-top:7px;
+}
+.upload .component-btns>div:hover{
+    cursor:pointer;opacity:0.8;
+}
