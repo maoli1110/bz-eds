@@ -49,8 +49,8 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
             ]);
         }
     ])
-    .run(['$http','$state'
-        function($http,$state) {
+    .run(['$http','$rootScope','$state',
+        function($http,$rootScope,$state) {
             // i18n get message
             // $http.get('lang.json').success(function(data) {
             //     i18n.set(data);
