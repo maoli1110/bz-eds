@@ -39,25 +39,45 @@
 .largePattern .main-siderbar ul p,.largePattern .main-siderbar ul li{
     padding: 0 20px;
 }
+/*
+    左侧菜单栏
+*/
+.largePattern .component-btns>div{
+    width: 145px;
+    height: 45px;
+    border-radius: 30px;
+    text-align: left;
+    line-height: 43px;
+    color: #4990e2;margin: 15px 20px;font-size:14px;border:1px solid #4990e2;
+}
 .largePattern .component-btns>div span{
     width: 24px;
     height: 20px;
     margin-right: 10px;
     display: inline-block;
-    background: url(../imgs/icon/icon-tool.png) no-repeat 0 0px;
+    background: url(../imgs/icon/icon-mainEle.png) no-repeat 0 0;
     float: left;
     margin-left: 21px;
-    margin-top: 11px;
+    margin-top: 13px;
 }
 .largePattern .component-btns>div:nth-child(1) .icon-tool{
-    background-position-y: -66px !important;
+    background-position-y: -34px;
 }
 .largePattern .component-btns>div:nth-child(2) .icon-tool{
-    background-position-y: -20px !important;
+    background-position-y: -73px;
 }
 .largePattern .component-btns>div:nth-child(3) .icon-tool{
-    background-position-y: -40px !important;height:26px;margin-top:7px;
+    background-position-y: -152px;height:26px;margin-top:7px;
 }
 .largePattern .component-btns>div:hover{
-    cursor:pointer;opacity:0.8;
+    cursor:pointer; background:#4990e2;color:#fff;
+}
+.largePattern .component-btns>div:nth-child(1):hover .icon-tool{
+    background-position-y: -55px;
+}
+.largePattern .component-btns>div:nth-child(2):hover .icon-tool{
+    background-position-y: -92px ;
+}
+.largePattern .component-btns>div:nth-child(3):hover .icon-tool{
+    background-position-y: -171px ;
 }
