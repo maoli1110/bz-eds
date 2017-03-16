@@ -90,16 +90,11 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
             //菜单点击事件
             menusEvent($('.main-siderbar ul>li'),'click');
-            console.log($('.component-info ul li .preview-small span'));
-            $('.component-info ul li .preview-small span').hover(function(){
+            console.log($('.largePattern .component-info ul li .preview-small span'));
+            $('.largePattern .component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc)
             });
-            //菜单选项
-            $('.main-siderbar ul li p').click(function(){
-                var menusText = $(this).text();
-                $('.filter-status .filter-ele div').eq(0).html(menusText)
-            })
         });
 
         /*
@@ -215,7 +210,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $('.pro-info div >p').css({
                     'margin-bottom': '9px'
                 });
-            }, 10);
+            }, 0.01);
 
         };
 
@@ -230,7 +225,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
          * */
         commonService.componentList().then(function(data){
             $scope.componentList = data.data;
-            //console.info( $scope.componentList)
+            //console.info( $scope.componentList);
         })
 
 

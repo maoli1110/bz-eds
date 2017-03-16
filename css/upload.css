@@ -8,12 +8,6 @@
     padding: 20px;
     padding-top: 0;
 }
-@media (min-width: 768px) {
-    .main {
-        padding-right: 40px;
-        padding-left: 40px;
-    }
-}
 .upload .main .page-header {
     margin-top: 0;
 }
@@ -22,7 +16,7 @@
 }
 .upload .main table tr th,.upload .main table tr td{
     height: 45px;
-    padding: 0 8px;
+    padding: 0 4% 0 0;
     vertical-align: middle;
 }
 .upload .main table thead tr th{
@@ -40,7 +34,7 @@
     font-size: 24px;
     position: fixed;
     right: 4%;
-    top:13.5%;
+    top:18%;
     z-index: 10;
 }
 .upload .listMode{
@@ -49,7 +43,7 @@
     font-size: 24px;
     position: fixed;
     right: 2%;
-    top:13.5%;
+    top:18%;
     z-index: 10;
 }
 .upload .table{
