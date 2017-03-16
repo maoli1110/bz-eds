@@ -49,12 +49,13 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
             ]);
         }
     ])
-    .run(['$http',
-        function($http) {
+    .run(['$http','$state'
+        function($http,$state) {
             // i18n get message
             // $http.get('lang.json').success(function(data) {
             //     i18n.set(data);
             // });
+            $rootScope.$state = $state;
         }
     ]);
 
