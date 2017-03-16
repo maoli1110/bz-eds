@@ -7,11 +7,19 @@
 </div>
 <div class="component-computer-logo  clearfix">
 	<div class="col-xs-3">
-		<span class=""><img src="imgs/icon-cloud.jpg">
-			<h1 class="" ng-show=" $state.includes('audit')">我的审核</h1>
-			<h1 class="" ng-show=" $state.includes('upload')">我的上传</h1>
-			<h1 class="" ng-show=" $state.includes('component')">云构件库</h1>
+		<span class="" ng-show=" $state.includes('audit')">
+			<img src="imgs/audit.jpg">
+			<h1 class="" >我的审核</h1>
 		</span>
+		<span class="" ng-show=" $state.includes('upload')">
+			<img src="imgs/upload.png">
+			<h1 class="" >我的上传</h1>
+		</span>
+		<span class="" ng-show=" $state.includes('component')">
+			<img src="imgs/icon-cloud.jpg">
+			<h1 class="">云构件库</h1>
+		</span>
+
 	</div>
 	<div class="col-xs-9 component-search ">
 		<form role="form">

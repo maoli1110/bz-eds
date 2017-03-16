@@ -182,6 +182,9 @@ input[type="checkbox"]:checked +:after{
     margin-left: 21px;
     margin-top: 11px;
 }
+.component-base .component-btns>div :hover{
+    background:#4990e2;color:#fff;
+}
 .component-base .component-btns>div:nth-child(1) .icon-tool{
     background-position-y: 0px !important;
 }
