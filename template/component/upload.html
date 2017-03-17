@@ -71,18 +71,14 @@
 					</div>
 				</div>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog" role="document" style="margin-top: 12%">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<h4 class="modal-title" id="myModalLabel">审核意见</h4>
 							</div>
 							<div class="modal-body">
-								<textarea style="width: 100%;height: 200px;">暂无</textarea>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-								<button type="button" class="btn btn-primary">确定</button>
+								<div style="width: 100%;height: 200px;background-color: #eeeeee">暂无</div>
 							</div>
 						</div>
 					</div>
@@ -93,7 +89,7 @@
 					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
 					<span>共 {{numPages}} 页 </span>
 					<div class="pagination-dump">
-						<p class="dump-inp inline"> ,  跳转到   <input type="text" class="form-control inline"> </p>
+						<p class="dump-inp inline"> , 跳转到   <input type="text" class="form-control inline"> </p>
 						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
 					</div>
 				</div>

@@ -1,13 +1,12 @@
 'use strict';
 /**
- * component
+ * upload
  */
-angular.module('core').controller('uploadCtrl', ['$scope', 'commonService', '$http',
-    function ($scope, commonService, $http) {
+angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
+    function ($scope, commonService) {
         /*
         * 我的上传页面数据
         * */
-        var  num;
         commonService.auditList().then(function(data){
             $scope.auditList = data.data;
         });
@@ -15,18 +14,31 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService', '$ht
         /*
         * 分页
         * */
+        var  dumpVal;//分页器跳转框的值
         $scope.totalItems = 64;
-        $scope.currentPage = 4;
-
+        $scope.currentPage = 1;
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
-        //$scope.pageChanged = function() {
-        //    $log.log('Page changed to: ' + $scope.currentPage);
-        //};
+        $scope.pageChanged = function() {
+            //console.log('Page changed to: ' + $scope.currentPage);
+        };
         $scope.maxSize = 5;
         $scope.bigTotalItems = 175;
         $scope.bigCurrentPage = 1;
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
+        function getDumpVal(){
+            dumpVal =  $('.dump-inp input').val();
+            return dumpVal;
+
+        }
+        $scope.setPage(getDumpVal());
+        $scope.getDumpOk = function(){
+            $scope.setPage(getDumpVal());
+        };
 
         //返回顶部
         $('.return-top').click(function() {
