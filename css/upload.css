@@ -18,11 +18,12 @@
     vertical-align: middle;
 }
 .upload .table>tbody>tr>td{
-    height: 94px;
+    height: 85px;
 }
 .upload .table>thead>tr>th{
     width: 9%;
-    height: 37px;
+    height: 50px;
+    border-bottom: none;
 }
 .upload .table>thead>tr>th:first-child{
     width:11%;
@@ -102,12 +103,12 @@
 }
 .upload .modelBtnl{
     right: 7%;
-    top:16.4%;
+    top:16.8%;
     background-color: #d2d2d2;
 }
 .upload .modelBtnm{
     right: 5%;
-    top:16.4%;
+    top:16.8%;
     background-color: #4990e2;
 }
 .upload .large-pattern, .upload .listMode{

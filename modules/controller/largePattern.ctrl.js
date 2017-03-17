@@ -234,7 +234,6 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                         return $scope.items;
                     }
                 }
-
             });
             modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
@@ -244,13 +243,13 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             /*
             * 详情框内容样式更改
             * */
-            $timeout(function () {
+            $timeout(function() {
                 var template = '<div class="modal-modify"> <p>---------------<span class="modify-text">审核意见</span>------------------</p></div>'+
-                    '<div class="text" style="border: 1px solid black;width: 90%;height: 30%;">暂无</div>'
-                 $('.pro-info').after(template);
-                 $('.modal-footer').css({
-                     'display': 'none'
-                 });
+                    '<div class="text" style="border: 1px solid black;width: 90%;height: 30%;background-color: #eeeeee">暂无</div>'
+                $('.pro-info').after(template);
+                $('.modal-footer').css({
+                    'display': 'none'
+                });
                 $( '.modal-modify').css({
                     'margin-top': '25px',
                     'margin-bottom': '25px'
@@ -258,7 +257,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $('.pro-info div >p').css({
                     'margin-bottom': '9px'
                 });
-            }, 0.01);
+            }, 0.1);
 
         };
 
