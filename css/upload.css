@@ -1,3 +1,6 @@
+.upload{
+    position: relative;
+}
 .upload .container-fluid h2{
     display: inline-block;
     vertical-align: middle;
@@ -97,24 +100,24 @@
 .upload .modelBtn{
     width: 25px;
     height: 25px;
-    position: fixed;
+    position: absolute;
     z-index: 10;
     padding: 2px;
 }
 .upload .modelBtnl{
     right: 7%;
-    top:16.8%;
+    top: 163.5px;
     background-color: #d2d2d2;
 }
 .upload .modelBtnm{
     right: 5%;
-    top:16.8%;
+    top: 163.5px;
     background-color: #4990e2;
 }
 .upload .large-pattern, .upload .listMode{
     display: inline-block;
     width: 21px;
-    height: 21px;
+    height: 20px;
     background: url("../imgs/icon/icon-mainEle.png") no-repeat;
     background-color: #d2d2d2;
 }
