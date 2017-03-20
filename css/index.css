@@ -347,8 +347,9 @@ input[type="checkbox"]:checked +:after{
 .component-base .filter-status .filter-ele .type-filter:nth-of-type(4) .filter-trigger:hover{
     border-color:#E5383C;color:#E5383C;
 }
+
 .component-base .filter-status  .icon-close{
-    width:15px;height:12px;display:inline-block;background:url(../imgs/icon/icon-ele.png) no-repeat 0 -142px;background-size:20px;float:right;margin-top: 9px;
+    width:15px;height:12px;display:inline-block;background:url(../imgs/icon/icon-mainEle.png) no-repeat -22px -19px;float:right;margin-top: 9px;
     margin-right: 10px;
 }
 .component-base .filter-status  .filter-closeStatus{
@@ -358,7 +359,7 @@ input[type="checkbox"]:checked +:after{
     color:#E5383C;border-color:#E5383C !important;
 }
 .component-base .filter-status  .filter-closeStatus:hover b{
-    background-position-y:-130px;
+    background-position-y:-29px;
 }
 /*.component-base  .filter-status:nth-child(3){
 

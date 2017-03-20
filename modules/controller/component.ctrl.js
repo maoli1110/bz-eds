@@ -28,7 +28,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                  $(this).toggleClass('active');
                  $(this).siblings().removeClass('active');
                  $(this).siblings().find('.menus-childs').stop().slideUp();
-                 $(this).find(".menusName").css({'color':'#4990e2'});
+                 $(this).find(".menusname").css({'color':'#4990e2'});
                  if($(this).hasClass('active')){
                      $(this).find('.menus-childs').stop().slideDown();
                  }else{
