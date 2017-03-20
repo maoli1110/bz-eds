@@ -30,13 +30,13 @@
     text-align: center!important;
     vertical-align: middle;
 }
-.upload .table>tbody>tr>td{
-    height: 85px;
-}
 .upload .table>thead>tr>th,.upload .table>tbody>tr>td{
     width: 9%;
     height: 50px;
     border-bottom: none;
+}
+.upload .table>tbody>tr>td{
+    height: 85px;
 }
 .upload .table>thead>tr>th:first-child,.upload .table>tbody>tr>td:first-child{
     width:11%;
