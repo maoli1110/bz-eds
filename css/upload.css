@@ -1,6 +1,10 @@
 .upload{
     position: relative;
 }
+.upload .container-fluid{
+    border: none;
+    padding: 0 20px!important;
+}
 .upload .container-fluid h2{
     display: inline-block;
     vertical-align: middle;
@@ -17,9 +21,12 @@
 .upload .page-header {
     margin-top: 0;
 }
+.upload .table>tbody>tr:first-of-type td{
+    border-top: none;
+}
 .upload .table>thead>tr>th, .upload .table>tbody>tr>td{
     padding: 0;
-    border-top: 1px solid #ddd;
+    /*border-top: 1px solid #ddd;*/
     text-align: center!important;
     vertical-align: middle;
 }
