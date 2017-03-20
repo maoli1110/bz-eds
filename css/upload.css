@@ -7,11 +7,14 @@
     margin-left: 50px;
     margin-right: 50px;
 }
-.upload .main, .upload .mainLeft{
-    padding: 20px;
-    padding-top: 0;
+.upload .component-list{
+    height: calc(100vh - 265px) !important;
 }
-.upload .main .page-header {
+.upload .main, .upload .mainLeft{
+    /*padding: 20px;*/
+    /*padding-top: 0;*/
+}
+.upload .page-header {
     margin-top: 0;
 }
 .upload .table>thead>tr>th, .upload .table>tbody>tr>td{
@@ -23,21 +26,18 @@
 .upload .table>tbody>tr>td{
     height: 85px;
 }
-.upload .table>thead>tr>th{
+.upload .table>thead>tr>th,.upload .table>tbody>tr>td{
     width: 9%;
     height: 50px;
     border-bottom: none;
 }
-.upload .table>thead>tr>th:first-child{
+.upload .table>thead>tr>th:first-child,.upload .table>tbody>tr>td:first-child{
     width:11%;
 }
-.upload .table>thead>tr>th:last-child{
-    width:5%;
+.upload .table>thead>tr>th:last-child, .upload .table>tbody>tr>td:last-child{
+    width:5% !important;
 }
-.upload .table>tbody>tr>th:first-child{
-    border-top:none;
-}
-.upload .main .table tbody tr td:nth-last-child(2):hover, .upload .main .table tbody tr td:nth-last-child(3):hover{
+.upload .table tbody tr td:nth-last-child(2):hover, .upload .table tbody tr td:nth-last-child(3):hover{
     cursor: pointer;
 }
 .upload .table{
@@ -105,12 +105,12 @@
     padding: 2px;
 }
 .upload .modelBtnl{
-    right: 7%;
+    right: 6%;
     top: 163.5px;
     background-color: #d2d2d2;
 }
 .upload .modelBtnm{
-    right: 5%;
+    right: 4%;
     top: 163.5px;
     background-color: #4990e2;
 }

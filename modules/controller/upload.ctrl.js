@@ -11,6 +11,9 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
             $scope.auditList = data.data;
         });
 
+        //锁定头部
+        //$(".upload .table").freezeHeader({ 'height': '50px' });
+
         /*
         * 分页
         * */
