@@ -108,9 +108,13 @@
 	-webkit-box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
 	-moz-box-shadow:1px 0px 7px rgba(0,0,0,0.3);
 	box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+	z-index: 10;
 }
 .audit .table td ul>li{
 	height:35px;
 	line-height: 35px;
 	padding: 0 10px;
+}
+.audit .table td ul>li:hover{
+	color:#4990e2;
 }

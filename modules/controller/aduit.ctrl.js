@@ -4,11 +4,13 @@
  */
 angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http','$uibModal', function ($scope, commonService, $http, $uibModal) {
 	$scope.sidebar = 'audit';
-    $scope.flag = {};
+    $scope.flag = {}
     //获取auditList
     $scope.getAuditList = function (source,currentPage) {
         if((source == "pass") || (source =="noPass")) {
             $scope.flag.auditStatus = false;
+            $scope.listStatus = false;
+
         }
         commonService.auditList().then(function(data){
             //console.log('success');
@@ -90,6 +92,11 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             $scope.flag.auditStatus = false;
             $scope.$apply();
         }
+        if($scope.listStatus) {
+            $scope.listStatus = false;
+            $scope.$apply();
+        }
+
     });
 
     /*
