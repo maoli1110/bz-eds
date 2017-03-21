@@ -99,3 +99,18 @@
 	width:27px;height:20px;display:inline-block;background:url('../imgs/icon/icon-mainEle.png') no-repeat 0 -257px ;margin-right:3px;
 
 }
+.audit .table td ul{
+	position: absolute;
+	top: 53px;
+	left: 10px;
+	background: #fff;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+	-moz-box-shadow:1px 0px 7px rgba(0,0,0,0.3);
+	box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+}
+.audit .table td ul>li{
+	height:35px;
+	line-height: 35px;
+	padding: 0 10px;
+}

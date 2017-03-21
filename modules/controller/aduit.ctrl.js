@@ -11,9 +11,9 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             $scope.flag.auditStatus = false;
         }
         commonService.auditList().then(function(data){
-            console.log('success');
+            //console.log('success');
             $scope.auditList = data.data.slice(0,20);
-            console.log($scope.auditList);
+            //console.log($scope.auditList);
         });
     }
     $scope.getAuditList(); 
@@ -77,9 +77,9 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
     }
     
     //auditStatusShow
-    $scope.auditStatusShow = function () {
-        $scope.flag.auditStatus = !$scope.flag.auditStatus
-    }
+    //$scope.auditStatusShow = function () {
+    //    $scope.flag.auditStatus = !$scope.flag.auditStatus
+    //}
 
     //点击审核的其他区域，收起下拉
     $(document).click(function(event) {

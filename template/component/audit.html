@@ -50,7 +50,7 @@
 					<li ng-click="invertSelected()">反选</li>
 					<li><span class="icon-updown"></span>下载</li>
 					<li class="rela audit-status pop-signal">
-						<div class="pop-signal" ng-click="auditStatusShow()">审核<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
+						<div class="pop-signal" ng-click="flag.auditStatus = !flag.auditStatus">审核<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
 						<ul ng-show="flag.auditStatus" class="pop-signal">
 							<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
 							<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
@@ -98,7 +98,13 @@
 								<td width="10%">{{item.model}}</td>
 								<td width="5%" style="min-width:70px;"><img ng-src="{{item.picture}}" alt=""></td>
 								<td width="10%">{{item.author}}</td>
-								<td width="10%">{{item.status}}</td>
+								<td width="10%" style="position: relative">
+									<div class="pop-signal" ng-click="flag.auditStatus = !flag.auditStatus">{{item.status}}<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
+									<ul ng-show="flag.auditStatus" class="pop-signal">
+										<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
+										<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
+									</ul>
+								</td>
 								<td width="10%" ng-click="showModal()"><span class="icon-sign"></span></td>
 								<td width="10%">{{item.updateTime}}</td>
 							</tr>
