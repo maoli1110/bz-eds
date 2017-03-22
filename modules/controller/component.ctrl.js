@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService',
-    function ($scope, $http,$uibModal,commonService) {
+angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout',
+    function ($scope, $http,$uibModal,commonService,$timeout) {
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -19,6 +19,14 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isType = true;
         $scope.isStyle = true;
         $scope.isBrand = true;
+
+        /*
+        * 侧边栏构建来源
+        * */
+        $timeout(function() {
+            $(".main-siderbar ul li:nth-child(2)>p b,.main-siderbar ul li:nth-child(3)>p b").hide();
+        },0.2);
+
         function  menusEvent(obj,event){
             $('.menus-childs').unbind('click').click(function(){
                 return false;
@@ -58,6 +66,15 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             dumpVal =  $('.dump-inp input').val();
             return dumpVal;
         }
+
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
+        $scope.setPage(getDumpVal());
+        $scope.getDumpOk = function(){
+            $scope.setPage(getDumpVal());
+        };
         /*
         * typeFilter 样式
         * params obj event
@@ -66,13 +83,13 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         function setFilterStyle(obj){
            obj.on('mouseenter',function(){
                 $(this).children().not('.filter-closeStatus').css({'color':'#E5383C','border-color':'#E5383C'});
-                $(this).children().find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'});
+                $(this).children().find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
                 $(this).not('.filter-closeStatus').find('.filter-trigger').css({'height':'33px','border-bottom':'0','background':'#fff'});
                 $(this).find('.switch-filter').show();
             });
            obj.on('mouseleave',function(){
                 $(this).children().css({'color':'','border-color':''});
-                $(this).children().find('.glyphicon-menu-up').css({'transform':''});
+                $(this).children().find('.glyphicon-menu-down').css({'transform':''});
                 $(this).find('.filter-trigger').css({'height':'30px','border-bottom':'1px solid #c9c9c9','background':''});
                 $(this).find('.switch-filter').hide();
             })
@@ -82,7 +99,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * params function
         * */
         function setFilterBlank(textFilter){
-            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger ">'+textFilter+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
+            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger ">'+textFilter+' <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
         }
         /*
         * 关闭筛选条件
@@ -95,14 +112,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             })
         }
 
-        /*分页器跳转
-         * params  value
-         * return currentPage
-         * */
-        $scope.setPage(getDumpVal());
-        $scope.getDumpOk = function(){
-            $scope.setPage(getDumpVal());
-        };
+
         /*
         * 清空筛选条件
         * */
@@ -214,7 +224,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         //声明菜单内容
         siderbarArr = [
             {menus:'全部'},
-            {menus:'版筑构件库'},
+            {menus:'班筑构件库'},
             {menus:'A企业库',child:['甲分公司库','乙分公司库','丙分公司库']},
             {menus:'B企业库',child:['甲分公司库','乙分公司库','丙分公司库']},
         ];

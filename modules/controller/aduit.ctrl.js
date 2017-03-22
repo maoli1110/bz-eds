@@ -57,7 +57,10 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
     }
     //反选
     $scope.invertSelected = function () {
-        $(".table-list label>input").prop("checked",false);
+        //$(".table-list label>input").prop("checked",!$(".table-list label>input").prop("checked"));
+        $(".table-list label>input").each(function () {
+            $(this).prop("checked", !$(this).prop("checked"));
+        });
     }
 
     //单个选择

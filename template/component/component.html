@@ -10,9 +10,9 @@
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName"><!--<span class="strioke"></span>--><b class="glyphicon glyphicon-menu-up"></b>{{menusList.menus}}</p>
+					<p class="menusName"><b class="glyphicon glyphicon-menu-up"></b>{{menusList.menus}}</p>
 					<div class="menus-childs" ng-if="menusList.child">
-						<p  ng-repeat="menusChild in menusList.child track by $index" profit><!--<span class="strioke2"></span>-->{{menusChild}}</p>
+						<p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
 					</div>
 				</li>
 			</ul>
@@ -38,7 +38,7 @@
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isTypeFilter($event)"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
 							<div class="filter-tool">
-								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span>更多 <i class="glyphicon glyphicon-menu-up"></i></span>
+								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -123,7 +123,7 @@
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isBrandFilter($event)"><span>现代</span> <span>中式</span> <span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
 							<div class="filter-tool">
-								<span class="checkMore"><b>+</b>多选</span><span>更多 <i class="glyphicon glyphicon-menu-up"></i></span>
+								<span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
