@@ -26,7 +26,7 @@
 		<!--main-siderbar(侧边栏)-->
 		<aside class="main-siderbar">
 			<ul>
-				<p>构件来源</p>
+				<p>审核状态</p>
 				<li>
 				<p class="menusName"><span class="strioke"></span>全部</p>
 				<p class="menusName"><span class="strioke"></span>待审核</p>
@@ -53,8 +53,8 @@
 						<!--<div class="pop-signal" ng-init="sum1 = 0" ng-click="sum1 = sum1 + 1" ng-model="sum1">{{sum1}}</div>-->
 						<div class="pop-signal" ng-click="flag.auditStatus = !flag.auditStatus">审核<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
 						<ul ng-show="flag.auditStatus" class="pop-signal">
-							<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
-							<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
+							<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
+							<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
 						</ul>
 					</li>
 				</ul>
@@ -101,9 +101,9 @@
 								<td width="10%">{{item.author}}</td>
 								<td width="10%" style="position: relative" ng-click="listStatus = !listStatus">
 									<div>{{item.status}}<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
-									<ul class="pop-signal" ng-show="listStatus">
-										<li class="pop-signal" ng-click="getAuditList('pass',0)">审核通过</li>
-										<li class="pop-signal" ng-click="getAuditList('noPass',0)">审核不通过</li>
+									<ul class="pop-signal" ng-show="listStatus" style="width: 80%">
+										<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
+										<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
 									</ul>
 								</td>
 								<td width="10%" ng-click="showModal()"><span class="icon-sign"></span></td>

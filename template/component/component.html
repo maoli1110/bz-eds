@@ -1,7 +1,32 @@
 <!--component-base构件库简写-->
 <div class="component-base">
 	<!--header 页面中的头部-->
-	<header ng-include="'template/core/header.html'" class="component-logo"></header>
+	<!--<header ng-include="'template/core/header.html'" class="component-logo"></header>-->
+	<div class="component-logo">
+		<div class=" component-sys-close" >
+			<div class="close-tool">
+				<span class="glyphicon glyphicon-minus"></span>
+				<span class="glyphicon glyphicon-book"></span>
+				<span class="glyphicon glyphicon-remove"></span>
+			</div>
+		</div>
+		<div class="component-computer-logo  clearfix">
+			<div class="col-xs-3">
+			<span>
+				<img src="imgs/icon-cloud.jpg" style="">
+				<h1 class="">云构件库</h1>
+			</span>
+
+			</div>
+			<div class="col-xs-9 component-search">
+				<form role="form">
+					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3" ng-model="searchText">
+					<div class="absol search-btn" ng-click="search(searchText)"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
@@ -10,7 +35,7 @@
 			<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName"><b class="glyphicon glyphicon-menu-up"></b>{{menusList.menus}}</p>
+					<p class="menusName"><b class="glyphicon glyphicon-menu-down"></b>{{menusList.menus}}</p>
 					<div class="menus-childs" ng-if="menusList.child">
 						<p  ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
 					</div>
@@ -31,21 +56,43 @@
 					<div class="filter-status">
 						<div class="filter-ele" ><div>全部</div></div><span ng-click="cancelFilter()">清空筛选</span>
 					</div>
+					<!--筛选大类-->
 					<div class="filter-infoList" ng-if="isType">
 						<!--筛选标题-->
-						<p><b>类型 ：&nbsp;</b></p>
+						<p><b>大类 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele" ng-click="isTypeFilter($event)"><span>单人沙发</span><span>双人沙发</span><span>多人沙发</span></div>
-							<div class="filter-tool">
+							<div class="filter-ele" ng-click="isTypeFilter($event)">
+								<span ng-repeat="item in typeList track by $index">{{item.type}}</span>
+							</div>
+							<!--<div class="filter-tool">
 								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
 								<button type="button" class="btn btn-default btn-cancel">取消</button>
-							</div>
+							</div>-->
 						</div>
 					</div>
+					<!--筛选小类-->
+					<div class="filter-infoList" ng-if="isSType">
+						<!--筛选标题-->
+						<p><b>小类 ：&nbsp;</b></p>
+						<!--筛选内容-->
+						<div class="filter-condition row" style="width:calc(100% - 56px )">
+							<div class="filter-ele" ng-click="isSTypeFilter($event)">
+								<span ng-repeat="item in sTypeList track by $index">{{item.name}}</span>
+							</div>
+							<!--<div class="filter-tool">
+								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
+							</div>
+							<div class="btns-item">
+								<button type="button" class="btn btn-danger btn-ok">确定</button>
+								<button type="button" class="btn btn-default btn-cancel">取消</button>
+							</div>-->
+						</div>
+					</div>
+					<!--筛选风格-->
 					<div class="filter-infoList" ng-if="isStyle" >
 						<!--筛选标题-->
 						<p><b>风格 ：&nbsp;</b></p>

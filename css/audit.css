@@ -44,7 +44,7 @@
 .audit .audit-status ul>li{
 	height:35px;
 	line-height:35px;
-	text-align:left;padding:0 10px ;
+	text-align:center;padding:0 10px ;
 }
 .audit .audit-status ul>li:hover{
 	color:#4990e2;

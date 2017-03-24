@@ -245,6 +245,7 @@ input[type="checkbox"]:checked +:after{
 .component-base .filter-status .filter-ele >div{
     display:inline-block;position:relative; height: 30px;width:86px;
     line-height:30px;
+
 }
 .component-base .filter-status .filter-ele .filter-trigger:not(.switch-filter){
     height: 30px;
@@ -257,6 +258,15 @@ input[type="checkbox"]:checked +:after{
     position: absolute;
     /*margin-top: 8px;*/
     z-index: 150;
+}
+.component-base .filter-status .filter-ele .filter-trigger:not(.switch-filter) span{
+    display: inline-block;
+    width: 70%;
+    text-align: center;
+    margin:0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 .component-base .filter-status .filter-ele .switch-filter{
     width:350px;padding:0 10px;

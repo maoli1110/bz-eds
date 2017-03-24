@@ -98,4 +98,15 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //自定义大类小类数据获取
+    this.typeList = function(){
+        var url="json/type.json";
+        var delay = $q.defer();
+        $http.get(url).then(function(data){
+            delay.resolve(data);
+        },function(error){
+            delay.reject(error);
+        });
+        return delay.promise;
+    }
 });

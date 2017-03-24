@@ -19,6 +19,18 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isType = true;
         $scope.isStyle = true;
         $scope.isBrand = true;
+
+        //大类、小类数据获取
+        commonService.typeList().then(function(data){
+            var typeList = data.data;
+            $scope.typeList = typeList;
+        })
+
+        //风格、品牌数据
+        $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
+        $scope.brandsList = ["卡地亚","夏奈尔","唐纳·卡兰","范思哲","迪奥","古驰","路易·威登","乔治·阿玛尼","PRADA","GUESS","蒂芬尼","ENZO","宝诗龙","Swarovski","Georgjensen"];
+
+
         /*
          * 分页器
          * */
@@ -59,25 +71,48 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         function setFilterStyle(obj){
             obj.on('mouseenter',function(){
                 $(this).children().not('.filter-closeStatus').css({'color':'#E5383C','border-color':'#E5383C'});
-                $(this).children().find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'});
+                $(this).children().find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
                 $(this).not('.filter-closeStatus').find('.filter-trigger').css({'height':'33px','border-bottom':'0','background':'#fff'});
                 $(this).find('.switch-filter').show();
             });
             obj.on('mouseleave',function(){
                 $(this).children().css({'color':'','border-color':''});
-                $(this).children().find('.glyphicon-menu-up').css({'transform':''});
+                $(this).children().find('.glyphicon-menu-down').css({'transform':''});
                 $(this).find('.filter-trigger').css({'height':'30px','border-bottom':'1px solid #c9c9c9','background':''});
                 $(this).find('.switch-filter').hide();
             })
         }
 
         /*
-         * 筛选条件生成条件标签
+         * 搜索关键字生成条件标签
+         * */
+        var oldText;
+        $scope.search = function(searchText) {
+            if(searchText != oldText) {
+                setBlank(searchText);
+            } else {
+                return;
+            }
+            oldText = searchText;
+            closeStatus();
+        }
+
+        /*
+         * 筛选条件（有下拉功能）生成条件标签
          * params function
          * */
         function setFilterBlank(textFilter){
-            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger ">'+textFilter+' <b class="glyphicon glyphicon-menu-up"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
+            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
         }
+
+        /*
+         * 筛选条件（无下拉功能）生成条件标签
+         * params function
+         * */
+        function  setBlank(textFilter){
+            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
+        }
+
         /*
          * 关闭筛选条件
          * */
@@ -88,6 +123,8 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $scope.isBrand = true;
             })
         }
+
+
         /*
          * 清空筛选条件
          * */
@@ -95,7 +132,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isBrandFilter = function(event){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
                 textFilter = $(event.target).text();
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus">' + textFilter + '<b class="icon-close"></b></div>');
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isBrand = false;
             }
             closeStatus();
@@ -104,21 +141,40 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isStyleFilter = function(event){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
                 textFilter = $(event.target).text();
-                setFilterBlank(textFilter);
-                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+                setBlank(textFilter);
                 $scope.isStyle = false;
             }
+            closeStatus();
         };
-        //筛选类型
+        //筛选大类
         $scope.isTypeFilter = function(event){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span'){
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
                 setFilterBlank(textFilter);
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isType = false;
+                //显示小类
+                commonService.typeList().then(function(data){
+                    var typeList = data.data;
+                    angular.forEach(typeList, function(value, index){
+                        if(value.type == textFilter) {
+                            $scope.sTypeList = value.list;
+                            console.log($scope.sTypeList);
+                        }
+                    })
+                });
+                $scope.isSType = true;
             }
-
         };
+        //筛选小类
+        $scope.isSTypeFilter = function(even){
+            if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
+                textFilter = $(event.target).not('input[type="checkbox"]').text();
+                setFilterBlank(textFilter);
+                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+                $scope.isSType = false;
+            }
+        }
         //取消筛选
         $scope.cancelFilter = function(){
             if($('.filter-trigger').length){
@@ -142,10 +198,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 var menusText = $(this).text();//选中的当前项的内容
                 $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
                 $('li').css({'background':'','color':'#333'});//初始化样式
-                //$('.glyphicon-menu-up').css({'transform':'rotate(0deg)'});
-                //$(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
                 $(this).css({'color':'#4990e2'});//选中样式
-                //$(this).find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'})
 
             });
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
