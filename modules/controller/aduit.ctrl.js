@@ -108,7 +108,7 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
     * */
     $scope.showModal = function () {
         var modalInstance = $uibModal.open({
-            windowClass: 'component-modal',
+            windowClass: 'component-modal audit-modal',
             backdrop: 'static',
             animation: false,
             size: 'lg',
@@ -126,6 +126,13 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             //console.info('Modal dismissed at: ' + new Date());
         });
     };
+    $scope.flag.auditStatus = false;
+    $scope.editAudit = function() {
+        $scope.flag.auditStatus = !$scope.flag.auditStatus;
+        if($scope.flag.auditStatus = 'true') {
+            $('.audit .edit>span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+        }
+    }
     /*
      * 返回顶部
      * */

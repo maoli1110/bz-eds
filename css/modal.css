@@ -2,10 +2,12 @@
     padding:0;margin:0;
 }
 .component-modal .modal-dialog .modal-content{
-    /*width:1000px;height:768px;background:red;*/
+    width:600px;height:470px;
+    margin-left: 15%;
+    margin-top:100px;
 }
 .component-modal .modal-dialog .modal-body .preview-model .preview-big>img{
-    height:500px;width:500px;
+    height:250px;width:250px;
 }
 .component-modal .modal-dialog .modal-body .preview-model .preview-small{
     margin-top:10px;
@@ -17,7 +19,7 @@
     opacity:0.4;
 }*/
 .component-modal .modal-dialog .modal-body .preview-model .preview-small img{
-    height:100px;width:100px;
+    height:50px;width:50px;
 }
 /*modal-close*/
 .modal-close{
@@ -28,34 +30,36 @@
 }
 /* modal-left(模态框左侧)*/
 .component-modal .modal-dialog .modal-body .modal-left{
-    width: 500px;
+    width: 250px;
     display: inline-block;
 }
 /*modal-right(模态框右侧)*/
 .component-modal .modal-dialog .modal-body .modal-right{
-    width: 343px;
-    height: 612px;
+    width:250px;
+    height: 340px;
     float: right;
     display:inline-block;
-    padding-left:20px;
+    /*padding-left:20px;*/
 }
 /*modal-modify(修饰线)*/
 .component-modal .modal-dialog .modal-body .modal-right .modal-modify{
-    margin:30px 0;
+    margin:20px 0;
 }
 .modify-text{
-    font-size:18px;
+    font-size:14px;
 }
 /*author-info*/
 .author-info h2{
     margin:0 0 20px 0;
 }
 .author-info h4{
-    margin-bottom:23px;
+    font-size: 22px;
+    margin-bottom:15px;
 }
 /*pro-info*/
 .component-modal .modal-dialog .modal-body .modal-right .pro-info div >p{
-    margin-bottom:30px;
+    font-size: 14px;
+    margin-bottom:10px;
 }
 .component-modal .modal-dialog .modal-body .modal-right .pro-info div >p:nth-child(2){
     display:inline-block;
@@ -63,8 +67,14 @@
 /*footer*/
 .btn-primary{
     width: 100px;
-    background: gray;
+    /*background: gray;*/
     border-style: none;
+}
+.btn-warning{
+    width:17%;
+    border: 1px solid #4990e2;
+    color: #4990e2;
+    background-color: white;
 }
 .component-modal .modal-dialog  .btn-primary:hover{
     background:#8c8c8c!important;

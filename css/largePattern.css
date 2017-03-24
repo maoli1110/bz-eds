@@ -84,3 +84,7 @@
 .largePattern .component-btns>div:nth-child(3):hover .icon-tool{
     background-position-y: -171px ;
 }
+/*详情框样式*/
+.largePattern-modal .modal-dialog .modal-content{
+    height:570px;
+}

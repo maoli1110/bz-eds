@@ -111,14 +111,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         /*
         * 搜索关键字生成条件标签
         * */
-        var oldText;
+        //var oldText;
        $scope.search = function(searchText) {
-           if(searchText != oldText) {
-               setBlank(searchText);
-           } else {
-               return;
-           }
-           oldText.push(searchText);
+           $('.type-filter').remove();
+           $('.filter-status .filter-ele>b').remove();
+           setBlank(searchText);
            closeStatus();
        }
 
@@ -184,7 +181,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     '</div>';
                 angular.element($('.filter-status .filter-ele')).append(temp);*/
                 $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div ng-repeat="item in typeList">{{item.type}}</div>');
-                //setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
+                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 //$('.component-base .filter-status .filter-ele .type-filter').on("mouseenter", function())
                 $scope.isType = false;
                 //显示小类

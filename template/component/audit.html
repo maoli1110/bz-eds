@@ -51,7 +51,7 @@
 					<li><span class="icon-updown"></span>下载</li>
 					<li class="rela audit-status pop-signal">
 						<!--<div class="pop-signal" ng-init="sum1 = 0" ng-click="sum1 = sum1 + 1" ng-model="sum1">{{sum1}}</div>-->
-						<div class="pop-signal" ng-click="flag.auditStatus = !flag.auditStatus">审核<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
+						<div class="pop-signal edit" ng-click="editAudit()">审核<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
 						<ul ng-show="flag.auditStatus" class="pop-signal">
 							<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
 							<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
@@ -100,8 +100,8 @@
 								<td width="5%" style="min-width:70px;"><img ng-src="{{item.picture}}" alt=""></td>
 								<td width="10%">{{item.author}}</td>
 								<td width="10%" style="position: relative" ng-click="listStatus = !listStatus">
-									<div>{{item.status}}<span class="glyphicon glyphicon-menu-up pop-signal"></span></div>
-									<ul class="pop-signal" ng-show="listStatus" style="width: 80%">
+									<div>{{item.status}}<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
+									<ul class="pop-signal" ng-show="listStatus" style="width: 87%;font-size: 16px">
 										<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
 										<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
 									</ul>

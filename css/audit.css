@@ -81,7 +81,7 @@
 
 .modal-audit .modal-body>p{
 	font-size: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 /**/
 .audit  .glyphicon-menu-up{
@@ -117,4 +117,7 @@
 }
 .audit .table td ul>li:hover{
 	color:#4990e2;
+}
+.audit-modal .modal-dialog .modal-content{
+	height: 400px!important;
 }

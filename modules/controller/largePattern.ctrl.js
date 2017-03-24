@@ -276,11 +276,11 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
          * */
         $scope.componetModal = function () {
             var modalInstance = $uibModal.open({
-                windowClass: 'component-modal',
+                windowClass: 'component-modal largePattern-modal',
                 backdrop: 'static',
                 animation: false,
                 size: 'lg',
-                templateUrl: 'template/core/modal.html',
+                templateUrl: 'template/core/largeModal.html',
                 controller: 'modalCtrl',
                 resolve: {
                     items: function () {
@@ -293,24 +293,6 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             }, function () {
                 //console.info('Modal dismissed at: ' + new Date());
             });
-            /*
-            * 详情框内容样式更改
-            * */
-            $timeout(function() {
-                var template = '<div class="modal-modify"> <p>---------------<span class="modify-text">审核意见</span>------------------</p></div>'+
-                    '<div class="text" style="border: 1px solid black;width: 90%;height: 30%;background-color: #eeeeee">暂无</div>'
-                $('.pro-info').after(template);
-                $('.modal-footer').css({
-                    'display': 'none'
-                });
-                $( '.modal-modify').css({
-                    'margin-top': '25px',
-                    'margin-bottom': '25px'
-                });
-                $('.pro-info div >p').css({
-                    'margin-bottom': '9px'
-                });
-            }, 0.1);
 
         };
 
