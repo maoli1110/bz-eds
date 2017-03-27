@@ -60,6 +60,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         /*
          * 分页器
          * */
+        //所有页面中的项目总数
         $scope.totalItems = 64;
         $scope.currentPage = 1;
         $scope.setPage = function (pageNo) {
@@ -68,6 +69,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.pageChanged = function() {
             //console.log('Page changed to: ' + $scope.currentPage);
         };
+        //分页大小限制号码。
         $scope.maxSize = 5;
         $scope.bigTotalItems = 175;
         $scope.bigCurrentPage = 1;
@@ -117,6 +119,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
            $('.filter-status .filter-ele>b').remove();
            setBlank(searchText);
            closeStatus();
+           isShow();
        }
 
         /*
@@ -153,6 +156,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.isBrand = false;
             }
             closeStatus();
+            isShow();
         };
         //筛选风格
         $scope.isStyleFilter = function(event){
@@ -161,7 +165,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 setBlank(textFilter);
                 $scope.isStyle = false;
             }
-            closeStatus()
+            closeStatus();
+            isShow();
         };
         //筛选大类
         $scope.isTypeFilter = function(event){
@@ -196,6 +201,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 });
                 $scope.isSType = true;
             }
+            isShow();
         };
         //筛选小类
         $scope.isSTypeFilter = function(even){
@@ -207,21 +213,29 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isSType = false;
             }
+            isShow();
         }
 
         /*
         * 监听筛选条件是否为空
         * */
-        var num = $('.filter-trigger').length;
-        console.log(num);
-        $scope.$watch('num',function(newValue,oldValue){
+        /*$scope.$watch('num',function(newValue,oldValue){
             console.log(newValue,oldValue);
             if(newValue > 0) {
                 $scope.isBlock = true;
             } else {
                 $scope.isBlock = false;
             }
-        });
+        });*/
+        function isShow() {
+            console.log($('type-filter').length);
+            if($('type-filter').length != 0){
+                $scope.isBlock = true;
+            } else {
+                $scope.isBlock = false;
+            }
+        }
+        isShow();
 
         //清空筛选
         $scope.cancelFilter = function(){

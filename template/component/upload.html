@@ -52,20 +52,6 @@
 				<div class="component-list table-responsive main"style="position: relative;">
 					<!--<div class="tabBody">-->
 						<table class="table " style="border-top: none;">
-							<!--<thead>
-                                <tr>
-                                    <th>构件名称</th>
-                                    <th>大类</th>
-                                    <th>小类</th>
-                                    <th>品牌</th>
-                                    <th>型号</th>
-                                    <th>图形</th>
-                                    <th>审核状态</th>
-                                    <th>审核意见</th>
-                                    <th>上传时间</th>
-                                    <th></th>
-                                </tr>
-                            </thead>-->
 							<tbody>
 							<tr ng-repeat="item in auditList">
 								<td>{{item.componentName}}</td>
@@ -73,7 +59,7 @@
 								<td>{{item.smallClass}}</td>
 								<td>{{item.brand}}</td>
 								<td>{{item.model}}</td>
-								<td><img style="width: 66px;height: 66px;" src="{{item.picture}}"></td>
+								<td><img style="width: 66px;height: 66px;" ng-src="{{item.picture}}"></td>
 								<td>{{item.status}}</td>
 								<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
 								<td>{{item.updateTime}}</td>
@@ -100,7 +86,7 @@
 			<!--</div>-->
 			<div class="pagination">
 				<div class="clearfix">
-					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<ul uib-pagination total-items="totalItems" force-ellipses="true" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
 					<span>共 {{numPages}} 页 </span>
 					<div class="pagination-dump">
 						<p class="dump-inp inline"> , 跳转到   <input type="text" class="form-control inline"> </p>

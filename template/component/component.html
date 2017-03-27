@@ -54,7 +54,7 @@
 			<div class="component-list">
 				<div class="component-filter">
 					<div class="filter-status">
-						<div class="filter-ele" ><div>全部</div></div><span ng-click="cancelFilter()">清空筛选</span>
+						<div class="filter-ele" ><div>全部</div></div><span ng-show="isBlock" ng-click="cancelFilter()">清空筛选</span>
 					</div>
 					<!--筛选大类-->
 					<div class="filter-infoList" ng-if="isType">
@@ -208,8 +208,6 @@
 						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
 					</div>
 				</div>
-
-
 			</div>
 		</section>
 
