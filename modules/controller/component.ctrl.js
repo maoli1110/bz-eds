@@ -228,8 +228,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             }
         });*/
         function isShow() {
-            console.log($('type-filter').length);
-            if($('type-filter').length != 0){
+            //console.log($('type-filter').length);
+            if($('type-filter').text() != ''){
                 $scope.isBlock = true;
             } else {
                 $scope.isBlock = false;
@@ -256,7 +256,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             menusEvent($('.main-siderbar ul>li'),'click');
             $('.component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
-                $(this).parent().siblings().find('img').attr('src',previewSrc)
+                $(this).parent().siblings().find('img').attr('src',previewSrc);
             });
             //菜单选项
             $('.main-siderbar ul li p').click(function(){
@@ -266,8 +266,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
                 $(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
                 $(this).css({'color':'#4990e2'});//选中样式
-                console.log($(this));
-                $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'})
+                $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
 
             });
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
@@ -309,6 +308,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             });
             //  取消选择的时候条件清空
             $('.filter-infoList .btn-cancel').click(function(){
+                console.log(this);
                 $(this).parent().siblings().find('.check-box').hide();
                 $(this).parent().css({'display':'none'});
                 $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');

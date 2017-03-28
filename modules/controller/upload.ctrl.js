@@ -7,12 +7,14 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
         /*
         * 我的上传页面数据
         * */
+        var data;
+        var num
         commonService.auditList().then(function(data){
             //$scope.auditList = data.data;
-            var data = data.data;
-            var num = data.length;
+            data = data.data;
+            num = data.length;
             $scope.totalItems = num;
-            $scope.auditList = data.slice(0,10);
+            //$scope.auditList = data.slice(0,10);
             /*
             * 分页
             * */
@@ -25,6 +27,7 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
             $scope.maxSize = 5;
             //$scope.setPage($scope.currentPage);
             $scope.setPage = function (pageNo) {
+                pageNo = pageNo?pageNo:1;
                 $scope.currentPage = pageNo;
                 $scope.auditList = data.slice((10 * (pageNo - 1)), (10 * pageNo));
                 console.log((10 * (pageNo - 1)), (10 * pageNo))
@@ -34,6 +37,7 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
                 console.log('Page changed to: ' + $scope.currentPage);
                 $scope.setPage(currentPage);
             };
+            $scope.setPage($scope.currentPage);
 
             /*分页器跳转
              * params  value
