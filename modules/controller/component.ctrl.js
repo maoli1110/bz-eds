@@ -49,11 +49,13 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                  $(this).toggleClass('active');
                  $(this).siblings().removeClass('active');
                  $(this).siblings().find('.menus-childs').stop().slideUp();
-                 $(this).find(".menusname").css({'color':'#4990e2'});
+                 $(this).find(".menusName").css({'color':'#4990e2'});
                  if($(this).hasClass('active')){
                      $(this).find('.menus-childs').stop().slideDown();
+                     $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
                  }else{
                      $(this).find('.menus-childs').stop().slideUp();
+                     $(this).find('.glyphicon-menu-down').css({'transform':'rotate(360deg)'});
                  }
              })
         }
@@ -264,10 +266,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
                 $('li').css({'background':'','color':'#333'});//初始化样式
                 //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
+                $('li div p').css({'background':'','color':'#333'});//初始化样式
                 $(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
                 $(this).css({'color':'#4990e2'});//选中样式
                 $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
-
             });
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
