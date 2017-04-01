@@ -1,17 +1,24 @@
-<div >
+<style>
+    #ztree{
+        width: 100%;;
+        height:320px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+</style>
+<div>
     <div class="modal-header">
         <p class="modal-title modal-close" ng-click="cancel()" id="modal-title"></p>
     </div>
-    <div class="modal-body" id="modal-body" >
-        <div class="clearfix modal-left" >
-
+    <div class="modal-body" id="modal-body" style="height: 350px;">
+        <div class="clearfix modal-left zTreeDemoBackground left" style="width: 50%">
+            <ul id="ztree" class="ztree"></ul>
         </div>
         <div class="modal-right" >
-
+            sadogjlknmttrkt
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">应用</button>
-        <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+        <button class="btn btn-primary" type="button" ng-click="ok()">上传</button>
     </div>
 </div>

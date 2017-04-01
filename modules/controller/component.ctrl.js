@@ -26,7 +26,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         commonService.typeList().then(function(data){
             var typeList = data.data;
             $scope.typeList = typeList;
-        })
+        });
 
         //风格、品牌数据
         $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
@@ -59,6 +59,38 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                  }
              })
         }
+
+        /*
+         * 左侧树结构
+         * */
+        var setting = {
+            view: {
+                showIcon: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+
+        var zNodes =[
+            { id:1, pId:0, name:"父节点 1", open:false},
+            { id:11, pId:1, name:"叶子节点 1-1"},
+            { id:12, pId:1, name:"叶子节点 1-2"},
+            { id:13, pId:1, name:"叶子节点 1-3"},
+            { id:2, pId:0, name:"父节点 2", open:false},
+            { id:21, pId:2, name:"叶子节点 2-1"},
+            { id:22, pId:2, name:"叶子节点 2-2"},
+            { id:23, pId:2, name:"叶子节点 2-3"},
+            { id:3, pId:0, name:"父节点 3", open:false},
+            { id:31, pId:3, name:"叶子节点 3-1"},
+            { id:32, pId:3, name:"叶子节点 3-2"},
+            { id:33, pId:3, name:"叶子节点 3-3"}
+        ];
+        $(document).ready(function(){
+            $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
+        });
         /*
          * 分页器
          * */
@@ -372,6 +404,30 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 //console.info('Modal dismissed at: ' + new Date());
             });
         };
+
+        /*
+        * 上传构件
+        * */
+        $scope.uploadCom = function() {
+            var modalInstance = $uibModal.open({
+                windowClass: 'component-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/component/uploadCom.html',
+                controller: 'uploadComCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //console.info('Modal dismissed at: ' + new Date());
+            });
+        }
         /*
          * 返回顶部
          * */

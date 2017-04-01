@@ -297,6 +297,30 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         };
 
         /*
+         * 上传构件
+         * */
+        $scope.uploadCom = function() {
+            var modalInstance = $uibModal.open({
+                windowClass: 'component-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/component/uploadCom.html',
+                controller: 'uploadComCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //console.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+        /*
          * 返回顶部
          * */
         $('.return-top').click(function() {

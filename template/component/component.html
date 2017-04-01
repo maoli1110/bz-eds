@@ -32,7 +32,7 @@
 		<!--main-siderbar(侧边栏)-->
 		<aside class="main-siderbar">
 			<!--侧边栏菜单-->
-			<ul>
+			<!--<ul>
 				<p>构件来源</p>
 				<li ng-repeat="menusList in menusArr track by $index" >
 					<p class="menusName"><b class="glyphicon glyphicon-menu-down"></b>{{menusList.menus}}</p>
@@ -40,11 +40,19 @@
 						<p ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
 					</div>
 				</li>
+			</ul>-->
+			<ul>
+				<p>构件来源</p>
+				<li><p>全部</p></li>
+				<li><p>班筑构件库</p></li>
+				<li>
+					<ul class="ztree" style="overflow-y:scroll"></ul>
+				</li>
 			</ul>
 			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
 				<div ui-sref="upload"><span class="icon-tool"></span>我的上传</div>
-				<div ui-sref="uploadCom"><span class="icon-tool"></span>上传构件</div>
+				<div ng-click="uploadCom()"><span class="icon-tool"></span>上传构件</div>
 				<div ui-sref="audit"><span class="icon-tool"></span>我的审核</div>
 			</div>
 		</aside>

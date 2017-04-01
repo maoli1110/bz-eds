@@ -133,6 +133,11 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             $('.audit .edit>span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
         }
     }
+    $scope.tableStatus = function() {
+        if($scope.listStatus = 'true') {
+            $(this).find('.tdStatus').children('span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+        }
+    }
     /*
      * 返回顶部
      * */

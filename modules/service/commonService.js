@@ -109,4 +109,15 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //上传构件树结构
+    this.treeList = function(){
+        var url="json/tree.json";
+        var delay = $q.defer();
+        $http.get(url).then(function(data){
+            delay.resolve(data);
+        },function(error){
+            delay.reject(error);
+        });
+        return delay.promise;
+    }
 });

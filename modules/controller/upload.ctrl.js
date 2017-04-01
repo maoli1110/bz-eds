@@ -2,8 +2,8 @@
 /**
  * upload
  */
-angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
-    function ($scope, commonService) {
+angular.module('core').controller('uploadCtrl', ['$scope', 'commonService','$uibModal',
+    function ($scope, commonService,$uibModal) {
         /*
         * 我的上传页面数据
         * */
@@ -80,6 +80,30 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService',
             if(str_n){
                 return(str_n+result);
             }
+        }
+
+        /*
+         * 上传构件
+         * */
+        $scope.uploadCom = function() {
+            var modalInstance = $uibModal.open({
+                windowClass: 'component-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/component/uploadCom.html',
+                controller: 'uploadComCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //console.info('Modal dismissed at: ' + new Date());
+            });
         }
 
         /*按上传时间排序*/
