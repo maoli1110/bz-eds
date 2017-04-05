@@ -41,7 +41,7 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
             }
         };
 
-        var zNodes; /*=[
+        var zNodes/*=[
             { id:1, pId:0, name:"父节点 1", open:true},
             { id:11, pId:1, name:"叶子节点 1-1"},
             { id:12, pId:1, name:"叶子节点 1-2"},
@@ -54,7 +54,7 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
             { id:31, pId:3, name:"叶子节点 3-1"},
             { id:32, pId:3, name:"叶子节点 3-2"},
             { id:33, pId:3, name:"叶子节点 3-3"}
-        ];*/
+        ]*/;
         $(document).ready(function(){
             $.fn.zTree.init($("#ztree"), setting, zNodes);
         });

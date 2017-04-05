@@ -5,9 +5,9 @@
 	<div class="component-logo">
 		<div class=" component-sys-close" >
 			<div class="close-tool">
-				<span class="glyphicon glyphicon-minus"></span>
-				<span class="glyphicon glyphicon-book"></span>
-				<span class="glyphicon glyphicon-remove"></span>
+				<span class="glyphicon glyphicon-minus" ng-click="minUI()"></span>
+				<span class="glyphicon glyphicon-book" ng-click="maxUI()"></span>
+				<span class="glyphicon glyphicon-remove" ng-click="closeUI()"></span>
 			</div>
 		</div>
 		<div class="component-computer-logo  clearfix">
@@ -41,14 +41,12 @@
 					</div>
 				</li>
 			</ul>-->
-			<ul>
+			<ul class="source">
 				<p>构件来源</p>
-				<li><p>全部</p></li>
-				<li><p>班筑构件库</p></li>
-				<li>
-					<ul class="ztree" style="overflow-y:scroll"></ul>
-				</li>
+				<li><span>全部</span></li>
+				<li><span>班筑构件库</span></li>
 			</ul>
+			<ul class="ztree" style="overflow-y:scroll;max-height: 300px"></ul>
 			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
 				<div ui-sref="upload"><span class="icon-tool"></span>我的上传</div>

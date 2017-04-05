@@ -123,6 +123,19 @@ input[type="checkbox"]:checked +:after{
     height:calc(100vh - 152px) ;
 }
 /*---------------------------------------------aside-------------------------------------*/
+.component-base .main-siderbar .source>li{
+    padding:0 20px;
+}
+.component-base .main-siderbar .ztree{
+    padding-left: 15px;
+}
+.ztree li a.curSelectedNode{
+    background-color: #f2f2f2;
+    border: none;
+}
+.ztree li{
+    line-height: 25px;
+}
 .component-base .componet-base-main aside.main-siderbar{
     width:200px;height:100%;float:left;font-size:14px;
 }

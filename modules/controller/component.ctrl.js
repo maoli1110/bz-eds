@@ -32,6 +32,38 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
         $scope.brandsList = ["卡地亚","夏奈尔","唐纳·卡兰","范思哲","迪奥","古驰","路易·威登","乔治·阿玛尼","PRADA","GUESS","蒂芬尼","ENZO","宝诗龙","Swarovski","Georgjensen"];
 
+        /*var BzCloudComp;
+        if(!BzCloudComp)
+            BzCloudComp = {};
+        (function() {
+            // 最大化界面
+            BzCloudComp.MaxUI = function()
+            {
+                native function MaxUI();
+                return MaxUI();
+            };
+            // 最小化界面
+            BzCloudComp.MinUI = function()
+            {
+                native function MinUI();
+                return MinUI();
+            };
+            // 关闭界面
+            BzCloudComp.CloseUI = function()
+            {
+                native function CloseUI();
+                return CloseUI();
+            };
+        })();*/
+        $scope.minUI = function() {
+            BzCloudComp.MinUI();
+        }
+        $scope.maxUI = function() {
+            BzCloudComp.MaxUI();
+        }
+        $scope.closeUI = function() {
+            BzCloudComp.CloseUI();
+        }
 
         /*
         * 侧边栏构建来源
@@ -40,10 +72,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $(".main-siderbar ul li:nth-child(2)>p b,.main-siderbar ul li:nth-child(3)>p b").hide();
         },0.2);
 
-        function  menusEvent(obj,event){
-            $('.menus-childs').unbind('click').click(function(){
+        /*function  menusEvent(obj,event){
+            /!*$('.menus-childs').unbind('click').click(function(){
                 return false;
-            });
+            });*!/
             obj.off(event).on(event,function(){
                  $(".menusName").css({'background':'','color':'#333'});
                  $(this).toggleClass('active');
@@ -58,7 +90,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                      $(this).find('.glyphicon-menu-down').css({'transform':'rotate(360deg)'});
                  }
              })
-        }
+        }*/
 
         /*
          * 左侧树结构
@@ -90,7 +122,14 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         ];
         $(document).ready(function(){
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
+
         });
+        $timeout(function(){
+            //console.log($('.ztree>li>span.button'));
+            //$('.ztree>li>span.button').attr('').removeClass('roots_close').addClass('glyphicon glyphicon-triangle-bottom');
+            //$('.ztree>li>span').button('background-image','url(./img/diy/open.png)').removeClass('roots_close').removeClass('roots_open');
+        },0.1)
+
         /*
          * 分页器
          * */
@@ -283,26 +322,28 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.isBlock = false;
             $scope.isSType = false;
         };
+        //菜单选项
+        $('.main-siderbar ul li span').click(function(){
+            var menusText = $(this).text();//选中的当前项的内容
+            console.log(menusText);
+            $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
+            $('li').css({'background':'','color':'#333'});//初始化样式
+            //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
+            $('li span').css({'background':'','color':'#333'});//初始化样式
+            $(this).parent().children().find('span').css({'background':'','color':'#333'});//隐藏父元素的选中样式
+            $(this).css({'color':'#4990e2'});//选中样式
+            //$(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
+        });
         //多选
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-            //菜单点击事件
-            menusEvent($('.main-siderbar ul>li'),'click');
             $('.component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc);
             });
-            //菜单选项
-            $('.main-siderbar ul li p').click(function(){
-                var menusText = $(this).text();//选中的当前项的内容
-                $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
-                $('li').css({'background':'','color':'#333'});//初始化样式
-                //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
-                $('li div p').css({'background':'','color':'#333'});//初始化样式
-                $(this).parent().children().find('p').css({'background':'','color':'#333'});//隐藏父元素的选中样式
-                $(this).css({'color':'#4990e2'});//选中样式
-                $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
-            });
+            //菜单点击事件
+            //menusEvent($('.main-siderbar ul>li'),'click');
+
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
                 $('.checkMore').click(function(){
@@ -311,6 +352,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     $(this).parent().parent().find('.btns-item').css({'display':'block'});
                 })
             });
+
             //是否选中筛选多选框 选中的话可以提交
             $('.filter-infoList .check-box input').click(function(event){
                 showBtn=0;
