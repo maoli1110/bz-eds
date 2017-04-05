@@ -122,12 +122,28 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         ];
         $(document).ready(function(){
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
+            //菜单选项
+            $('.main-siderbar ul li span,.main-siderbar .ztree ul li a>span:last-child').click(function(){
+                if($(this).text() != '' && $(this).text() != undefined) {
+                    var menusText = $(this).text();//选中的当前项的内容
+                }
+                if($(".main-siderbar .ztree>li>span").hasClass('roots_open')){
+                    var menusText = $('.main-siderbar .ztree ul li a span:last-child').text();
+                    console.log($('.main-siderbar .ztree ul li a span:last-child'));
+                }
 
+                console.log($(this));
+                $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
+                $('li').css({'background':'','color':'#333'});//初始化样式
+                //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
+                $('li span').css({'background':'','color':'#333'});//初始化样式
+                $(this).parent().children().find('span').css({'background':'','color':'#333'});//隐藏父元素的选中样式
+                $(this).css({'color':'#4990e2'});//选中样式
+                //$(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
+            });
         });
         $timeout(function(){
-            //console.log($('.ztree>li>span.button'));
-            //$('.ztree>li>span.button').attr('').removeClass('roots_close').addClass('glyphicon glyphicon-triangle-bottom');
-            //$('.ztree>li>span').button('background-image','url(./img/diy/open.png)').removeClass('roots_close').removeClass('roots_open');
+
         },0.1)
 
         /*
@@ -322,18 +338,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.isBlock = false;
             $scope.isSType = false;
         };
-        //菜单选项
-        $('.main-siderbar ul li span').click(function(){
-            var menusText = $(this).text();//选中的当前项的内容
-            console.log(menusText);
-            $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
-            $('li').css({'background':'','color':'#333'});//初始化样式
-            //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
-            $('li span').css({'background':'','color':'#333'});//初始化样式
-            $(this).parent().children().find('span').css({'background':'','color':'#333'});//隐藏父元素的选中样式
-            $(this).css({'color':'#4990e2'});//选中样式
-            //$(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
-        });
+
         //多选
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
@@ -343,6 +348,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             });
             //菜单点击事件
             //menusEvent($('.main-siderbar ul>li'),'click');
+
 
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
