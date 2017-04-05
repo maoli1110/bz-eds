@@ -103,7 +103,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 simpleData: {
                     enable: true
                 }
-            }
+            }/*,
+            callback: {
+                beforeClick: treenodeClick
+            }*/
         };
 
         var zNodes =[
@@ -120,19 +123,45 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             { id:32, pId:3, name:"叶子节点 3-2"},
             { id:33, pId:3, name:"叶子节点 3-3"}
         ];
+       /* function treenodeClick(event, treeId, treeNode, clickFlag) {
+            //此处treeNode 为当前节点
+            var str ='' ;
+            str = getAllChildrenNodes(treeNode,str);
+            alert(str); //所有叶子节点ID
+        }
+
+        function getAllChildrenNodes(treeNode,result){
+            if (treeNode.isParent) {
+                var childrenNodes = treeNode.children;
+                if (childrenNodes) {
+                    for (var i = 0; i < childrenNodes.length; i++) {
+                        result += ',' + childrenNodes[i].name;
+                        result = getChildNodes(childrenNodes[i], result);
+                    }
+                }
+            }
+            return result;
+        }*/
         $(document).ready(function(){
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
             //菜单选项
-            $('.main-siderbar ul li span,.main-siderbar .ztree ul li a>span:last-child').click(function(){
+            $('.main-siderbar ul li span').click(function(){
                 if($(this).text() != '' && $(this).text() != undefined) {
                     var menusText = $(this).text();//选中的当前项的内容
                 }
+                console.log($(this));
                 if($(".main-siderbar .ztree>li>span").hasClass('roots_open')){
-                    var menusText = $('.main-siderbar .ztree ul li a span:last-child').text();
-                    console.log($('.main-siderbar .ztree ul li a span:last-child'));
+                    $('.main-siderbar .ztree ul li a span:last-child').click(function() {
+                        var menusText = $(this).text();
+                        $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
+                        $('li').css({'background':'','color':'#333'});//初始化样式
+                        //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
+                        $('li a span:last-child').css({'background':'','color':'#333'});//初始化样式
+                        $(this).parent().children().find('span').css({'background':'','color':'#333'});//隐藏父元素的选中样式
+                        $(this).css({'color':'#4990e2'});//选中样式
+                    })
                 }
 
-                console.log($(this));
                 $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
                 $('li').css({'background':'','color':'#333'});//初始化样式
                 //$('.glyphicon-menu-down').css({'transform':'rotate(0deg)'});
@@ -142,6 +171,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 //$(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
             });
         });
+
         $timeout(function(){
 
         },0.1)
