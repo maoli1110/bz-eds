@@ -32,19 +32,10 @@
 		<!--main-siderbar(侧边栏)-->
 		<aside class="main-siderbar">
 			<!--侧边栏菜单-->
-			<!--<ul>
-				<p>构件来源</p>
-				<li ng-repeat="menusList in menusArr track by $index" >
-					<p class="menusName"><b class="glyphicon glyphicon-menu-down"></b>{{menusList.menus}}</p>
-					<div class="menus-childs" ng-if="menusList.child">
-						<p ng-repeat="menusChild in menusList.child track by $index" profit>{{menusChild}}</p>
-					</div>
-				</li>
-			</ul>-->
 			<ul class="source">
 				<p>构件来源</p>
-				<li><span>全部</span></li>
-				<li><span>班筑构件库</span></li>
+				<li><span class="node_name">全部</span></li>
+				<li><span class="node_name">班筑构件库</span></li>
 			</ul>
 			<ul class="ztree" style="overflow-y:scroll;max-height: 300px"></ul>
 			<!--component-btns（侧边栏构件按钮组）-->
