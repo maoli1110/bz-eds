@@ -32,39 +32,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
         $scope.brandsList = ["卡地亚","夏奈尔","唐纳·卡兰","范思哲","迪奥","古驰","路易·威登","乔治·阿玛尼","PRADA","GUESS","蒂芬尼","ENZO","宝诗龙","Swarovski","Georgjensen"];
 
-        /*var BzCloudComp;
-        if(!BzCloudComp)
-            BzCloudComp = {};
-        (function() {
-            // 最大化界面
-            BzCloudComp.MaxUI = function()
-            {
-                native function MaxUI();
-                return MaxUI();
-            };
-            // 最小化界面
-            BzCloudComp.MinUI = function()
-            {
-                native function MinUI();
-                return MinUI();
-            };
-            // 关闭界面
-            BzCloudComp.CloseUI = function()
-            {
-                native function CloseUI();
-                return CloseUI();
-            };
-        })();*/
-        $scope.minUI = function() {
-            BzCloudComp.MinUI();
-        }
-        $scope.maxUI = function() {
-            BzCloudComp.MaxUI();
-        }
-        $scope.closeUI = function() {
-            BzCloudComp.CloseUI();
-        }
-
         /*
         * 侧边栏构建来源
         * */
@@ -128,12 +95,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     var menusText = $(this).text();//选中的当前项的内容
                 }*/
             var menusText;
-                $('.main-siderbar ul li').click(function(){
-                    $(this).find('span[class=node_name]').click(function(){
-                        if($(this).text() != '' && $(this).text() != undefined) {
-                            menusText = $(this).text();//选中的当前项的内容
-                        }
-                    });
+            $('.main-siderbar ul li .node_name').click(function(){
+                if($(this).text() != '' && $(this).text() != undefined) {
+                    menusText = $(this).text();//选中的当前项的内容
+                }
                 if($(".main-siderbar .ztree .button").hasClass('roots_open')){
                     $('.main-siderbar .ztree ul li .node_name').click(function() {
                         menusText = $(this).text();
