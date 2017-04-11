@@ -3,13 +3,6 @@
 	<!--header 页面中的头部-->
 	<!--<header ng-include="'template/core/header.html'" class="component-logo"></header>-->
 	<div class="component-logo">
-		<!--<div class=" component-sys-close" >
-			<div class="close-tool">
-				<span class="glyphicon glyphicon-minus" ng-click="minUI()"></span>
-				<span class="glyphicon glyphicon-book" ng-click="maxUI()"></span>
-				<span class="glyphicon glyphicon-remove" ng-click="closeUI()"></span>
-			</div>
-		</div>-->
 		<div class="component-computer-logo  clearfix">
 			<div class="col-xs-3">
 			<span>
@@ -60,7 +53,7 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isTypeFilter($event)">
-								<span ng-repeat="item in typeList track by $index">{{item.type}}</span>
+								<span ng-repeat="item in typeList track by $index" title="{{item.type}}">{{item.type}}</span>
 							</div>
 						</div>
 					</div>
@@ -71,7 +64,7 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isSTypeFilter($event)">
-								<span ng-repeat="item in sTypeList track by $index">{{item.name}}</span>
+								<span ng-repeat="item in sTypeList track by $index" title="{{item.name}}">{{item.name}}</span>
 							</div>
 						</div>
 					</div>
@@ -86,7 +79,7 @@
 									<input type="checkbox"  >
 									<div class="simulated-box"></div>
 								</label>
-								<span data-name="a" ng-repeat="item in styleList track by $index">{{item}}</span>
+								<span data-name="a" ng-repeat="item in styleList track by $index" title="{{item}}">{{item}}</span>
 							</div>
 
 							<div class="filter-tool">
@@ -108,7 +101,7 @@
 									<input type="checkbox">
 									<div class="simulated-box"></div>
 								</label>
-								<span ng-repeat="item in brandsList">{{item}}</span>
+								<span ng-repeat="item in brandsList" title="{{item}}">{{item}}</span>
 							</div>
 							<div class="filter-tool">
 								<span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>

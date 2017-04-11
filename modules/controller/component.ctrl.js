@@ -20,7 +20,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isStyle = true;
         $scope.isBrand = true;
         $scope.isSType = false;
-        $scope.isBlock = false;
+        $scope.isBlock = true;
 
         //大类、小类数据获取
         commonService.typeList().then(function(data){
@@ -95,7 +95,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     var menusText = $(this).text();//选中的当前项的内容
                 }*/
             var menusText;
-            $('.main-siderbar ul li .node_name').click(function(){
+            $('.main-siderbar ul:not(.line) .node_name').click(function(){
+                console.log(this);
                 if($(this).text() != '' && $(this).text() != undefined) {
                     menusText = $(this).text();//选中的当前项的内容
                 }
@@ -216,7 +217,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.isBrand = false;
             }
             closeStatus();
-            isShow();
         };
         //筛选风格
         $scope.isStyleFilter = function(event){
@@ -226,7 +226,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.isStyle = false;
             }
             closeStatus();
-            isShow();
         };
         //筛选大类
         $scope.isTypeFilter = function(event){
@@ -261,7 +260,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 });
                 $scope.isSType = true;
             }
-            isShow();
         };
         //筛选小类
         $scope.isSTypeFilter = function(even){
@@ -273,7 +271,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isSType = false;
             }
-            isShow();
         }
 
         /*
@@ -295,7 +292,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.isBlock = false;
             }
         }
-        isShow();
+        //isShow();
 
         //清空筛选
         $scope.cancelFilter = function(){
@@ -313,17 +310,16 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         //多选
         //监听是否 菜单选项repeat 完成
         $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+            console.log('11111111')
             $('.component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
                 $(this).parent().siblings().find('img').attr('src',previewSrc);
             });
-            //菜单点击事件
-            //menusEvent($('.main-siderbar ul>li'),'click');
-
 
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
                 $('.checkMore').click(function(){
+                    console.log('==========');
                     $(this).parent().parent().find('.check-box').show();
                     $(this).parent().parent().parent().css({'height':'auto','overflow':''});
                     $(this).parent().parent().find('.btns-item').css({'display':'block'});
@@ -349,6 +345,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             //筛选条件点击更多显示全部
             $('.filter-tool ').map(function(){
                 $(this).find('.filter-more').unbind('click').click(function(){
+                    console.log('============');
                     $(this).toggleClass('showMore');
                      if($(this).hasClass('showMore')){
                          $(this).parent().parent().parent().css({'height':'auto','overflow':''});

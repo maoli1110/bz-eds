@@ -5,7 +5,7 @@
 angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModalInstance','items','$timeout','commonService','$uibModal',
     function ($scope, $http, $uibModalInstance,items,$timeout,commonService,$uibModal,$routeParams) {
         /*
-        * 弹框的最大化和还原
+        * 弹框的最大化和还原(待续)
         * */
         $scope.status = 0;
         $scope.statusSet = 0;
@@ -14,7 +14,6 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         }
         $scope.max = function() {
             $scope.status = 1;
-            max($(''));
         }
         $scope.revert = function() {
             $scope.status = 0;
@@ -32,7 +31,6 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
 
         $scope.ok = function () {
             //$uibModalInstance.close($scope.selected.item);
-            $('#container').show();
             var strJson = {
                 /*[
                  {"GUID":"","typeID":"","BigTypeID":""}
@@ -76,29 +74,5 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         $(document).ready(function(){
             $.fn.zTree.init($(".uploadCom .ztree"), setting, zNodes);
         });
-        /*
-         * 上传构件权限设置
-         * */
-       /* function uploadComSet() {
-            var modalInstance = $uibModal.open({
-                windowClass: 'uploadComSet-modal',
-                backdrop: 'static',
-                animation: false,
-                size: 'lg',
-                templateUrl: 'template/core/uploadComSet.html',
-                controller: 'uploadComSetCtrl',
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
-            });
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                //console.info('Modal dismissed at: ' + new Date());
-            });
-        }*/
-
 
     }])

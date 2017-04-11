@@ -113,7 +113,9 @@
 
     function uploadProgress (currentNum,total){
         //显示滚动条
-        $('#container').show();
+        if(currentNum == 1){
+            $('#container').show();
+        }
         //动态改变当前个数
         if(total === currentNum){
             //隐藏滚动条
