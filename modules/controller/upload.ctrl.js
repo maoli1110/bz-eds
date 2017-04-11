@@ -30,11 +30,11 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService','$uib
                 pageNo = pageNo?pageNo:1;
                 $scope.currentPage = pageNo;
                 $scope.auditList = data.slice((10 * (pageNo - 1)), (10 * pageNo));
-                console.log((10 * (pageNo - 1)), (10 * pageNo))
+                //console.log((10 * (pageNo - 1)), (10 * pageNo))
             };
            // 每当页面更改时，这可以用于调用函数。
             $scope.pageChanged = function(currentPage) {
-                console.log('Page changed to: ' + $scope.currentPage);
+                //console.log('Page changed to: ' + $scope.currentPage);
                 $scope.setPage(currentPage);
             };
             $scope.setPage($scope.currentPage);

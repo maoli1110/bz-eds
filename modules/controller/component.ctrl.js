@@ -103,10 +103,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 simpleData: {
                     enable: true
                 }
-            }/*,
-            callback: {
-                beforeClick: treenodeClick
-            }*/
+            }
         };
 
         var zNodes =[
@@ -126,14 +123,20 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $(document).ready(function(){
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
             //菜单选项
-            $('.main-siderbar ul li span').click(function(){
+            /*$('.main-siderbar ul li .node_name').click(function(){
                 if($(this).text() != '' && $(this).text() != undefined) {
                     var menusText = $(this).text();//选中的当前项的内容
-                }
-                console.log($('.ztree ul'));
+                }*/
+            var menusText;
+                $('.main-siderbar ul li').click(function(){
+                    $(this).find('span[class=node_name]').click(function(){
+                        if($(this).text() != '' && $(this).text() != undefined) {
+                            menusText = $(this).text();//选中的当前项的内容
+                        }
+                    });
                 if($(".main-siderbar .ztree .button").hasClass('roots_open')){
-                    $('.main-siderbar .ztree .node_name').click(function() {
-                        var menusText = $(this).text();
+                    $('.main-siderbar .ztree ul li .node_name').click(function() {
+                        menusText = $(this).text();
                         $('.filter-status .filter-ele div').eq(0).html(menusText)//把值改变到筛选条件的路径监听框
                         $('li').css({'background':'','color':'#333'});//初始化样式
                         $('.node_name').css({'background':'','color':'#333'});//初始化样式
@@ -461,7 +464,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * */
         $scope.uploadCom = function() {
             var modalInstance = $uibModal.open({
-                windowClass: 'component-modal',
+                windowClass: 'uploadCom-modal',
                 backdrop: 'static',
                 animation: false,
                 size: 'lg',

@@ -2,29 +2,53 @@
 /**
  * uploadCom
  */
-angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModalInstance','items','$timeout','commonService',
-    function ($scope, $http, $uibModalInstance,items,$timeout,commonService) {
+angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModalInstance','items','$timeout','commonService','$uibModal',
+    function ($scope, $http, $uibModalInstance,items,$timeout,commonService,$uibModal,$routeParams) {
+        /*
+        * 弹框的最大化和还原
+        * */
+        $scope.status = 0;
+        $scope.statusSet = 0;
+        function max(obj){
+            $(this)
+        }
+        $scope.max = function() {
+            $scope.status = 1;
+            max($(''));
+        }
+        $scope.revert = function() {
+            $scope.status = 0;
+        }
+        $scope.maxSet = function() {
+            $scope.statusSet = 1;
+        }
+        $scope.revertSet = function() {
+            $scope.statusSet = 0;
+        }
         $scope.items = items;
         $scope.selected = {
             item: $scope.items
         };
 
         $scope.ok = function () {
-            $uibModalInstance.close($scope.selected.item);
+            //$uibModalInstance.close($scope.selected.item);
+            $('#container').show();
+            var strJson = {
+                /*[
+                 {"GUID":"","typeID":"","BigTypeID":""}
+                 ]*/
+            };
+            //BzCloudComp.UpLoadDetail(strJson, strCompID);
         };
 
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
 
-        commonService.treeList().then(function(data){
-            console.log(data.data);
-            zNodes = data.data;
-        })
-
         /*
         * 左侧树结构
         * */
+        var zNodes;
         var setting = {
             check: {
                 enable: true,
@@ -41,23 +65,40 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
             }
         };
 
-        var zNodes/*=[
-            { id:1, pId:0, name:"父节点 1", open:true},
-            { id:11, pId:1, name:"叶子节点 1-1"},
-            { id:12, pId:1, name:"叶子节点 1-2"},
-            { id:13, pId:1, name:"叶子节点 1-3"},
-            { id:2, pId:0, name:"父节点 2", open:true},
-            { id:21, pId:2, name:"叶子节点 2-1"},
-            { id:22, pId:2, name:"叶子节点 2-2"},
-            { id:23, pId:2, name:"叶子节点 2-3"},
-            { id:3, pId:0, name:"父节点 3", open:true},
-            { id:31, pId:3, name:"叶子节点 3-1"},
-            { id:32, pId:3, name:"叶子节点 3-2"},
-            { id:33, pId:3, name:"叶子节点 3-3"}
-        ]*/;
+        /*获取上传构件左侧树结构*/
+        //var zNodes = BzCloudComp.GetUpLoadDetail();
+        commonService.treeList().then(function(data){
+            console.log(data.data);
+            zNodes = data.data;
+            console.log(zNodes);
+        })
+
         $(document).ready(function(){
-            $.fn.zTree.init($("#ztree"), setting, zNodes);
+            $.fn.zTree.init($(".uploadCom .ztree"), setting, zNodes);
         });
+        /*
+         * 上传构件权限设置
+         * */
+       /* function uploadComSet() {
+            var modalInstance = $uibModal.open({
+                windowClass: 'uploadComSet-modal',
+                backdrop: 'static',
+                animation: false,
+                size: 'lg',
+                templateUrl: 'template/core/uploadComSet.html',
+                controller: 'uploadComSetCtrl',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //console.info('Modal dismissed at: ' + new Date());
+            });
+        }*/
 
 
     }])
