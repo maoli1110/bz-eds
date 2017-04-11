@@ -75,15 +75,15 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isStyleFilter($event)">
-								<label class="check-box">
-									<input type="checkbox"  >
-									<div class="simulated-box"></div>
-								</label>
-								<span data-name="a" ng-repeat="item in styleList track by $index" title="{{item}}">{{item}}</span>
+								<span ng-repeat="item in styleList track by $index" title="{{item}}">
+									<label class="check-box" style="margin-top: -5px">
+										<input type="checkbox">
+										<div class="simulated-box"></div>
+									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;padding-left:3px;">{{item}}</i></span>
 							</div>
 
 							<div class="filter-tool">
-								<span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
+								<span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
 							</div>
 							<div class="btns-item">
 								<button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -91,17 +91,17 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-brand filter-infoList" ng-show="isBrand" >
+					<div class="filter-brand filter-infoList" ng-show="isBrand">
 						<!--筛选标题-->
 						<p><b>品牌 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isBrandFilter($event)">
-								<label class="check-box">
-									<input type="checkbox">
-									<div class="simulated-box"></div>
-								</label>
-								<span ng-repeat="item in brandsList" title="{{item}}">{{item}}</span>
+								<span ng-repeat="item in brandsList" title="{{item}}">
+									<label class="check-box" style="margin-top: -5px">
+										<input type="checkbox">
+										<div class="simulated-box"></div>
+									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;padding-left:3px;">{{item}}</i></span>
 							</div>
 							<div class="filter-tool">
 								<span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
