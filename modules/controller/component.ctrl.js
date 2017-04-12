@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout',
-    function ($scope, $http,$uibModal,commonService,$timeout) {
+angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
+    function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -20,7 +20,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isStyle = true;
         $scope.isBrand = true;
         $scope.isSType = false;
-        $scope.isBlock = true;
+        $scope.isBlock = false;
 
         //大类、小类数据获取
         commonService.typeList().then(function(data){
@@ -132,7 +132,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.setPage(getDumpVal());
         };
         /*
-        * typeFilter 样式
+        * 条件标签 样式
         * params obj event
         *
         * */
@@ -156,8 +156,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * */
         //var oldText;
        $scope.search = function(searchText) {
-           $('.type-filter').remove();
-           $('.filter-status .filter-ele>b').remove();
+           //$('.type-filter').remove();
+           //$('.filter-status .filter-ele>b').remove();
            setBlank(searchText);
            closeStatus();
            isShow();
@@ -167,8 +167,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * 筛选条件（有下拉功能）生成条件标签
         * params function
         * */
-        function setFilterBlank(textFilter, list){
-            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div ng-repeat="item in list">{{item}}</div>');
+        function setFilterBlank(textFilter,typeList){
+            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div ng-repeat="item in typeList">{{item.type}}</div></div></div>'
+            var template=angular.element(html);
+            var pagination=$compile(template)($scope);
+            angular.element($('.filter-status .filter-ele').append(pagination));
         }
         /*
          * 筛选条件（无下拉功能）生成条件标签
@@ -191,43 +194,33 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
 
         //筛选品牌
         $scope.isBrandFilter = function(event){
-            if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
+            if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
                 $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isBrand = false;
             }
             closeStatus($scope.isBrand);
+            isShow();
         };
 
         //筛选风格
         $scope.isStyleFilter = function(event){
-            if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
+            if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
                 setBlank(textFilter);
                 $scope.isStyle = false;
             }
             closeStatus($scope.isStyle);
+            isShow();
         };
         //筛选大类
         $scope.isTypeFilter = function(event){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span'){
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
-                console.log($scope.typeList);
                 var typeList = $scope.typeList;
-                /*var temp = '<b class="glyphicon glyphicon-menu-right"></b>' +
-                    '<div class="type-filter">' +
-                         '<div class="filter-trigger ">' +
-                             '<span>'+textFilter+'</span> ' +
-                            '<b class="glyphicon glyphicon-menu-down"></b> ' +
-                        '</div>' +
-                        '<div class="switch-filter" >' +
-                             '<div ng-repeat="item in typeList">{{item.type}}</div>' +
-                        '</div>' +
-                    '</div>';
-                angular.element($('.filter-status .filter-ele')).append(temp);*/
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div ng-repeat="item in typeList">{{item.type}}</div>');
+                console.log(typeList);
+                setFilterBlank(textFilter,typeList);
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
-                //$('.component-base .filter-status .filter-ele .type-filter').on("mouseenter", function())
                 $scope.isType = false;
                 //显示小类
                 commonService.typeList().then(function(data){
@@ -235,12 +228,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     angular.forEach(typeList, function(value, index){
                         if(value.type == textFilter) {
                             $scope.sTypeList = value.list;
-                            //console.log($scope.sTypeList);
                         }
                     })
                 });
                 $scope.isSType = true;
             }
+            isShow();
         };
         //筛选小类
         $scope.isSTypeFilter = function(even){
@@ -248,32 +241,22 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
                 console.log($scope.sTypeList);
                 var sTypeList = $scope.sTypeList;
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div ng-repeat="item in sTypeList">{{item.name}}</div>');
+                setFilterBlank(textFilter,sTypeList);
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isSType = false;
             }
+            isShow();
         }
 
-        /*
-        * 监听筛选条件是否为空
-        * */
-        /*$scope.$watch('num',function(newValue,oldValue){
-            console.log(newValue,oldValue);
-            if(newValue > 0) {
-                $scope.isBlock = true;
-            } else {
-                $scope.isBlock = false;
-            }
-        });*/
+        //清空筛选
         function isShow() {
-            //console.log($('type-filter').length);
-            if($('type-filter').text() != ''){
+            if($('.type-filter')){
                 $scope.isBlock = true;
             } else {
                 $scope.isBlock = false;
             }
         }
-        //isShow();
+
 
         //清空筛选
         $scope.cancelFilter = function(){
@@ -283,7 +266,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.isType = true;
             }
             $('.type-filter').remove();
-            //$('.filter-status .filter-ele>b').remove();
+            $('.filter-status .filter-ele>b').remove();
             $scope.isBlock = false;
             $scope.isSType = false;
         };
@@ -299,7 +282,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
                 $('.checkMore').click(function(){
-                    console.log($(this));
                     $(this).parent().parent().find('.check-box').show();
                     $(this).parent().parent().parent().css({'height':'auto','overflow':''});
                     $(this).parent().parent().find('.btns-item').css({'display':'block'});
@@ -309,16 +291,26 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $('.filter-infoList .check-box input').click(function(event){
                 showBtn=0;
                 var i=0;
+                var arr = [];
                 $('.filter-infoList .check-box').map(function(i,val){
+                    //console.log($(val).find('input[type="checkbox"]').prop('checked'));
                     if($(val).find('input[type="checkbox"]').prop('checked')==true){
+                        textFilter = ($(this).parent().children('i').text());
+                        arr.push(textFilter);
                         i=1;
                         showBtn= i;
                     }
                 });
+                $('.btn-ok').off().click(function(){
+                    for(var i = 0; i < arr.length; i++){
+                        setBlank(arr[i]);
+                    }
+                })
                 if(showBtn==0){
-                    $(this).parent().parent().siblings().find('.btn-ok').hide();
+                    $(this).parent().parent().parent().siblings().find('.btn-ok').hide();
                 }else{
-                    $(this).parent().parent().siblings().find('.btn-ok').show();
+                    $(this).parent().parent().parent().siblings().find('.btn-ok').show();
+
                 }
             });
             //筛选条件点击更多显示全部
