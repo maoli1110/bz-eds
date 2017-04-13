@@ -68,7 +68,6 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         commonService.treeList().then(function(data){
             zNodes = data.data;
         })
-
         $(document).ready(function(){
             $.fn.zTree.init($(".uploadCom .ztree"), setting, zNodes);
         });

@@ -120,7 +120,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-    //上传构件树结构
+    //构件来源树结构
     this.getComponent = function(){
         // param = JSON.stringify(param);
         var delay = $q.defer();
