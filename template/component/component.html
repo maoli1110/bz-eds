@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-xs-9 component-search">
 				<form role="form">
-					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3" ng-model="searchText">
+					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3 searchtext" ng-model="searchText">
 					<div class="absol search-btn" ng-click="search(searchText)"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
 				</form>
 			</div>
@@ -26,7 +26,7 @@
 		<aside class="main-siderbar">
 			<!--侧边栏菜单-->
 			<ul class="source">
-				<p>构件来源</p>
+				<p ng-click="source()">构件来源</p>
 				<li><span class="node_name">全部</span></li>
 				<li><span class="node_name">公共构件库</span></li>
 			</ul>

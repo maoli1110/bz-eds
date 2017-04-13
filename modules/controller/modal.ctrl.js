@@ -4,15 +4,15 @@
 angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalInstance','items','$timeout','commonService',
     function ($scope, $http, $uibModalInstance,items,$timeout,commonService) {
     //var $ctrl = this;
-        /*
-         * 构件库数据展示
-         * */
-        commonService.componentList().then(function(data){
-            $scope.componentList = data.data;
-            $scope.componentDescr = $scope.componentList[0];
-            console.info($scope.componentList[0])
-            console.info($scope.componentList)
-        })
+    /*
+     * 构件库数据展示
+     * */
+    commonService.componentList().then(function(data){
+        $scope.componentList = data.data;
+        $scope.componentDescr = $scope.componentList[0];
+        console.info($scope.componentList[0])
+        console.info($scope.componentList)
+    })
 
     $scope.items = items;
     $scope.selected = {
@@ -34,4 +34,9 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
         })
 
     })
+
+    $scope.delect = function(){
+        
+    }
+
 }])

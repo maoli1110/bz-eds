@@ -120,4 +120,22 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //上传构件树结构
+    this.getComponent = function(){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "GET",
+            url: "http://192.168.3.103:9000/banzhucls/rs/component/getOrgInfo",
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+
+    }
 });

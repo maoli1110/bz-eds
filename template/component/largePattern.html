@@ -3,13 +3,6 @@
     <!--header 页面中的头部-->
     <!--<header ng-include="'template/core/header.html'" class="component-logo"></header>-->
     <div class="component-logo">
-        <!--<div class=" component-sys-close" >
-            <div class="close-tool">
-                <span class="glyphicon glyphicon-minus"></span>
-                <span class="glyphicon glyphicon-book"></span>
-                <span class="glyphicon glyphicon-remove"></span>
-            </div>
-        </div>-->
         <div class="component-computer-logo  clearfix">
             <div class="col-xs-3">
 			<span>
@@ -20,7 +13,7 @@
             </div>
             <div class="col-xs-9 component-search">
                 <form role="form">
-                    <input type="text" placeholder="输入构件名称" class="form-control col-xs-3" ng-model="searchText">
+                    <input type="text" placeholder="输入构件名称" class="form-control col-xs-3 searchtext" ng-model="searchText">
                     <div class="absol search-btn" ng-click="search(searchText)"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
                 </form>
             </div>
@@ -58,7 +51,7 @@
             <div class="component-list">
                 <div class="component-filter">
                     <div class="filter-status">
-                        <div class="filter-ele" ><div>全部</div></div><span ng-click="cancelFilter()">清空筛选</span>
+                        <div class="filter-ele" ><div>全部</div></div><span ng-show="isBlock" ng-click="cancelFilter()">清空筛选</span>
                     </div>
                     <!--筛选大类-->
                     <div class="filter-infoList" ng-if="isType">
@@ -67,15 +60,8 @@
                         <!--筛选内容-->
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
                             <div class="filter-ele" ng-click="isTypeFilter($event)">
-                                <span ng-repeat="item in typeList track by $index">{{item.type}}</span>
+                                <span ng-repeat="item in typeList track by $index" title="{{item.type}}">{{item.type}}</span>
                             </div>
-                            <!--<div class="filter-tool">
-                                <span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
-                            </div>
-                            <div class="btns-item">
-                                <button type="button" class="btn btn-danger btn-ok">确定</button>
-                                <button type="button" class="btn btn-default btn-cancel">取消</button>
-                            </div>-->
                         </div>
                     </div>
                     <!--筛选小类-->
@@ -85,15 +71,8 @@
                         <!--筛选内容-->
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
                             <div class="filter-ele" ng-click="isSTypeFilter($event)">
-                                <span ng-repeat="item in sTypeList track by $index">{{item.name}}</span>
+                                <span ng-repeat="item in sTypeList track by $index" title="{{item.name}}">{{item.name}}</span>
                             </div>
-                            <!--<div class="filter-tool">
-                                <span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
-                            </div>
-                            <div class="btns-item">
-                                <button type="button" class="btn btn-danger btn-ok">确定</button>
-                                <button type="button" class="btn btn-default btn-cancel">取消</button>
-                            </div>-->
                         </div>
                     </div>
                     <!--筛选风格-->
@@ -103,63 +82,15 @@
                         <!--筛选内容-->
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
                             <div class="filter-ele" ng-click="isStyleFilter($event)">
-                                <label class="check-box">
-                                    <input type="checkbox"  >
-                                    <div class="simulated-box"></div>
-
-                                </label>
-                                <span data-name="a">现代</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>中式</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>现代</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>中式</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>现代</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>中式</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>现代</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>中式</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>现代</span>
-                                <label class="check-box">
-                                    <input type="checkbox">
-                                    <div class="simulated-box"></div>
-                                </label>
-                                <span>中式</span>
-
-
+								<span ng-repeat="item in styleList track by $index" title="{{item}}">
+									<label class="check-box" style="margin-top: -5px">
+                                        <input type="checkbox">
+                                        <div class="simulated-box"></div>
+                                    </label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item}}</i></span>
                             </div>
 
                             <div class="filter-tool">
-                                <span class="checkMore" ng-click="checkMore()"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
+                                <span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
                             </div>
                             <div class="btns-item">
                                 <button type="button" class="btn btn-danger btn-ok">确定</button>
@@ -167,12 +98,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-brand" ng-show="isBrand" >
+                    <div class="filter-brand filter-infoList" ng-show="isBrand">
                         <!--筛选标题-->
                         <p><b>品牌 ：&nbsp;</b></p>
                         <!--筛选内容-->
                         <div class="filter-condition row" style="width:calc(100% - 56px )">
-                            <div class="filter-ele" ng-click="isBrandFilter($event)"><span>现代</span> <span>中式</span> <span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span><span>现代</span><span>中式</span><span>欧式</span></div>
+                            <div class="filter-ele" ng-click="isBrandFilter($event)">
+								<span ng-repeat="item in brandsList" title="{{item}}">
+									<label class="check-box" style="margin-top: -5px">
+                                        <input type="checkbox">
+                                        <div class="simulated-box"></div>
+                                    </label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item}}</i></span>
+                            </div>
                             <div class="filter-tool">
                                 <span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
                             </div>

@@ -234,7 +234,7 @@ input[type="checkbox"]:checked +:after{
 }
 /*---------------------------------filter-status--------------------------------------*/
 .component-base  .filter-ele{
-    width:calc(100% - 186px);
+    max-width:calc(100% - 186px);
 }
 /*选上去的筛选条件*/
 .component-base .filter-status{

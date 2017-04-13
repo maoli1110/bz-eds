@@ -4,6 +4,9 @@
  */
 angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
     function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
+        /*$http.get('192.168.3.103:9000/banzhucls/rs/component/getOrgInfo').then(function(data){
+            console.log(data);
+        })*/
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -31,6 +34,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         //风格、品牌数据
         $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
         $scope.brandsList = ["卡地亚","夏奈尔","唐纳·卡兰","范思哲","迪奥","古驰","路易·威登","乔治·阿玛尼","PRADA","GUESS","蒂芬尼","ENZO","宝诗龙","Swarovski","Georgjensen"];
+
+        //清空input框的值
+        $('.searchtext').click(function(){
+            $(this).val('');
+        })
 
         /*
         * 侧边栏构建来源
@@ -70,10 +78,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $(document).ready(function(){
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
             //菜单选项
-            /*$('.main-siderbar ul li .node_name').click(function(){
-                if($(this).text() != '' && $(this).text() != undefined) {
-                    var menusText = $(this).text();//选中的当前项的内容
-                }*/
             var menusText;
             $('.main-siderbar ul:not(.line) .node_name').click(function(){
                 console.log(this);
@@ -132,6 +136,23 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.setPage(getDumpVal());
         };
         /*
+        * 点击构建来源移除除搜索外的条件
+        * */
+        $scope.source = function(){
+            $('.ltype').prev().remove();
+            $('.ltype').remove();
+            $('.stype').prev().remove();
+            $('.stype').remove();
+            $('.selectType').prev().remove();
+            $('.selectType').remove();
+            console.log($('.addSearch').text());
+            if($('.addSearch').text() == ''){
+                $scope.isBlock = false;
+            } else {
+                $scope.isBlock = true;
+            }
+        }
+        /*
         * 条件标签 样式
         * params obj event
         *
@@ -147,8 +168,16 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                    $(this).parent().siblings().children('span').text(text);
                    sType(text);
                    if($(this).parent().parent().hasClass('ltype')){
+                       $('.stype').prev().remove();
                        $('.stype').remove();
+                       $('.selectType').prev().remove();
+                       $('.selectType').remove();
                        $scope.isSType = true;
+                       $scope.isStyle = true
+                   }else if($(this).parent().parent().hasClass('stype')){
+                       $('.selectType').prev().remove();
+                       $('.selectType').remove();
+                       $scope.isStyle = true
                    }
                })
             });
@@ -164,7 +193,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * 搜索关键字生成条件标签
         * */
        $scope.search = function(searchText) {
-           setBlank(searchText);
+           //setBlank(searchText);
+           var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter addSearch"><div class="filter-trigger filter-closeStatus"><span>' + searchText + '</span><b class="icon-close"></b></div>';
+           var template=angular.element(html);
+           var pagination=$compile(template)($scope);
+           angular.element($('.filter-status .filter-ele').append(pagination));
            closeStatus();
            isShow();
        }
@@ -184,7 +217,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
          * params function
          * */
         function  setBlank(textFilter){
-            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>';
+            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>';
             var template=angular.element(html);
             var pagination=$compile(template)($scope);
             angular.element($('.filter-status .filter-ele').append(pagination));
@@ -196,10 +229,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $('.filter-closeStatus').click(function(){
                 $(this).parent().prev().remove();
                 $(this).parent().remove();
-                console.log($('.type-filter'));
                 isShow();
             })
-            console.log($('.type-filter'));
             status = true;
         }
 
@@ -207,7 +238,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isBrandFilter = function(event){
             if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isBrand = false;
             }
             isShow();
@@ -218,7 +249,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isStyleFilter = function(event){
             if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isStyle = false;
             }
             isShow();
@@ -269,10 +300,11 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
 
         //清空筛选显隐
         function isShow() {
-            if($('.type-filter')){
-                $scope.isBlock = true;
-            } else {
+            console.log($('.type-filter').length);
+            if($('.type-filter').length == 0){
                 $scope.isBlock = false;
+            } else {
+                $scope.isBlock = true;
             }
         }
 
@@ -324,12 +356,14 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     for(var i = 0; i < arr.length; i++){
                         setBlank(arr[i]);
                     }
+                    isShow();
+                    closeStatus();
                 })
+
                 if(showBtn==0){
                     $(this).parent().parent().parent().siblings().find('.btn-ok').hide();
                 }else{
                     $(this).parent().parent().parent().siblings().find('.btn-ok').show();
-
                 }
             });
             //筛选条件点击更多显示全部
@@ -350,6 +384,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $(this).parent().siblings().find('.check-box').hide();
                 $(this).parent().css({'display':'none'});
                 $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');
+                $(this).siblings('.btn-ok').hide();
                 $scope.isType = true;
                 $scope.isStyle = true;
                 $scope.isBrand = true;
@@ -434,4 +469,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.componentList = data.data;
             //console.info( $scope.componentList)
         })
+        commonService.getComponent().then(function(){
+            debugger
+            console.log('33333')
+        });
+
     }]);

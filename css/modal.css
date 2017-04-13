@@ -2,7 +2,7 @@
     padding:0;margin:0;
 }
 .component-modal .modal-dialog .modal-content{
-    width:600px;height:470px;
+    width:600px;
     margin-left: 15%;
     margin-top:100px;
 }
@@ -43,7 +43,7 @@
 }
 /*modal-modify(修饰线)*/
 .component-modal .modal-dialog .modal-body .modal-right .modal-modify{
-    margin:20px 0;
+    margin:15px 0;
 }
 .modify-text{
     font-size:14px;

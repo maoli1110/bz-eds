@@ -66,9 +66,7 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         /*获取上传构件左侧树结构*/
         //var zNodes = BzCloudComp.GetUpLoadDetail();
         commonService.treeList().then(function(data){
-            console.log(data.data);
             zNodes = data.data;
-            console.log(zNodes);
         })
 
         $(document).ready(function(){

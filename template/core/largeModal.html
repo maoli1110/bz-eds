@@ -1,8 +1,8 @@
 <div>
-    <div class="modal-header">
+    <div class="modal-header" style="border-bottom: none">
         <p class="modal-title modal-close" ng-click="cancel()" id="modal-title"></p>
     </div>
-    <div class="modal-body" id="modal-body" >
+    <div class="modal-body" id="modal-body" style="height: 500px;">
         <ul class="clearfix modal-left" >
             <li>
                 <div class="preview-model">
@@ -33,7 +33,10 @@
             <div class="modal-modify">
                 <p>-------------<span class="modify-text">审核意见</span>---------------</p>
             </div>
-            <div class="text" style="border: 1px solid black;width: 99%;height: 35%;background-color: #eeeeee;padding: 5px;">暂无</div>
+            <div class="text" style="border: 1px solid #ccc;border-radius:6px;width: 99%;height: 110px;background-color: #eeeeee;padding: 7px;">暂无</div>
         </div>
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        <button class="btn btn-primary" type="button" ng-click="delect()">删除</button>
     </div>
 </div>

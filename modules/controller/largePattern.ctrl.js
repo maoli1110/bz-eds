@@ -2,8 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibModal','commonService','$timeout',
-    function ($scope, $http,$uibModal,commonService,$timeout) {
+angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
+    function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -19,11 +19,18 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isType = true;
         $scope.isStyle = true;
         $scope.isBrand = true;
+        $scope.isSType = false;
+        $scope.isBlock = false;
 
         //大类、小类数据获取
         commonService.typeList().then(function(data){
             var typeList = data.data;
             $scope.typeList = typeList;
+        })
+
+        //清空input框的值
+        $('.searchtext').click(function(){
+            $(this).val('');
         })
 
         //风格、品牌数据
@@ -64,7 +71,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         };
 
         /*
-         * typeFilter 样式
+         * 条件标签 样式
          * params obj event
          *
          * */
@@ -74,6 +81,23 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $(this).children().find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
                 $(this).not('.filter-closeStatus').find('.filter-trigger').css({'height':'33px','border-bottom':'0','background':'#fff'});
                 $(this).find('.switch-filter').show();
+                $('.switchFilter').click(function(){
+                    var text = $(this).text();
+                    $(this).parent().siblings().children('span').text(text);
+                    sType(text);
+                    if($(this).parent().parent().hasClass('ltype')){
+                        $('.stype').prev().remove();
+                        $('.stype').remove();
+                        $('.selectType').prev().remove();
+                        $('.selectType').remove();
+                        $scope.isSType = true;
+                        $scope.isStyle = true
+                    }else if($(this).parent().parent().hasClass('stype')){
+                        $('.selectType').prev().remove();
+                        $('.selectType').remove();
+                        $scope.isStyle = true
+                    }
+                })
             });
             obj.on('mouseleave',function(){
                 $(this).children().css({'color':'','border-color':''});
@@ -86,96 +110,115 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         /*
          * 搜索关键字生成条件标签
          * */
-        var oldText;
         $scope.search = function(searchText) {
-            if(searchText != oldText) {
-                setBlank(searchText);
-            } else {
-                return;
-            }
-            oldText = searchText;
+            //setBlank(searchText);
+            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter addSearch"><div class="filter-trigger filter-closeStatus"><span>' + searchText + '</span><b class="icon-close"></b></div>';
+            var template=angular.element(html);
+            var pagination=$compile(template)($scope);
+            angular.element($('.filter-status .filter-ele').append(pagination));
             closeStatus();
+            isShow();
         }
 
-        /*
-         * 筛选条件（有下拉功能）生成条件标签
-         * params function
-         * */
-        function setFilterBlank(textFilter){
-            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div>沙发</div><div>沙发</div><div>沙发</div><div>沙发</div></div></div>');
-        }
 
         /*
          * 筛选条件（无下拉功能）生成条件标签
          * params function
          * */
         function  setBlank(textFilter){
-            $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
+            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>';
+            var template=angular.element(html);
+            var pagination=$compile(template)($scope);
+            angular.element($('.filter-status .filter-ele').append(pagination));
         }
 
         /*
          * 关闭筛选条件
          * */
-        function closeStatus(){
+        function closeStatus(status){
             $('.filter-closeStatus').click(function(){
                 $(this).parent().prev().remove();
                 $(this).parent().remove();
-                $scope.isBrand = true;
+                isShow();
             })
+            status = true;
         }
 
-
-        /*
-         * 清空筛选条件
-         * */
         //筛选品牌
         $scope.isBrandFilter = function(event){
-            if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
+            if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
-                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isBrand = false;
             }
-            closeStatus();
+            isShow();
+            closeStatus($scope.isBrand);
         };
+
         //筛选风格
         $scope.isStyleFilter = function(event){
-            if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
+            if(event.target.nodeName=='I' || event.target.nodeName=='I') {
                 textFilter = $(event.target).text();
-                setBlank(textFilter);
+                $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isStyle = false;
             }
-            closeStatus();
+            isShow();
+            closeStatus($scope.isStyle);
         };
         //筛选大类
         $scope.isTypeFilter = function(event){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span'){
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
-                setFilterBlank(textFilter);
+                var typeList = $scope.typeList;
+                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter ltype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in typeList">{{item.type}}</div></div></div>'
+                var template=angular.element(html);
+                var pagination=$compile(template)($scope);
+                angular.element($('.filter-status .filter-ele').append(pagination));
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isType = false;
                 //显示小类
-                commonService.typeList().then(function(data){
-                    var typeList = data.data;
-                    angular.forEach(typeList, function(value, index){
-                        if(value.type == textFilter) {
-                            $scope.sTypeList = value.list;
-                            console.log($scope.sTypeList);
-                        }
-                    })
-                });
+                sType(textFilter);
                 $scope.isSType = true;
             }
+            isShow();
         };
+
+        function sType(textFilter){
+            commonService.typeList().then(function(data){
+                var typeList = data.data;
+                angular.forEach(typeList, function(value, index){
+                    if(value.type == textFilter) {
+                        $scope.sTypeList = value.list;
+                    }
+                })
+            });
+        }
         //筛选小类
         $scope.isSTypeFilter = function(even){
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
-                setFilterBlank(textFilter);
+                var sTypeList = $scope.sTypeList;
+                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter stype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in sTypeList">{{item.name}}</div></div></div>'
+                var template=angular.element(html);
+                var pagination=$compile(template)($scope);
+                angular.element($('.filter-status .filter-ele').append(pagination));
                 setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isSType = false;
             }
+            isShow();
         }
-        //取消筛选
+
+        //清空筛选显隐
+        function isShow() {
+            console.log($('.type-filter').length);
+            if($('.type-filter').length == 0){
+                $scope.isBlock = false;
+            } else {
+                $scope.isBlock = true;
+            }
+        }
+
+        //清空筛选
         $scope.cancelFilter = function(){
             if($('.filter-trigger').length){
                 $scope.isBrand = true;
@@ -184,14 +227,17 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             }
             $('.type-filter').remove();
             $('.filter-status .filter-ele>b').remove();
+            $scope.isBlock = false;
+            $scope.isSType = false;
         };
+
         //多选
         //监听是否 菜单选项repeat 完成
-        $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-            //菜单点击事件
-            $('.largePattern .component-info ul li .preview-small span').hover(function(){
+        //$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        $timeout(function(){
+            $('.component-info ul li .preview-small span').hover(function(){
                 var previewSrc = $(this).find('img').attr('src');
-                $(this).parent().siblings().find('img').attr('src',previewSrc)
+                $(this).parent().siblings().find('img').attr('src',previewSrc);
             });
             //菜单选项
             $('.main-siderbar ul li').click(function(){
@@ -201,6 +247,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $(this).css({'color':'#4990e2'});//选中样式
 
             });
+
             $('.filter-infoList ').css({'height':'50px','overflow':'hidden'});
             $('.filter-infoList .filter-tool').map(function(i,val){
                 $('.checkMore').click(function(){
@@ -213,16 +260,28 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             $('.filter-infoList .check-box input').click(function(event){
                 showBtn=0;
                 var i=0;
+                var arr = [];
                 $('.filter-infoList .check-box').map(function(i,val){
+                    //console.log($(val).find('input[type="checkbox"]').prop('checked'));
                     if($(val).find('input[type="checkbox"]').prop('checked')==true){
+                        textFilter = ($(this).parent().children('i').text());
+                        arr.push(textFilter);
                         i=1;
                         showBtn= i;
                     }
                 });
+                $('.btn-ok').off().click(function(){
+                    for(var i = 0; i < arr.length; i++){
+                        setBlank(arr[i]);
+                    }
+                    isShow();
+                    closeStatus();
+                })
                 if(showBtn==0){
-                    $(this).parent().parent().siblings().find('.btn-ok').hide();
+                    $(this).parent().parent().parent().siblings().find('.btn-ok').hide();
                 }else{
-                    $(this).parent().parent().siblings().find('.btn-ok').show();
+                    $(this).parent().parent().parent().siblings().find('.btn-ok').show();
+
                 }
             });
             //筛选条件点击更多显示全部
@@ -243,15 +302,13 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
                 $(this).parent().siblings().find('.check-box').hide();
                 $(this).parent().css({'display':'none'});
                 $(this).parent().siblings().find('input[type="checkbox"]').prop('checked','');
+                $(this).siblings('.btn-ok').hide();
                 $scope.isType = true;
                 $scope.isStyle = true;
                 $scope.isBrand = true;
             });
-        });
-        /*
-         *筛选状态
-         * */
-        $scope.typeFilter  = ['单人沙发','多人沙发','沙发','沙发沙发'];
+        },0.1)
+
         /*
          * .filter-down更多选项
          * */
