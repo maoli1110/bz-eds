@@ -53,7 +53,7 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isTypeFilter($event)">
-								<span ng-repeat="item in typeList track by $index" title="{{item.type}}">{{item.type}}</span>
+								<span ng-repeat="item in typeList track by $index" title="{{item.compClassName}}">{{item.compClassName}}</span>
 							</div>
 						</div>
 					</div>
@@ -64,7 +64,7 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isSTypeFilter($event)">
-								<span ng-repeat="item in sTypeList track by $index" title="{{item.name}}">{{item.name}}</span>
+								<span ng-repeat="item in sTypeList track by $index" title="{{item.subClassName}}">{{item.subClassName}}</span>
 							</div>
 						</div>
 					</div>
@@ -75,11 +75,11 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isStyleFilter($event)">
-								<span ng-repeat="item in styleList track by $index" title="{{item}}">
+								<span ng-repeat="item in styleList track by $index" title="{{item.styleName}}">
 									<label class="check-box" style="margin-top: -5px">
 										<input type="checkbox">
 										<div class="simulated-box"></div>
-									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item}}</i></span>
+									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item.styleName}}</i></span>
 							</div>
 
 							<div class="filter-tool">
@@ -97,11 +97,11 @@
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
 							<div class="filter-ele" ng-click="isBrandFilter($event)">
-								<span ng-repeat="item in brandsList" title="{{item}}">
+								<span ng-repeat="item in brandsList" title="{{item.brandName}}">
 									<label class="check-box" style="margin-top: -5px">
 										<input type="checkbox">
 										<div class="simulated-box"></div>
-									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item}}</i></span>
+									</label><i style="display: inline-block;width: 60px; height: 25px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:3px;">{{item.brandName}}</i></span>
 							</div>
 							<div class="filter-tool">
 								<span class="checkMore"><b>+</b>多选</span><span class="filter-more">更多 <i class="glyphicon glyphicon-menu-up"></i></span>
