@@ -39,6 +39,8 @@
 						<th>品牌</th>
 						<th>型号</th>
 						<th>图形</th>
+						<th>作者</th>
+						<th>来源企业</th>
 						<th>审核状态</th>
 						<th>审核意见</th>
 						<th>上传时间</th>
@@ -48,26 +50,25 @@
 				</table>
 			</div>
 			<!--component-filter（构件筛选）-->
-			<!--<div class="component-list">-->
 				<div class="component-list table-responsive main"style="position: relative;">
-					<!--<div class="tabBody">-->
-						<table class="table " style="border-top: none;">
-							<tbody>
-							<tr ng-repeat="item in auditList">
-								<td>{{item.componentName}}</td>
-								<td>{{item.largeClass}}</td>
-								<td>{{item.smallClass}}</td>
-								<td>{{item.brand}}</td>
-								<td>{{item.model}}</td>
-								<td><img style="width: 66px;height: 66px;" ng-src="{{item.picture}}"></td>
-								<td>{{item.status}}</td>
-								<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
-								<td>{{item.updateTime}}</td>
-								<td></td>
-							</tr>
-							</tbody>
-						</table>
-					<!--</div>-->
+					<table class="table " style="border-top: none;">
+						<tbody>
+						<tr ng-repeat="item in auditList">
+							<td>{{item.componentName}}</td>
+							<td>{{item.largeClass}}</td>
+							<td>{{item.smallClass}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.model}}</td>
+							<td><img style="width: 66px;height: 66px;" ng-src="{{item.picture}}"></td>
+							<td>{{item.author}}</td>
+							<td>班筑构件</td>
+							<td>{{item.status}}</td>
+							<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
+							<td>{{item.updateTime}}</td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
 
 				</div>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -78,7 +79,7 @@
 								<h4 class="modal-title" id="myModalLabel">审核意见</h4>
 							</div>
 							<div class="modal-body">
-								<div style="width: 100%;height: 200px;background-color: #eeeeee">暂无</div>
+								<div style="width: 100%;height: 200px;background-color: #eeeeee;padding: 12px">暂无</div>
 							</div>
 						</div>
 					</div>

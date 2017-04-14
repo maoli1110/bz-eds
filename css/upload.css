@@ -31,7 +31,7 @@
     vertical-align: middle;
 }
 .upload .table>thead>tr>th,.upload .table>tbody>tr>td{
-    width: 9%;
+    width: 7%;
     height: 50px;
     border-bottom: none;
 }
@@ -39,12 +39,12 @@
     height: 85px;
 }
 .upload .table>thead>tr>th:first-child,.upload .table>tbody>tr>td:first-child{
-    width:11%;
+    width:9%;
 }
 .upload .table>thead>tr>th:last-child, .upload .table>tbody>tr>td:last-child{
     width:5% !important;
 }
-.upload .table tbody tr td:nth-last-child(2):hover, .upload .table tbody tr td:nth-last-child(3):hover{
+.upload .table tbody tr td:nth-last-child(3):hover{
     cursor: pointer;
 }
 .upload .table{

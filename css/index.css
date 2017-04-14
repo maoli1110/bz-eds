@@ -340,6 +340,7 @@ input[type="checkbox"]:checked +:after{
     font-size:14px;
     float: left;
     margin: 7px 6px 0;
+    cursor: pointer;
 }
 .component-base .componet-base-main section .component-filter .filter-ele span:hover{
     color:#00b3ee;border-color:#4990e2;
