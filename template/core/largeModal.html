@@ -37,6 +37,20 @@
         </div>
     </div>
     <div class="modal-footer" style="border-top: none;">
-        <button class="btn btn-primary" type="button" ng-click="delect()">删除</button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-show="item.status == "待审核""><!--{{item.status}}-->删除</button>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body"><h3>您确定要删除该构件吗？</h3></div>
+            <div class="modal-footer" style="border-top: none">
+                <button type="button" class="btn btn-primary" ng-click="delete()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>

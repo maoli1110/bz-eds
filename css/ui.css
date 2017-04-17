@@ -29,14 +29,14 @@
 }
 
 ::selection {
-  background: #9bdd62;
+  background: #4490e2;
   color: rgba(255, 255, 255, 0.847656);
 }
 
 ::-moz-selection {
   color: #fff;
   color: rgba(255, 255, 255, 0.847656);
-  background: #9bdd62;
+  background: #4490e2;
 }
 
 .content p{

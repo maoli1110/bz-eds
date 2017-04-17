@@ -126,8 +126,10 @@
 								<p class="preview-descText" >{{itemList.previewText}}</p>
 							</div>
 							<div class="preview-tool">
-								<a ng-click="componetModal()"><span class="icon-describe"></span>更多详情</a>
-								<a > <span class="icon-describe"></span>应用</a>
+								<a ng-click="componetModal()" style="cursor: pointer"><span class="icon-describe"></span>更多详情</a>
+								<a> <span class="icon-describe" style="cursor: pointer" ng-show="status == 2"></span>下载</a>
+								<a> <span class="icon-describe" style="cursor: pointer" ng-show="status == 0"></span>应用</a>
+								<a> <span class="icon-describe" style="cursor: pointer" ng-show="status == 1"></span>更新</a>
 							</div>
 						</li>
 					</ul>

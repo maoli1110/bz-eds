@@ -22,21 +22,19 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $scope.isSType = false;
         $scope.isBlock = false;
 
-        //大类、小类数据获取
-        commonService.typeList().then(function(data){
-            var typeList = data.data;
-            $scope.typeList = typeList;
+        //大类、风格、品牌数据获取
+        commonService.getTypeStyle().then(function(data){
+            var list = data.data;
+            $scope.typeList = list.compClassInfos;
+            $scope.styleList = list.styles;
+            $scope.brandsList = list.brands;
+            //console.log(list);
         })
 
         //清空input框的值
         $('.searchtext').click(function(){
             $(this).val('');
         })
-
-        //风格、品牌数据
-        $scope.styleList = ["中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式","中式","欧式","地中海","罗马式"];
-        $scope.brandsList = ["卡地亚","夏奈尔","唐纳·卡兰","范思哲","迪奥","古驰","路易·威登","乔治·阿玛尼","PRADA","GUESS","蒂芬尼","ENZO","宝诗龙","Swarovski","Georgjensen"];
-
 
         /*
          * 分页器
@@ -170,25 +168,25 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span'){
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
                 var typeList = $scope.typeList;
-                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter ltype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in typeList">{{item.type}}</div></div></div>'
+                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter ltype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in typeList">{{item.compClassName}}</div></div></div>'
                 var template=angular.element(html);
                 var pagination=$compile(template)($scope);
                 angular.element($('.filter-status .filter-ele').append(pagination));
-                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
-                $scope.isType = false;
                 //显示小类
                 sType(textFilter);
+                $scope.isType = false;
                 $scope.isSType = true;
+                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
             }
             isShow();
         };
 
         function sType(textFilter){
-            commonService.typeList().then(function(data){
-                var typeList = data.data;
-                angular.forEach(typeList, function(value, index){
-                    if(value.type == textFilter) {
-                        $scope.sTypeList = value.list;
+            commonService.getTypeStyle().then(function(data){
+                var list = data.data.compClassInfos;
+                angular.forEach(list, function(value, index){
+                    if(value.compClassName == textFilter) {
+                        $scope.sTypeList = value.subClassInfo;
                     }
                 })
             });
@@ -198,12 +196,12 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             if(event.target.nodeName=='SPAN' || event.target.nodeName=='span') {
                 textFilter = $(event.target).not('input[type="checkbox"]').text();
                 var sTypeList = $scope.sTypeList;
-                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter stype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in sTypeList">{{item.name}}</div></div></div>'
+                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter stype"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in sTypeList">{{item.subClassName}}</div></div></div>'
                 var template=angular.element(html);
                 var pagination=$compile(template)($scope);
                 angular.element($('.filter-status .filter-ele').append(pagination));
-                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
                 $scope.isSType = false;
+                setFilterStyle($('.component-base .filter-status .filter-ele .type-filter'));//筛选条件切换
             }
             isShow();
         }
@@ -358,7 +356,7 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
          * */
         $scope.uploadCom = function() {
             var modalInstance = $uibModal.open({
-                windowClass: 'component-modal',
+                windowClass: 'uploadCom-modal',
                 backdrop: 'static',
                 animation: false,
                 size: 'lg',

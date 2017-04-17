@@ -35,8 +35,13 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
 
     })
 
-    $scope.delect = function(){
-        
+    $scope.delete = function(){
+        $('#myModal').modal('hide');
+        /*commonService.deleteCom(componentId).then(function(data){
+
+        })*/
     }
+
+
 
 }])

@@ -4,11 +4,7 @@
  */
 angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
     function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
-        /*
-         * 左侧菜单
-         * param:一个带有数据的数组
-         * return 一个字符串拼接的变量
-         * */
+
         var  siderbarArr = [];//菜单项
         var  filterCount = 1;//筛选开关
         var  dumpVal;//分页器跳转框的值
@@ -22,13 +18,13 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isSType = false;
         $scope.isBlock = false;
 
-        //大类、小类、风格、品牌数据获取
+        //大类、风格、品牌数据获取
         commonService.getTypeStyle().then(function(data){
             var list = data.data;
             $scope.typeList = list.compClassInfos;
             $scope.styleList = list.styles;
             $scope.brandsList = list.brands;
-            //console.log(list);
+            console.log(list);
         })
 
         //清空input框的值
@@ -456,5 +452,19 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.componentList = data.data;
             //console.info( $scope.componentList)
         })
+
+        //应用、下载、更新按钮转换
+        function getStatus(strCompGUID, strCompMd5, strCompID){
+            var status;
+            $scope.status = status;
+            /*BzCloudComp.GetCompType = function()
+            {
+                 // strCompGUID 构件的GUID
+                 // strCompMd5 构件的MD5值
+                 // strCompID 构件的企业ID
+                native function GetCompType(strCompGUID, strCompMd5, strCompID);
+                return GetCompType(strCompGUID, strCompMd5, strCompID);
+            };*/
+        }
 
     }]);

@@ -254,6 +254,7 @@ input[type="checkbox"]:checked +:after{
     text-align: center;
     line-height: 30px;
     border: 1px solid #C9C9C9;
+    cursor: pointer;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 }
 .component-base .filter-status .filter-ele >div{
     display:inline-block;position:relative; height: 30px;width:86px;
@@ -271,6 +272,7 @@ input[type="checkbox"]:checked +:after{
     position: absolute;
     /*margin-top: 8px;*/
     z-index: 150;
+    cursor: pointer;
 }
 .component-base .filter-status .filter-ele .filter-trigger:not(.switch-filter) span{
     display: inline-block;

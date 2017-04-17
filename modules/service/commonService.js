@@ -88,6 +88,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //我的上传、审核假数据
     this.auditList = function(){
         var url="json/uploadList.json";
         var delay = $q.defer();
@@ -137,7 +138,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-    //
+    //获取类型和风格
     this.getTypeStyle = function(){
         // param = JSON.stringify(param);
         var delay = $q.defer();
@@ -154,4 +155,38 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //删除构件
+    this.deleteCom = function(){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.3.103:9000/banzhucls/rs/component/delete",
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+        //我的审核审核状态查询列表
+        /*this.auditList() = function(){
+            // param = JSON.stringify(param);
+            var delay = $q.defer();
+            $.ajax({
+                type: "POST",
+                url: "http://192.168.3.103:9000/banzhucls/rs/component/findReviewComponent",
+                contentType:'application/json;',
+                success: function(data){
+                    delay.resolve(data);
+                },
+                error:function(error){
+                    delay.reject(JSON.parse(error.responseText));
+                }
+            });
+            return delay.promise;
+        }*/
 });

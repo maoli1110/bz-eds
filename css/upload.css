@@ -25,21 +25,19 @@
     border-top: none;
 }
 .upload .table>thead>tr>th, .upload .table>tbody>tr>td{
-    padding: 0;
-    /*border-top: 1px solid #ddd;*/
-    text-align: center!important;
-    vertical-align: middle;
-}
-.upload .table>thead>tr>th,.upload .table>tbody>tr>td{
     width: 7%;
     height: 50px;
     border-bottom: none;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
 }
 .upload .table>tbody>tr>td{
     height: 85px;
+    font-size: 14px;
 }
 .upload .table>thead>tr>th:first-child,.upload .table>tbody>tr>td:first-child{
-    width:9%;
+    width:9%;padding-left: 5px;
 }
 .upload .table>thead>tr>th:last-child, .upload .table>tbody>tr>td:last-child{
     width:5% !important;
@@ -58,6 +56,29 @@
     width: 25px;
     height: 20px;
     background: url(../imgs/icon/icon-mainEle.png) no-repeat 0 -258px;
+}
+.upload .fun-sort{
+    width: 5px;
+    height: 12px;
+    display: inline-block;
+    background: url(../imgs/icon-sort.png) no-repeat 0 0;
+    cursor:pointer;
+}
+.upload .sort-right{
+    background-position-x: -10px;
+    margin-left:-2px;
+}
+.upload .fun-sort.sort-left:hover{
+    background-position-y: -12px;
+}
+.upload .fun-sort.sort-right:hover{
+    background-position-y: -24px;
+}
+.funSortLeftActive{
+    background-position-y: -12px!important;
+}
+.funSortRightActive{
+    background-position-y: -24px!important;
 }
 /*
     左侧菜单栏

@@ -60,34 +60,13 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService','$uib
             $('.component-list').animate({ scrollTop: 0 }, 500);
         });
 
-        /*
-        * 排序逻辑
-        * */
-        function toQfw(){
-            var str_n=n.toString();
-            var result="";
-            var re=/\d{3}$/;
-            while(re.test(str_n)){
-                result=RegExp.lastMatch+result;
-                if(str_n!=RegExp.lastMatch){
-                    result=","+result;
-                    str_n=RegExp.leftContext; //匹配成功，返回匹配内容左侧的字符信息
-                }
-                else{
-                    num="";
-                }
-            }
-            if(str_n){
-                return(str_n+result);
-            }
-        }
 
         /*
          * 上传构件
          * */
         $scope.uploadCom = function() {
             var modalInstance = $uibModal.open({
-                windowClass: 'component-modal',
+                windowClass: 'uploadCom-modal',
                 backdrop: 'static',
                 animation: false,
                 size: 'lg',
@@ -107,5 +86,25 @@ angular.module('core').controller('uploadCtrl', ['$scope', 'commonService','$uib
         }
 
         /*按上传时间排序*/
+        $scope.asByTimes = function($event){
+            var list = $scope.auditList;
+            console.log(list);
+            var unit = _.sortBy(list, function(item) {
+                return item.updateTime;
+            });
+            $scope.auditList = unit;
+            $($event.target).addClass("funSortLeftActive");
+            $($event.target).siblings().removeClass("funSortRightActive");
+        }
+        $scope.deByTimes = function($event){
+            var list = $scope.auditList;
+            var unit = _.sortBy(list, function(item) {
+                return -item.updateTime;
+            });
+            console.log(unit)
+            $scope.auditList = unit;
+            $($event.target).addClass("funSortRightActive");
+            $($event.target).siblings().removeClass("funSortLeftActive");
+        }
 
     }]);

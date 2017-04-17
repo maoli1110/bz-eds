@@ -63,6 +63,13 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
         });
     }
 
+    //左侧审核状态切换
+    /*scope.getComponent = function(status){
+        commonService.auditList(status).then(function(data){
+            $scope.auditList = data.data;
+        })
+    }*/
+
     //单个选择
     $scope.updateSelection = function($event,item){
         var checkbox = $event.target;
