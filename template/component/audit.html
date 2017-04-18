@@ -57,6 +57,15 @@
 							<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
 						</ul>
 					</li>
+					<li style="width: 205px">
+						<div class="companySource" ng-show="$state.includes('audit')">
+							来源企业：<select>
+							<option>不限</option>
+							<option>班筑软件</option>
+							<!--<option ng-repeat=""></option>-->
+						</select>
+						</div>
+					</li>
 				</ul>
 				<div class="count-overview ">共<b class="text-orange" >361</b>未审核</div>
 			</div>

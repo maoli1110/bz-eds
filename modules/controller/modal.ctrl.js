@@ -20,7 +20,9 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
     };
 
     $scope.ok = function () {
-        $uibModalInstance.close($scope.selected.item);
+        //$uibModalInstance.close($scope.selected.item);
+        $('.progressWrap').show();
+        prograss();
     };
 
     $scope.cancel = function () {
@@ -41,6 +43,29 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
 
         })*/
     }
+
+    //进度条函数
+    var value = 0;
+    var time = 100;
+    function prograss(){
+        function reset( ) {
+            value = 0
+            $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
+            //setTimeout(increment,5000);
+        }
+        function increment(){
+            value += 1;
+            $("#prog").css("width",value + "%").text(value + "%");
+            if(value == 100){
+                $('.progressWrap').hide();
+                reset();
+                return;
+            }
+            setTimeout(increment,time);
+        }
+        increment();
+    }
+
 
 
 

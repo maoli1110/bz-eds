@@ -184,17 +184,6 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
            closeStatus();
            isShow();
        }
-
-        /*
-        * 筛选条件（有下拉功能）生成条件标签
-        * params function
-        * */
-        /*function setFilterBlank(textFilter,typeList){
-            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter"><div class="filter-trigger "><span>'+textFilter+'</span> <b class="glyphicon glyphicon-menu-down"></b> </div><div class="switch-filter" ><div class="switchFilter" style="cursor: pointer" ng-repeat="item in typeList">{{item.type}}</div></div></div>'
-            var template=angular.element(html);
-            var pagination=$compile(template)($scope);
-            angular.element($('.filter-status .filter-ele').append(pagination));
-        }*/
         /*
          * 筛选条件（无下拉功能）生成条件标签
          * params function
@@ -452,19 +441,36 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $scope.componentList = data.data;
             //console.info( $scope.componentList)
         })
-
         //应用、下载、更新按钮转换
+        // strCompGUID 构件的GUID
+        // strCompMd5 构件的MD5值
+        // strCompID 构件的企业ID
         function getStatus(strCompGUID, strCompMd5, strCompID){
             var status;
             $scope.status = status;
-            /*BzCloudComp.GetCompType = function()
-            {
-                 // strCompGUID 构件的GUID
-                 // strCompMd5 构件的MD5值
-                 // strCompID 构件的企业ID
-                native function GetCompType(strCompGUID, strCompMd5, strCompID);
-                return GetCompType(strCompGUID, strCompMd5, strCompID);
-            };*/
+            BzCloudComp.GetCompType(strCompGUID, strCompMd5, strCompID);
+        }
+        // strCompGUID 构件的GUID
+        // strCompID 构件的企业ID
+        var value = 0;
+        var time = 100;
+        $scope.down = function(){
+            //BzCloudComp.DownloadComp(strCompGUID, strCompID);
+            $('.progressWrap').show();
+            prograss();
+        }
+        //进度条函数
+        function prograss(){
+            function increment(){
+                value += 1;
+                $("#prog").css("width",value + "%").text(value + "%");
+                if(value == 100){
+                    $('.progressWrap').hide();
+                    return;
+                }
+                setTimeout(increment,time);
+            }
+            increment();
         }
 
     }]);

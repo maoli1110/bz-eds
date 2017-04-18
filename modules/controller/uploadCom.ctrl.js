@@ -10,7 +10,7 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         $scope.status = 0;
         $scope.statusSet = 0;
         function max(obj){
-            $(this)
+
         }
         $scope.max = function() {
             $scope.status = 1;
