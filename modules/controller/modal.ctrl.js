@@ -20,7 +20,7 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
     };
 
     $scope.ok = function () {
-        //$uibModalInstance.close($scope.selected.item);
+        $uibModalInstance.close($scope.selected.item);
         $('.progressWrap').show();
         prograss();
     };
@@ -65,8 +65,4 @@ angular.module('core').controller('modalCtrl', ['$scope', '$http', '$uibModalIns
         }
         increment();
     }
-
-
-
-
 }])

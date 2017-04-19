@@ -136,10 +136,24 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
     $scope.flag.auditStatus = false;
     $scope.editAudit = function() {
         $scope.flag.auditStatus = !$scope.flag.auditStatus;
-        if($scope.flag.auditStatus = 'true') {
-            $('.audit .edit>span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
-        }
+        //if($scope.flag.auditStatus = 'true') {
+            $('.audit .edi .glyphicon-menu-down').css({'transform':'rotate(180deg)'});
+        //} else {
+        //    $('.audit .edit>span').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+        //}
     }
+    $('.filter-tool ').map(function(){
+        $(this).find('.filter-more').unbind('click').click(function(){
+            $(this).toggleClass('showMore');
+            if($(this).hasClass('showMore')){
+                $(this).parent().parent().parent().css({'height':'auto','overflow':''});
+                $(this).find('.glyphicon-menu-up').css({'transform':'rotate(0deg)'});
+            }else{
+                $(this).parent().parent().parent().css({'height':'50px','overflow':'hidden'});
+                $(this).find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'});
+            }
+        });
+    });
     $scope.tableStatus = function() {
         if($scope.listStatus = 'true') {
             $(this).find('.tdStatus').children('span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");

@@ -426,6 +426,9 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $scope.selected = selectedItem;
             }, function () {
                 //console.info('Modal dismissed at: ' + new Date());
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
             });
         }
         /*
@@ -461,16 +464,37 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         }
         //进度条函数
         function prograss(){
+            function reset( ) {
+                value = 0
+                $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
+                //setTimeout(increment,5000);
+            }
             function increment(){
                 value += 1;
                 $("#prog").css("width",value + "%").text(value + "%");
                 if(value == 100){
                     $('.progressWrap').hide();
+                    reset();
                     return;
                 }
                 setTimeout(increment,time);
             }
             increment();
         }
+        var prom = JSON.stringify({
+            epId: "-2",
+            orgId:282,
+            compClassName: "户型",
+            subClassName: "套装门",
+            styleName: "欧式",
+            brandName: "西贝",
+            componentDisplayName: "沙发",
+            currentPage: 1,
+            pageSize: "20"
+        })
+        console.log(prom);
+        commonService.about(prom).then(function(data){
+            console.info(data)
+        })
 
     }]);

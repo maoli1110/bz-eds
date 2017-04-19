@@ -172,21 +172,33 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-        //我的审核审核状态查询列表
-        /*this.auditList() = function(){
-            // param = JSON.stringify(param);
-            var delay = $q.defer();
-            $.ajax({
-                type: "POST",
-                url: "http://192.168.3.103:9000/banzhucls/rs/component/findReviewComponent",
-                contentType:'application/json;',
-                success: function(data){
-                    delay.resolve(data);
-                },
-                error:function(error){
-                    delay.reject(JSON.parse(error.responseText));
-                }
-            });
-            return delay.promise;
-        }*/
+    /*//我的审核审核状态查询列表
+    this.auditList() = function(){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.3.103:9000/banzhucls/rs/component/findReviewComponent",
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }*/
+    //查询
+    this.about = function(params){
+        //var param = JSON.stringify(params);
+        var delay = $q.defer();
+        var url = 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent';
+        $http.post(url,params,{'withCredentials':true}).then(function(data){
+            delay.resolve(data);
+        },function(error){
+            delay.reject(error);
+        });
+        return delay.promise;
+    }
 });

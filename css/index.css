@@ -584,6 +584,7 @@ input[type="checkbox"]:checked +:after{
     top: 0;
     background-color: rgba(0,0,0,0.5);
     display: none;
+    z-index: 100;
 }
 .progress{
     width: 500px;
