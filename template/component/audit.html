@@ -49,7 +49,7 @@
 					<li ng-click="allSelected()">全选</li>
 					<li ng-click="invertSelected()">反选</li>
 					<li><span class="icon-updown"></span>下载</li>
-					<li class="rela audit-status pop-signal">
+					<li class="rela audit-status pop-signal" ng-click="flag.auditStatus == !flag.auditStatus">
 						<!--<div class="pop-signal" ng-init="sum1 = 0" ng-click="sum1 = sum1 + 1" ng-model="sum1">{{sum1}}</div>-->
 						<div class="pop-signal edit" ng-click="editAudit()">审核<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
 						<ul ng-show="flag.auditStatus" class="pop-signal">
@@ -57,12 +57,12 @@
 							<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
 						</ul>
 					</li>
-					<li style="width: 205px">
-						<div class="companySource" ng-show="$state.includes('audit')">
+					<li style="width: 320px;margin-left: 15px">
+						<div class="companySource">
 							来源企业：<select>
-							<option>不限</option>
-							<option>班筑软件</option>
-							<!--<option ng-repeat=""></option>-->
+							<option ng-click="companySelect('不限')">不限</option>
+							<option ng-click="companySelect('班筑软件')">班筑软件</option>
+							<option ng-repeat="item in sourceList track by $index"  ng-click="companySelect(item.originEpName)">{{item.originEpName}}</option>
 						</select>
 						</div>
 					</li>
@@ -108,7 +108,7 @@
 								<td width="10%">{{item.model}}</td>
 								<td width="5%" style="min-width:70px;"><img ng-src="{{item.picture}}" alt=""></td>
 								<td width="10%">{{item.author}}</td>
-								<td width="10%" style="position: relative" ng-click="listStatus = !listStatus;">
+								<td width="10%" class="aduitStatus" style="position: relative" ng-click="listStatus = !listStatus;">
 									<div class="tdStatus">{{item.status}}<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
 									<ul class="pop-signal" ng-show="listStatus" style="width: 87%;font-size: 16px">
 										<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>

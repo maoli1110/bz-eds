@@ -99,28 +99,6 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-    //自定义大类小类数据获取
-    this.typeList = function(){
-        var url="json/type.json";
-        var delay = $q.defer();
-        $http.get(url).then(function(data){
-            delay.resolve(data);
-        },function(error){
-            delay.reject(error);
-        });
-        return delay.promise;
-    }
-    //上传构件树结构
-    this.treeList = function(){
-        var url="json/tree.json";
-        var delay = $q.defer();
-        $http.get(url).then(function(data){
-            delay.resolve(data);
-        },function(error){
-            delay.reject(error);
-        });
-        return delay.promise;
-    }
     //构件来源树结构
     this.getComponent = function(){
         // param = JSON.stringify(param);
@@ -190,14 +168,109 @@ angular.module('core').service('commonService', function ($http, $q) {
         return delay.promise;
     }*/
     //查询
-    this.about = function(params){
-        //var param = JSON.stringify(params);
+    this.about = function(param){
+        // param = JSON.stringify(param);
         var delay = $q.defer();
-        var url = 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent';
-        $http.post(url,params,{'withCredentials':true}).then(function(data){
-            delay.resolve(data);
-        },function(error){
-            delay.reject(error);
+        $.ajax({
+            type: "post",
+            data: JSON.stringify(param),
+            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //我的上传--搜索大图模式
+    this.largePattern = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "post",
+            data: JSON.stringify(param),
+            url: 'http://192.168.3.103:9000/banzhucls/rs/review/findReviewComponent',
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //我的上传--搜索列表模式
+    this.uplaodList = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "post",
+            data: JSON.stringify(param),
+            url: 'http://192.168.3.103:9000/banzhucls/rs/review/find',
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //审核状态更新
+    this.auditStatus = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "post",
+            data: JSON.stringify(param),
+            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //审核意见更新
+    this.idea = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "post",
+            data: JSON.stringify(param),
+            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //来源企业列表
+    this.getSourceList = function(){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "GET",
+            url: "http://192.168.3.103:9000/banzhucls/rs/component/findOriginEp",
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
         });
         return delay.promise;
     }

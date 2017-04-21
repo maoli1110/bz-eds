@@ -461,6 +461,7 @@ input[type="checkbox"]:checked +:after{
 }
 /*---------------------.preview-big--------------------------*/
 .component-base .component-info ul >li .preview-big{
+    display: inline-block;
     width:100%;
     height:270px;text-align:center;
 }
@@ -483,7 +484,7 @@ input[type="checkbox"]:checked +:after{
     margin:5px 0 0 10px;padding:0 0 10px;
 }
 
-.component-base .component-info ul >li .preview-small span{
+.component-base .component-info ul >li .preview-small a{
     width:50px;
     height:50px;
     display:inline-block;margin-right:10px;background:#fff;

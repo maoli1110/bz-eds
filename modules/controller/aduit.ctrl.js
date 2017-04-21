@@ -2,10 +2,25 @@
 /**
  * audit
  */
-angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http','$uibModal', function ($scope, commonService, $http, $uibModal) {
+angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$http','$uibModal','$timeout', function ($scope, commonService, $http, $uibModal,$timeout) {
 	$scope.sidebar = 'audit';
     $scope.flag = {}
     //获取auditList
+    commonService.auditList().then(function(data){
+        $scope.auditList = data.data.slice(0,20);
+    });
+
+    commonService.getSourceList().then(function(data){
+        console.log(data.data);
+        $scope.sourceList = data.data;
+    })
+
+    $scope.companySelect = function(ele){
+        commonService.about().then();
+    }
+
+
+    //修改审核状态
     $scope.getAuditList = function (source,currentPage) {
         if((source == "pass") || (source =="noPass")) {
             $scope.flag.auditStatus = false;
@@ -13,12 +28,29 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
 
         }
         commonService.auditList().then(function(data){
-            //console.log('success');
             $scope.auditList = data.data.slice(0,20);
-            //console.log($scope.auditList);
         });
     }
-    $scope.getAuditList(); 
+
+    $scope.flag.auditStatus = false;
+    $scope.editAudit = function() {
+        $scope.flag.auditStatus = !$scope.flag.auditStatus;
+        console.log($scope.flag.auditStatus);
+        $('.audit .edi .glyphicon-menu-down').css({'transform':'rotate(180deg)'});
+    }
+    $timeout(function(){
+        $('.aduitStatus').map(function(){
+            $(this).find('.tdStatus').click(function(){
+                console.log("aaaaaaaa")
+                $(this).toggleClass('showMore');
+                if($(this).hasClass('showMore')){
+                    $(this).find('.glyphicon-menu-down').css({'transform':'rotate(180deg)'});
+                }else{
+                    $(this).find('.glyphicon-menu-down').css({'transform':'rotate(360deg)'});
+                }
+            });
+        });
+    },0.1)
     //分页器
 	$scope.totalItems = 64;
 	$scope.currentPage = 1;
@@ -133,32 +165,8 @@ angular.module('core').controller('auditCtrl', ['$scope', 'commonService', '$htt
             //console.info('Modal dismissed at: ' + new Date());
         });
     };
-    $scope.flag.auditStatus = false;
-    $scope.editAudit = function() {
-        $scope.flag.auditStatus = !$scope.flag.auditStatus;
-        //if($scope.flag.auditStatus = 'true') {
-            $('.audit .edi .glyphicon-menu-down').css({'transform':'rotate(180deg)'});
-        //} else {
-        //    $('.audit .edit>span').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
-        //}
-    }
-    $('.filter-tool ').map(function(){
-        $(this).find('.filter-more').unbind('click').click(function(){
-            $(this).toggleClass('showMore');
-            if($(this).hasClass('showMore')){
-                $(this).parent().parent().parent().css({'height':'auto','overflow':''});
-                $(this).find('.glyphicon-menu-up').css({'transform':'rotate(0deg)'});
-            }else{
-                $(this).parent().parent().parent().css({'height':'50px','overflow':'hidden'});
-                $(this).find('.glyphicon-menu-up').css({'transform':'rotate(180deg)'});
-            }
-        });
-    });
-    $scope.tableStatus = function() {
-        if($scope.listStatus = 'true') {
-            $(this).find('.tdStatus').children('span').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
-        }
-    }
+
+
     /*
      * 返回顶部
      * */

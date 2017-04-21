@@ -71,118 +71,36 @@
         <p class="con">选择上传构件</p>
         <div class="modal-body" style="height: 350px;">
             <div class="clearfix modal-left zTreeDemoBackground left">
-                <ul class="ztree"></ul>
+                <ul id="treeLeft" class="ztree"></ul>
             </div>
-            <p class="public" style="position: relative;top: 8%;font-size: 14px;"><input type="checkbox">公开到公共构件库</p>
+            <p class="public" style="position: relative;top: 8%;font-size: 14px;"><input type="checkbox" checked="checked">公开到公共构件库</p>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">上传</button>
+            <button class="btn btn-primary" type="button" ng-click="upload()">上传</button>
         </div>
     </div>
-    <div class="uploadComSet">
+    <div class="uploadComSet" >
         <div class="modal-header">
-            <p class="modal-title modal-close" ng-click="cancel()"></p>
+            <p class="modal-title modal-close" ng-click="cancelSet()"></p>
             <span class="max" ng-click="maxSet()" ng-show="statusSet == 0"></span>
             <span class="revert" ng-click="revertSet()" ng-show="statusSet == 1"></span>
         </div>
         <p class="con">权限设置</p>
         <div class="modal-body" style="height: 350px;">
             <div class="clearfix modal-left zTreeDemoBackground left">
-                <ul class="ztree"></ul>
+                <ul id="treeRight" class="ztree"></ul>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+            <button class="btn btn-warning" type="button" ng-click="cancelSet()">取消</button>
         </div>
     </div>
 </div>
-<div id="container" style="display: none">
-    <!-- Progress bar -->
-    <div id="progress_bar" class="ui-progress-bar ui-container">
-        <div class="ui-progress" style="width: 79%;">
-            <span class="ui-label" style="display:none;">正在加载...<b class="value">79%</b></span>
+<div class="progressWrap" style="display: none;">
+    <div class="progress progress-striped active">
+        <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+            <span id="proglabel">正在启动，请稍后......</span>
         </div>
     </div>
-    <p>上传{{currentNum}}/{{total}}</p>
-    <!-- /Progress bar -->
-    <div class="content" id="main_content" style="display: none;">
-        <p>加载完成。</p>
-    </div>
 </div>
-<script>
-
-    function uploadProgress (currentNum,total){
-        //显示滚动条
-        if(currentNum == 1){
-            $('#container').show();
-        }
-        //动态改变当前个数
-        if(total === currentNum){
-            //隐藏滚动条
-            $('#container').hide();
-        }
-    }
-    (function( $ ){
-        $.fn.animateProgress = function(progress, callback) {
-            return this.each(function() {
-                $(this).animate({
-                    width: progress+'%'
-                }, {
-                    duration: 2000,
-
-                    // swing or linear
-                    easing: 'swing',
-
-                    // this gets called every step of the animation, and updates the label
-                    step: function( progress ){
-                        var labelEl = $('.ui-label', this),
-                                valueEl = $('.value', labelEl);
-
-                        if (Math.ceil(progress) < 20 && $('.ui-label', this).is(":visible")) {
-                            labelEl.hide();
-                        }else{
-                            if (labelEl.is(":hidden")) {
-                                labelEl.fadeIn();
-                            };
-                        }
-
-                        if (Math.ceil(progress) == 100) {
-                            labelEl.text('完成');
-                            setTimeout(function() {
-                                labelEl.fadeOut();
-                            }, 1000);
-                        }else{
-                            valueEl.text(Math.ceil(progress) + '%');
-                        }
-                    },
-                    complete: function(scope, i, elem) {
-                        if (callback) {
-                            callback.call(this, i, elem );
-                        };
-                    }
-                });
-            });
-        };
-    })( jQuery );
-
-    $(function() {
-        // Hide the label at start
-        $('#progress_bar .ui-progress .ui-label').hide();
-        // Set initial value
-        $('#progress_bar .ui-progress').css('width', '7%');
-
-        // Simulate some progress
-        $('#progress_bar .ui-progress').animateProgress(43, function() {
-            $(this).animateProgress(79, function() {
-                setTimeout(function() {
-                    $('#progress_bar .ui-progress').animateProgress(100, function() {
-                        $('#main_content').slideDown();
-                        $('#fork_me').fadeIn();
-                    });
-                }, 2000);
-            });
-        });
-
-    });
-</script>

@@ -6,6 +6,9 @@
 	height:calc(100vh - 312px);
 	overflow: auto;
 }
+.audit .audit-list tbody tr td:nth-last-child(2){
+	cursor: pointer;
+}
 .audit .count-overview {
 	position: absolute;
 	right: 30px;
