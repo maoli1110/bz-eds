@@ -1,6 +1,23 @@
 <div class="component-base upload"  side-style>
 	<!-- 页面头部-->
-	<header ng-include="'template/core/header.html'" class="component-logo"></header>
+	<!--<header ng-include="'template/core/header.html'" class="component-logo"></header>-->
+	<div class="component-logo">
+		<div class="component-computer-logo  clearfix">
+			<div class="col-xs-3">
+			<span>
+				<img src="imgs/upload.png" style="">
+				<h1 class="">我的上传</h1>
+			</span>
+
+			</div>
+			<div class="col-xs-9 component-search">
+				<form role="form">
+					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3 searchtext" ng-model="searchText">
+					<div class="absol search-btn" ng-click="search(searchText)"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div ui-sref="largePattern" class="modelBtn modelBtnl">
 		<span class="large-pattern"></span>
 	</div>
@@ -15,10 +32,10 @@
 			<!--侧边栏菜单-->
 			<ul>
 				<p>审核状态</p>
-				<li class="menusName">全部</li>
-				<li class="menusName">待审核</li>
-				<li class="menusName">已通过</li>
-				<li class="menusName">未通过</li>
+				<li class="menusName" ng-click="getComponent(null)">全部</li>
+				<li class="menusName" ng-click="getComponent(1)">待审核</li>
+				<li class="menusName" ng-click="getComponent(2)">已通过</li>
+				<li class="menusName" ng-click="getComponent(3)">未通过</li>
 			</ul>
 			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
@@ -33,17 +50,16 @@
 				<table class="table" style="margin-bottom: 0">
 					<thead>
 					<tr>
-						<th>构件名称</th>
+						<th style="width: 13%">构件名称</th>
 						<th>大类</th>
 						<th>小类</th>
 						<th>品牌</th>
 						<th>型号</th>
 						<th>图形</th>
 						<th>作者</th>
-						<th>来源企业</th>
 						<th>审核状态</th>
 						<th>审核意见</th>
-						<th>上传时间
+						<th style="cursor: pointer" ng-click="order()">上传时间
 							<span class="fun-sort sort-left" ng-click="asByTimes($event)"></span>
 							<span class="fun-sort sort-right" ng-click="deByTimes($event)"></span>
 						</th>
@@ -56,18 +72,17 @@
 				<div class="component-list table-responsive main"style="position: relative;">
 					<table class="table " style="border-top: none;">
 						<tbody>
-						<tr ng-repeat="item in auditList">
-							<td>{{item.componentName}}</td>
-							<td>{{item.largeClass}}</td>
-							<td>{{item.smallClass}}</td>
-							<td>{{item.brand}}</td>
+						<tr ng-repeat="item in uploadList track by $index">
+							<td>{{item.componentDisplayName}}</td>
+							<td>{{item.compClassName}}</td>
+							<td>{{item.subClassName}}</td>
+							<td>{{item.brandName}}</td>
 							<td>{{item.model}}</td>
-							<td><img style="width: 66px;height: 66px;" ng-src="{{item.picture}}"></td>
+							<td><img style="width: 40px" ng-repeat=" items in item.attachment  track by $index" ng-src="{{items.displayUrl}}?name={{items.fileName}}" ng-show="items.fileType == 0"/>
 							<td>{{item.author}}</td>
-							<td>班筑构件</td>
 							<td>{{item.status}}</td>
-							<td class="btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon-fun"></span></td>
-							<td>{{item.updateTime}}</td>
+							<td class="btn-lg" data-toggle="modal" data-target="#myModal" ng-click="getOpinion(item.opinion)"><span class="icon-fun"></span></td>
+							<td>{{item.uploadTime}}</td>
 							<td></td>
 						</tr>
 						</tbody>
@@ -82,7 +97,7 @@
 								<h4 class="modal-title" id="myModalLabel">审核意见</h4>
 							</div>
 							<div class="modal-body">
-								<div style="width: 100%;height: 200px;background-color: #eeeeee;padding: 12px">暂无</div>
+								<div style="width: 100%;height: 200px;background-color: #eeeeee;padding: 12px">{{opinion}}</div>
 							</div>
 						</div>
 					</div>
@@ -90,10 +105,10 @@
 			<!--</div>-->
 			<div class="pagination">
 				<div class="clearfix">
-					<ul uib-pagination total-items="totalItems" force-ellipses="true" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" items-per-page="20" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
 					<span>共 {{numPages}} 页 </span>
 					<div class="pagination-dump">
-						<p class="dump-inp inline"> , 跳转到   <input type="text" class="form-control inline"> </p>
+						<p class="dump-inp inline"> ,  跳转到   <input type="text" class="form-control inline"> </p>
 						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
 					</div>
 				</div>

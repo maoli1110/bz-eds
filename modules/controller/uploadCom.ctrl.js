@@ -32,9 +32,6 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.cancelSet = function(){
-            $('.uploadComSet').hide();
-        }
 
         /*
         * 左侧树结构
@@ -59,34 +56,71 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
         /*获取上传构件左侧树结构*/
         var treeObj;
         var nodes;
-        var zNodes = BzCloudComp.GetUpLoadDetail();
-        alert(zNodes);
+        zNodes = BzCloudComp.GetUpLoadDetail();
+        zNodes = JSON.parse(zNodes);
+        status(zNodes);
+        function status(param) {
+            if(null != param)
+            {
+                switch (param.status) {
+                    case "1":
+                        param.name = "(新增)" + param.name;
+                        break;
+                    case "2":
+                    case "3":
+                        param.name = "(更新)" + param.name;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (null == param || null == param.children
+                || "" == param.children) {
+                return;
+            }
+
+            for (var i=0; i < param.children.length;i++) {
+                status(param.children[i]);
+            }
+        }
         $(document).ready(function(){
             $.fn.zTree.init($(".uploadCom .ztree"), setting, zNodes);
             treeObj = $.fn.zTree.getZTreeObj("treeLeft");
+            treeObj.expandAll(true);
         });
         $scope.upload = function(){
             var check;
-            if($('.uploadCom .public>input').attr("checked")){
+            if($('.uploadCom .public>input').prop('checked') == true){
                 check = 0;
             }else{
                 check = 1;
             }
             nodes = treeObj.getChangeCheckedNodes();
+            var selectNodes = [];
             for(var i = 0;i < nodes.length;i++){
-                delete nodes[i].name;
+                var obj = {
+                    identify: nodes[i].identify,
+                    type: nodes[i].type,
+                    status: nodes[i].status
+                }
+                selectNodes.push(obj);
                 //判断上传构件中是否存在新增构件
+                if(nodes[i].status == '' || nodes[i].status == undefined){
+                    alert("请选择构件！")
+                }
                 if(nodes[i].status == 1){
                     //如果是，弹出权限设置,选择后上传
-                    $('uploadComSet').show();
+                    $('.uploadComSet').show();
+                    $('.uploadCom').hide();
                 } else {
                     //如果否，直接上传
-                    BzCloudComp.UpLoadDetail(check,nodes);
+                    BzCloudComp.UpLoadDetail(check,selectNodes);
+                    $('.uploadCom').hide();
+                    $('.progressWrap').show();
                 }
             }
         }
-
-
 
         /*
         * 获取右侧树结构
@@ -118,20 +152,27 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
             zNode = data.data;
             $.fn.zTree.init($(".uploadComSet .ztree"), rSetting, zNode);
             rTreeObj = $.fn.zTree.getZTreeObj("treeRight");
-        })
+            rTreeObj.expandAll(true);
+        });
 
 
         //权限设置
         $scope.ok = function () {
             var check;
-            if($('.uploadCom .public>input').attr("checked")){
+            if($('.uploadCom .public>input').prop('checked') == true){
                 check = 0;
             }else{
                 check = 1;
             }
-            nodes = treeObj.getChangeCheckedNodes();
-            for(var i = 0;i < nodes.length;i++) {
-                delete nodes[i].name;
+            var nodes = treeObj.getChangeCheckedNodes();
+            var selectNodes = [];
+            for(var i = 0;i < nodes.length;i++){
+                var obj = {
+                    identify: nodes[i].identify,
+                    type: nodes[i].type,
+                    status: nodes[i].status
+                }
+                selectNodes.push(obj);
             }
             var strJson=[];
             node = rTreeObj.getChangeCheckedNodes();
@@ -139,39 +180,29 @@ angular.module('core').controller('uploadComCtrl', ['$scope', '$http', '$uibModa
                 strJson.push(node[i].orgId.toString());
             }
             strJson =  strJson.join(",");
-            BzCloudComp.UpLoadDetail(check,nodes, strJson);
+            $('.uploadComSet').hide();
+            $('.progressWrap').show();
+            BzCloudComp.UpLoadDetail(check, JSON.stringify(selectNodes), strJson);
         };
 
-        function uploadProgress (currentNum,total){
-            //显示滚动条
-            if(currentNum == 1){
-                $('.progressWrap').show();
-                prograss();
-            }
-            //动态改变当前个数
-            if(total === currentNum){
-                //隐藏滚动条
-                $('.progressWrap').hide();
+        $scope.close = function(){
+            var pro = $(".progressWrap #prog").width();
+            if(pro != "100%"){
+                $('.progressWrap .proModal').show();
+            }else{
+                $uibModalInstance.dismiss('cancel');
             }
         }
 
-        //进度条函数
-        var time = 100;
-        function prograss(){
-            function reset() {
-                var value = 0;
-                $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
-            }
-            function increment(){
-                value += 1;
-                $("#prog").css("width",value + "%").text(value + "%");
-                if(value == 100){
-                    $('.progressWrap').hide();
-                    reset();
-                    return;
-                }
-                setTimeout(increment,time);
-            }
-            increment();
+        $scope.btnCancel = function(){
+            $('.progressWrap .proModal').hide();
         }
+
+        $scope.btnOk = function(){
+            $uibModalInstance.dismiss('cancel');
+            BzCloudComp.CancelUpLoad();
+        }
+
+        //心跳
+        commonService.heartBeat();
     }])

@@ -37,7 +37,9 @@
     font-size: 14px;
 }
 .upload .table>thead>tr>th:first-child,.upload .table>tbody>tr>td:first-child{
-    width:9%;padding-left: 5px;
+    width:4%;padding-left: 5px;overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .upload .table>thead>tr>th:last-child, .upload .table>tbody>tr>td:last-child{
     width:5% !important;

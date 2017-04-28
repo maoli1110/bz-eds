@@ -37,3 +37,12 @@ angular.module('core').directive('sideStyle',function($timeout){
         }
     }
 });
+angular.module('core').directive('repeatFinish',function($timeout){
+    return {
+        link: function(scope,element,attr){
+            if(scope.$last == true){
+                scope.$eval( attr.repeatFinish )
+            }
+        }
+    }
+})

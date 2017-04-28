@@ -2,9 +2,8 @@
 /**
  * component
  */
-angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
-    function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
-
+angular.module('core').controller('componentCtrl', ['$scope', '$http','$rootScope','$uibModal','commonService','$timeout','$compile','$state',
+    function ($scope, $http,$rootScope,$uibModal,commonService,$timeout,$compile,$state) {
         var siderbarArr = [];//菜单项
         var filterCount = 1;//筛选开关
         var dumpVal;//分页器跳转框的值
@@ -17,15 +16,54 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $scope.isBrand = true;
         $scope.isSType = false;
         $scope.isBlock = false;
-
         //大类、风格、品牌数据获取
         commonService.getTypeStyle().then(function (data) {
             var list = data.data;
             $scope.typeList = list.compClassInfos;
             $scope.styleList = list.styles;
             $scope.brandsList = list.brands;
-            console.log(list);
         })
+
+        //云构件库构件信息获取
+        function getCom(){
+            commonService.about({
+                "epId": "-2",
+                "orgId":"",
+                "compClassName": "",
+                "subClassName": "",
+                "styleName": "",
+                "brandName": "",
+                "componentDisplayName": "",
+                "currentPage": 1,
+                "pageSize": "20"
+            }).then(function(data){
+                var list = data.data.itemList;
+                $scope.componentList = data.data.itemList;
+                $scope.bigTotalItems = data.data.totalRowCount;
+                angular.forEach(list,function(data,index,arr){
+                    getStatus(data.subClassName,data.guid,data.md5,data.epId,data.originEpId,data.lastestClientVersion);
+                })
+            })
+        }
+        getCom();
+        $scope.renderFinish = function(){
+            $timeout(function(){
+                var pre = $(".preview-small>span:first-child").find("img").attr("src");
+                $(".preview-small>span:first-child").find("img").parent().parent().prev(".preview-big").find("img").attr("src",pre);
+                $('.component-info ul li .preview-small span').hover(function () {
+                    var previewSrc = $(this).find('img').attr('src');
+                    $(this).parent().siblings().find('img').attr('src', previewSrc);
+                });
+            }, 10)
+
+        }
+
+        $(".component-base .source>li:nth-child(3)>span").css({'color': '#4990e2'});
+
+        //应用、下载、更新按钮转换
+        function getStatus(subClassName, guid, md5, epId, originEpId,lastestClientVersion){
+            $scope.status = BzCloudComp.GetCompType(subClassName, guid, md5, epId, originEpId,lastestClientVersion);
+        }
 
         //清空input框的值
         $('.searchtext').click(function () {
@@ -59,26 +97,19 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             }
         };
         commonService.getComponent().then(function (data) {
+            //console.log(data);
             zNodes = data.data;
-            console.log(zNodes)
             $.fn.zTree.init($(".component-base .ztree"), setting, zNodes);
+            var treeObj = $.fn.zTree.getZTreeObj("sourceTree");
+            treeObj.expandAll(true);
+
             //菜单选项
             var menusText;
             $('.main-siderbar ul:not(.line) .node_name').click(function () {
+                var nodes = treeObj.getSelectedNodes();
                 if ($(this).text() != '' && $(this).text() != undefined) {
                     menusText = $(this).text();//选中的当前项的内容
                 }
-                if ($(".main-siderbar .ztree .button").hasClass('roots_open')) {
-                    $('.main-siderbar .ztree ul li .node_name').click(function () {
-                        menusText = $(this).text();
-                        $('.filter-status .filter-ele div').eq(0).html(menusText).attr("title", menusText)//把值改变到筛选条件的路径监听框
-                        $('li').css({'background': '', 'color': '#333'});//初始化样式
-                        $('.node_name').css({'background': '', 'color': '#333'});//初始化样式
-                        $(this).parent().children().find('span').css({'background': '', 'color': '#333'});//隐藏父元素的选中样式
-                        $(this).css({'color': '#4990e2'});//选中样式
-                    })
-                }
-
                 $('.filter-status .filter-ele div').eq(0).html(menusText).attr("title", menusText)//把值改变到筛选条件的路径监听框
                 $('li').css({'background': '', 'color': '#333'});//初始化样式
                 $('li span').css({'background': '', 'color': '#333'});//初始化样式
@@ -89,19 +120,30 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         /*
          * 分页器
          * */
-        //所有页面中的项目总数
-        $scope.totalItems = 64;
-        $scope.currentPage = 1;
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
-        $scope.pageChanged = function () {
-            //console.log('Page changed to: ' + $scope.currentPage);
+        $scope.pageChanged = function (pageNo) {
+            commonService.about({
+                "epId": "-2",
+                "orgId":"",
+                "compClassName": "",
+                "subClassName": "",
+                "styleName": "",
+                "brandName": "",
+                "componentDisplayName": "",
+                "currentPage": pageNo,
+                "pageSize": "20"
+            }).then(function(data){
+                console.info(data.data);
+                $scope.componentList = data.data.itemList;
+                $scope.bigTotalItems = data.data.totalRowCount;
+            })
         };
         //分页大小限制号码。
         $scope.maxSize = 5;
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
+        //所有页面中的项目总数
+
         /*分页器跳转
          * params  value
          * return currentPage
@@ -115,9 +157,25 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
          * params  value
          * return currentPage
          * */
-        $scope.setPage(getDumpVal());
+        //$scope.setPage(getDumpVal());
         $scope.getDumpOk = function () {
             $scope.setPage(getDumpVal());
+            var page = parseInt(getDumpVal());
+            commonService.about({
+                "epId": "-2",
+                "orgId":"",
+                "compClassName": "",
+                "subClassName": "",
+                "styleName": "",
+                "brandName": "",
+                "componentDisplayName": "",
+                "currentPage": page,
+                "pageSize": "20"
+            }).then(function(data){
+                console.info(data.data);
+                $scope.componentList = data.data.itemList;
+                $scope.bigTotalItems = data.data.totalRowCount;
+            })
         };
         /*
          * 点击构建来源移除除搜索外的条件
@@ -147,10 +205,29 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $(this).children().find('.glyphicon-menu-down').css({'transform': 'rotate(180deg)'});
                 $(this).not('.filter-closeStatus').find('.filter-trigger').css({'height': '33px', 'border-bottom': '0', 'background': '#fff'});
                 $(this).find('.switch-filter').show();
+                var searchText;
+                if($(".addSearch ")){
+                    searchText = $(".addSearch").text();
+                } else {
+                    searchText = "";
+                }
+
                 $('.switchFilter').click(function () {
                     var text = $(this).text();
                     $(this).parent().siblings().children('span').text(text);
                     sType(text);
+                    object = {
+                        "epId": "-2",
+                        "orgId":"",
+                        "compClassName": text,
+                        "subClassName": "",
+                        "styleName": "",
+                        "brandName": "",
+                        "componentDisplayName": searchText,
+                        "currentPage": 1,
+                        "pageSize": 20
+                    }
+                    getAboutList(object);
                     if ($(this).parent().parent().hasClass('ltype')) {
                         $('.stype').prev().remove();
                         $('.stype').remove();
@@ -173,17 +250,51 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             })
         }
 
+        var object = {
+            "epId": "-2",
+            "orgId":"",
+            "compClassName": "",
+            "subClassName": "",
+            "styleName": "",
+            "brandName": "",
+            "componentDisplayName": "",
+            "currentPage": 1,
+            "pageSize": 20
+        };
+
+        function getAboutList(object){
+            commonService.about(object).then(function(data){
+                $scope.componentList = data.data.itemList;
+                $scope.bigTotalItems = data.data.totalRowCount;
+            })
+        }
+
         /*
          * 搜索关键字生成条件标签
          * */
         $scope.search = function (searchText) {
-            //setBlank(searchText);
-            var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter addSearch"><div class="filter-trigger filter-closeStatus"><span>' + searchText + '</span><b class="icon-close"></b></div>';
-            var template = angular.element(html);
-            var pagination = $compile(template)($scope);
-            angular.element($('.filter-status .filter-ele').append(pagination));
-            closeStatus();
-            isShow();
+            if(searchText == '' || searchText == undefined){
+                return;
+            } else {
+                object = {
+                    "epId": "-2",
+                    "orgId":"",
+                    "compClassName": "",
+                    "subClassName": "",
+                    "styleName": "",
+                    "brandName": "",
+                    "componentDisplayName": searchText,
+                    "currentPage": 1,
+                    "pageSize": 20
+                }
+                getAboutList(object);
+                var html = '<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter addSearch"><div class="filter-trigger filter-closeStatus"><span>' + searchText + '</span><b class="icon-close"></b></div>';
+                var template = angular.element(html);
+                var pagination = $compile(template)($scope);
+                angular.element($('.filter-status .filter-ele').append(pagination));
+                closeStatus();
+                isShow();
+            }
         }
         /*
          * 筛选条件（无下拉功能）生成条件标签
@@ -204,8 +315,40 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 $(this).parent().prev().remove();
                 $(this).parent().remove();
                 isShow();
+                switch (status){
+                    case 'isStyle' :
+                        $scope.isStyle = true;
+                        object = {
+                            "epId": "-2",
+                            "orgId":"",
+                            "compClassName": "",
+                            "subClassName": "",
+                            "styleName": "",
+                            "brandName": "",
+                            "componentDisplayName": "",
+                            "currentPage": 1,
+                            "pageSize": 20
+                        }
+                        getAboutList(object);
+                        break;
+                    case 'isBrands' :
+                        $scope.isBrands = true;
+                        object = {
+                            "epId": "-2",
+                            "orgId":"",
+                            "compClassName": "",
+                            "subClassName": "",
+                            "styleName": "",
+                            "brandName": "",
+                            "componentDisplayName": "",
+                            "currentPage": 1,
+                            "pageSize": 20
+                        }
+                        getAboutList(object);
+                        break;
+                }
+                $scope.$apply();
             })
-            status = true;
         }
 
         //筛选品牌
@@ -214,6 +357,18 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 textFilter = $(event.target).text();
                 $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isBrand = false;
+                object = {
+                    "epId": "-2",
+                    "orgId":"",
+                    "compClassName": "",
+                    "subClassName": "",
+                    "styleName": "",
+                    "brandName": textFilter,
+                    "componentDisplayName": "",
+                    "currentPage": 1,
+                    "pageSize": 20
+                }
+                getAboutList(object);
             }
             isShow();
             closeStatus($scope.isBrand);
@@ -225,9 +380,21 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 textFilter = $(event.target).text();
                 $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><div class="type-filter selectType"><div class="filter-trigger filter-closeStatus"><span>' + textFilter + '</span><b class="icon-close"></b></div>');
                 $scope.isStyle = false;
+                object = {
+                    "epId": "-2",
+                    "orgId":"",
+                    "compClassName": "",
+                    "subClassName": "",
+                    "styleName": textFilter,
+                    "brandName": "",
+                    "componentDisplayName": "",
+                    "currentPage": 1,
+                    "pageSize": 20
+                }
+                getAboutList(object);
             }
             isShow();
-            closeStatus($scope.isStyle);
+            closeStatus('isStyle');
         };
         //筛选大类
         $scope.isTypeFilter = function (event) {
@@ -238,6 +405,18 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 var template = angular.element(html);
                 var pagination = $compile(template)($scope);
                 angular.element($('.filter-status .filter-ele').append(pagination));
+                object = {
+                    "epId": "-2",
+                    "orgId":"",
+                    "compClassName": textFilter,
+                    "subClassName": "",
+                    "styleName": "",
+                    "brandName": "",
+                    "componentDisplayName": "",
+                    "currentPage": 1,
+                    "pageSize": 20
+                }
+                getAboutList(object);
                 //显示小类
                 sType(textFilter);
                 $scope.isType = false;
@@ -275,14 +454,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
 
         //清空筛选显隐
         function isShow() {
-            console.log($('.type-filter').length);
             if ($('.type-filter').length == 0) {
                 $scope.isBlock = false;
             } else {
                 $scope.isBlock = true;
             }
         }
-
 
         //清空筛选
         $scope.cancelFilter = function () {
@@ -295,20 +472,26 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
             $('.filter-status .filter-ele>b').remove();
             $scope.isBlock = false;
             $scope.isSType = false;
+            object = {
+                "epId": "-2",
+                "orgId":"",
+                "compClassName": "",
+                "subClassName": "",
+                "styleName": "",
+                "brandName": "",
+                "componentDisplayName": "",
+                "currentPage": 1,
+                "pageSize": 20
+            }
+            getAboutList(object);
         };
+
+
 
         //多选
         //监听是否 菜单选项repeat 完成
         //$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         $timeout(function () {
-            /*var src = $('.component-info ul li .preview-small span').find('img:first-child').attr('src');
-             $('.component-info ul li .preview-small span').parent().siblings().find('img').attr('src',src);*/
-            console.log($('.component-info ul li .preview-small span'));
-            $('.component-info ul li .preview-small span').hover(function () {
-                var previewSrc = $(this).find('img').attr('src');
-                console.log(previewSrc);
-                $(this).parent().siblings().find('img').attr('src', previewSrc);
-            });
             $('.filter-infoList ').css({'height': '50px', 'overflow': 'hidden'});
             $('.filter-infoList .filter-tool').map(function (i, val) {
                 $('.checkMore').click(function () {
@@ -324,7 +507,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 var arr = [];
                 $('.filter-infoList .check-box').map(function (i, val) {
                     //console.log($(val).find('input[type="checkbox"]').prop('checked'));
-                    if ($(val).find('input[type="checkbox"]').prop('checked') == true) {
+                    if ($(val).find('input[type="checkbox"]').prop('checked') == true && styleLable == "风格") {
                         textFilter = ($(this).parent().children('i').text());
                         arr.push(textFilter);
                         i = 1;
@@ -337,6 +520,7 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                     }
                     isShow();
                     closeStatus();
+                    $scope.$apply();
                 })
 
                 if (showBtn == 0) {
@@ -392,7 +576,8 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         * 初始化模态框
         * 初始化参数配置
         * */
-        $scope.componetModal = function () {
+        $scope.componetModal = function (componentId) {
+            $scope.items = componentId;
             var modalInstance = $uibModal.open({
                 windowClass: 'component-modal',
                 backdrop: 'static',
@@ -407,10 +592,10 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                 }
             });
             modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
+                getCom();
             }, function () {
-                //console.info('Modal dismissed at: ' + new Date());
-            });
+                getCom();
+            })
         };
 
         /*
@@ -429,9 +614,12 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
                         return $scope.items;
                     }
                 }
+
             });
             modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
+                $('.progressWrap').show();
+                uploadProgress(1,1,0,0);
             }, function () {
                 //console.info('Modal dismissed at: ' + new Date());
                 $scope.cancel = function () {
@@ -445,63 +633,47 @@ angular.module('core').controller('componentCtrl', ['$scope', '$http','$uibModal
         $('.return-top').click(function() {
             $('.component-list').animate({ scrollTop: 0 }, 500);
         })
+
         /*
-        * 构件库数据展示
+        * 构件应用、下载、更新
         * */
-        /*commonService.componentList().then(function(data){
-            $scope.componentList = data.data;
-            //console.info( $scope.componentList)
-        })*/
-        //应用、下载、更新按钮转换
-        // strCompGUID 构件的GUID
-        // strCompMd5 构件的MD5值
-        // strCompID 构件的企业ID
-        function getStatus(strCompGUID, strCompMd5, strCompID){
-            var status;
-            $scope.status = status;
-            BzCloudComp.GetCompType(strCompGUID, strCompMd5, strCompID);
+        //应用
+        $scope.apply = function(subClassName,guid,epId,originEpId){
+            BzCloudComp.UseComp(subClassName,guid,epId,originEpId);
         }
-        // strCompGUID 构件的GUID
-        // strCompID 构件的企业ID
-        var value = 0;
-        var time = 100;
-        $scope.down = function(){
-            //BzCloudComp.DownloadComp(strCompGUID, strCompID);
-            $('.progressWrap').show();
-            prograss();
+        //更新同下载
+        //下载、更新
+        $scope.down = function(componentId,$event){
+            console.log($('*[data-id="167"]').find('.proContiner'));
+            $('*[data-id="167"]').find('.proContiner').show();
+            downloadProcess(167,1);
+            //$($event.target).parent().prev('.preview-model').find('.proContiner').show();
+            //BzCloudComp.DownloadComp(componentId);
+            //window.onload();
         }
-        //进度条函数
-        function prograss(){
-            function reset( ) {
-                value = 0
-                $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
-                //setTimeout(increment,5000);
-            }
-            function increment(){
-                value += 1;
-                $("#prog").css("width",value + "%").text(value + "%");
-                if(value == 100){
-                    $('.progressWrap').hide();
-                    reset();
-                    return;
-                }
-                setTimeout(increment,time);
-            }
-            increment();
+
+        function downloadProcess(componentId, percent){
+            //$scope.renderFinish = function(){
+                $timeout(function(){
+                    var progress = $('*[data-id="componentId"]').find('.proContiner');
+                    console.log(progress);
+                    if(percent == 0.2){
+                        progtess.hide();
+                        alert("下载失败！");
+                    }else{
+                        var text = percent * 100 + "%";
+                        $(".proContiner .progress-bar").css("width",text);
+                        if(text == "100%"){
+                            progress.hide();
+                        }
+                    }
+                }, 10)
+            //}
         }
-        commonService.about({
-            "epId": "-2",
-            "orgId":"",
-            "compClassName": "",
-            "subClassName": "",
-            "styleName": "",
-            "brandName": "",
-            "componentDisplayName": "",
-            "currentPage": 1,
-            "pageSize": "20"
-        }).then(function(data){
-            console.info(data.data);
-            $scope.componentList = data.data.itemList;
-        })
+
+
+        //心跳
+        commonService.heartBeat();
 
     }]);
+

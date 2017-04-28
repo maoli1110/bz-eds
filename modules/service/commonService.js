@@ -4,6 +4,7 @@ angular.module('core').service('commonService', function ($http, $q) {
 
     // var url = "http://"+dbPort+"/rest/";
     var url ="";
+    var urls = "http://192.168.3.103:9001/banzhucls/rs/";
 
     /**
      * [testApi get-jquery-版本]
@@ -78,7 +79,7 @@ angular.module('core').service('commonService', function ($http, $q) {
     * type:get;
     * return data
     * */
-    this.componentList = function(){
+    /*this.componentList = function(){
         var  url="json/data.json";
         var delay = $q.defer();
         $http.get(url).then(function(data){
@@ -87,9 +88,9 @@ angular.module('core').service('commonService', function ($http, $q) {
             delay.reject(err)
         });
         return delay.promise;
-    }
+    }*/
     //我的上传、审核假数据
-    this.auditList = function(){
+    /*this.auditList = function(){
         var url="json/uploadList.json";
         var delay = $q.defer();
         $http.get(url).then(function(data){
@@ -98,20 +99,20 @@ angular.module('core').service('commonService', function ($http, $q) {
             delay.reject(error);
         });
         return delay.promise;
-    }
+    }*/
     //构件来源树结构
     this.getComponent = function(){
         // param = JSON.stringify(param);
         var delay = $q.defer();
         $.ajax({
             type: "GET",
-            url: "http://192.168.3.103:9000/banzhucls/rs/component/getOrgInfo",
+            url: urls + "component/getOrgInfo",
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
             },
             error:function(error){
-                delay.reject(JSON.parse(error.responseText));
+                //delay.reject(JSON.parse(error.responseText));
             }
         });
         return delay.promise;
@@ -122,13 +123,13 @@ angular.module('core').service('commonService', function ($http, $q) {
         var delay = $q.defer();
         $.ajax({
             type: "GET",
-            url: "http://192.168.3.103:9000/banzhucls/rs/component/findFeature",
+            url:  urls + "component/findFeature",
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
             },
             error:function(error){
-                delay.reject(JSON.parse(error.responseText));
+                //delay.reject(JSON.parse(error.responseText));
             }
         });
         return delay.promise;
@@ -139,7 +140,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         var delay = $q.defer();
         $.ajax({
             type: "POST",
-            url: "http://192.168.3.103:9000/banzhucls/rs/component/delete",
+            url: urls + "component/delete",
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
@@ -150,37 +151,20 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
-    /*//我的审核审核状态查询列表
-    this.auditList() = function(){
-        // param = JSON.stringify(param);
-        var delay = $q.defer();
-        $.ajax({
-            type: "POST",
-            url: "http://192.168.3.103:9000/banzhucls/rs/component/findReviewComponent",
-            contentType:'application/json;',
-            success: function(data){
-                delay.resolve(data);
-            },
-            error:function(error){
-                delay.reject(JSON.parse(error.responseText));
-            }
-        });
-        return delay.promise;
-    }*/
-    //查询
+    //按大类、小类、风格、品牌、查询
     this.about = function(param){
         // param = JSON.stringify(param);
         var delay = $q.defer();
         $.ajax({
             type: "post",
             data: JSON.stringify(param),
-            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            url: urls + 'component/findComponent',
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
             },
             error:function(error){
-                delay.reject(JSON.parse(error.responseText));
+                //delay.reject(JSON.parse(error.responseText));
             }
         });
         return delay.promise;
@@ -192,7 +176,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         $.ajax({
             type: "post",
             data: JSON.stringify(param),
-            url: 'http://192.168.3.103:9000/banzhucls/rs/review/findReviewComponent',
+            url: urls + 'review/findReviewComponent',
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
@@ -204,19 +188,19 @@ angular.module('core').service('commonService', function ($http, $q) {
         return delay.promise;
     }
     //我的上传--搜索列表模式
-    this.uplaodList = function(param){
+    this.uploadList = function(param){
         // param = JSON.stringify(param);
         var delay = $q.defer();
         $.ajax({
             type: "post",
             data: JSON.stringify(param),
-            url: 'http://192.168.3.103:9000/banzhucls/rs/review/find',
+            url: urls + 'review/find',
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
             },
             error:function(error){
-                delay.reject(JSON.parse(error.responseText));
+                //delay.reject(JSON.parse(error.responseText));
             }
         });
         return delay.promise;
@@ -228,14 +212,14 @@ angular.module('core').service('commonService', function ($http, $q) {
         $.ajax({
             type: "post",
             data: JSON.stringify(param),
-            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            url: urls + 'review/update/status',
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
-            },
+            }/*,
             error:function(error){
                 delay.reject(JSON.parse(error.responseText));
-            }
+            }*/
         });
         return delay.promise;
     }
@@ -246,7 +230,7 @@ angular.module('core').service('commonService', function ($http, $q) {
         $.ajax({
             type: "post",
             data: JSON.stringify(param),
-            url: 'http://192.168.3.103:9000/banzhucls/rs/component/findComponent',
+            url: urls + 'review/update/opinion',
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
@@ -263,7 +247,24 @@ angular.module('core').service('commonService', function ($http, $q) {
         var delay = $q.defer();
         $.ajax({
             type: "GET",
-            url: "http://192.168.3.103:9000/banzhucls/rs/component/findOriginEp",
+            url: urls + "component/findOriginEp",
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                //delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //云构件库构件详情
+    this.comDetails = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "GET",
+            url: urls + 'component/findComponentDetail/'+param,
             contentType:'application/json;',
             success: function(data){
                 delay.resolve(data);
@@ -274,4 +275,60 @@ angular.module('core').service('commonService', function ($http, $q) {
         });
         return delay.promise;
     }
+    //我的上传构件详情
+    this.uploadDetails = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "GET",
+            url: urls + 'review/get/'+param,
+            contentType:'application/json;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+    //心跳机制
+    function getheartBeat  () {
+        var delay = $q.defer();
+        var url_join="rs/co/heartBeat";
+        $http.get(url_join)
+            .success(function (data) {
+                delay.resolve(data);
+            }).error(function (data, status) {
+            delay.reject(data);
+        });
+        return delay.promise;
+    };
+
+    function refreshState() {
+        getheartBeat().then(function(){});
+    }
+    //设置间隔获取状态
+    this.heartBeat = function () {
+        ApplicationConfiguration.refreshID = setInterval(refreshState, 20*60*1000);
+        // ApplicationConfiguration.refreshID = setInterval(refreshState, 10*1000);
+    }
+    //登录
+    this.login = function(param){
+        // param = JSON.stringify(param);
+        var delay = $q.defer();
+        $.ajax({
+            type: "GET",
+            url: 'http://pdstest5.lubansoft.net/login/'+param,
+            contentType:'application/x-www-form-urlencoded;',
+            success: function(data){
+                delay.resolve(data);
+            },
+            error:function(error){
+                delay.reject(JSON.parse(error.responseText));
+            }
+        });
+        return delay.promise;
+    }
+
 });

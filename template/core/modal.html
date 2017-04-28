@@ -3,38 +3,37 @@
         <p class="modal-title modal-close" ng-click="cancel()" id="modal-title"></p>
     </div>
     <div class="modal-body" id="modal-body" >
-        <ul class="clearfix modal-left" >
+        <ul class="clearfix modal-left" style="height: 340px;">
             <li>
-              <div class="preview-model">
-                    <div class="preview-big"><img ng-src={{componentDescr.previewSrc}}/><b></b></div>
+                <div class="preview-model">
+                    <div class="preview-big"><img ng-src={{item.displayUrl}}?name={{item.fileName}}/></div>
                     <div class="preview-small">
-                        <span ng-repeat="itemList in componentList" component-finish><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                        <span ng-repeat="item in list.attachment track by $index"><img ng-show="item.fileType == 0 || item.fileType == 2 || item.fileType == 3 || item.fileType == 4 || item.fileType == 5" ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></span>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="modal-right" >
             <div class="author-info">
-                <h4>宜家中式双人沙发</h4>
-                <h5>作者：版筑家装研发中心</h5>
-                <h5>上传时间：2017.02.17</h5>
+                <h4>{{list.componentDisplayName}}</h4>
+                <h5>作者：{{list.author}}</h5>
+                <h5>上传时间：{{list.uploadTime}}</h5>
+                <h5 ng-show="list.originEpId != 0">来源企业： {{list.originEpName}}</h5>
+                <h5 ng-show="list.originEpId == 0">所属企业: {{list.epName}}</h5>
             </div>
             <div class="modal-modify">
                 <p>-------------<span class="modify-text">构件详情</span>---------------</p>
             </div>
-            <div class="pro-info">
-                <div><p>大类：<span>软装</span></p><p>小类：<span>沙发</span></p></div>
-                <div><p>尺寸：<span>2000*800*1200</span></p></div>
-                <div><p>品牌：<span>版筑软件</span></p></div>
-                <div><p>系列：<span>版筑软件</span></p></div>
-                <div><p>规格：<span>版筑软件</span></p></div>
-                <div><p>型号：<span>版筑软件</span></p></div>
+            <div class="pro-info" style="height:160px;overflow-y: scroll;">
+                <div><p>大类：<span>{{list.compClassName}}</span></p><p>小类：<span>{{list.subClassName}}</span></p></div>
+                <div ng-repeat="item in otherList track by $index"><p>{{item.name}}：<span>{{item.value}}</span></p></div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">应用</button>
-        <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+        <button class="btn btn-primary" type="button" ng-show="status == 0" ng-click="down(list.componentId)">下载</button>
+        <button class="btn btn-primary" type="button" ng-show="status == 1" ng-click="down(list.componentId)">更新</button>
+        <button class="btn btn-primary" type="button" ng-show="status == 2" ng-click="apply(list.subClassName,list.guid,list.epId,list.originEpId)">应用</button>
     </div>
 </div>
 <!--

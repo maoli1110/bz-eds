@@ -19,7 +19,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
@@ -30,7 +29,7 @@
 				<li><span class="node_name">全部</span></li>
 				<li><span class="node_name">公共构件库</span></li>
 			</ul>
-			<ul class="ztree" style="overflow-y:scroll;max-height: 300px"></ul>
+			<ul class="ztree" id="sourceTree" style="overflow-y:scroll;max-height: 300px"></ul>
 			<!--component-btns（侧边栏构件按钮组）-->
 			<div class="component-btns">
 				<div ui-sref="upload"><span class="icon-tool"></span>我的上传</div>
@@ -44,7 +43,7 @@
 			<div class="component-list">
 				<div class="component-filter">
 					<div class="filter-status">
-						<div class="filter-ele" ><div>全部</div></div><span ng-show="isBlock" ng-click="cancelFilter()">清空筛选</span>
+						<div class="filter-ele" ><div>公共构件库</div></div><span ng-show="isBlock" ng-click="cancelFilter()">清空筛选</span>
 					</div>
 					<!--筛选大类-->
 					<div class="filter-infoList" ng-if="isType">
@@ -52,7 +51,7 @@
 						<p><b>大类 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele" ng-click="isTypeFilter($event)">
+							<div class="filter-ele" ng-click="isTypeFilter($event)" style="max-height: 245px">
 								<span ng-repeat="item in typeList track by $index" title="{{item.compClassName}}">{{item.compClassName}}</span>
 							</div>
 						</div>
@@ -63,7 +62,7 @@
 						<p><b>小类 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele" ng-click="isSTypeFilter($event)">
+							<div class="filter-ele" ng-click="isSTypeFilter($event)" style="max-height: 245px">
 								<span ng-repeat="item in sTypeList track by $index" title="{{item.subClassName}}">{{item.subClassName}}</span>
 							</div>
 						</div>
@@ -71,10 +70,10 @@
 					<!--筛选风格-->
 					<div class="filter-infoList" ng-if="isStyle" >
 						<!--筛选标题-->
-						<p><b>风格 ：&nbsp;</b></p>
+						<p class="styleLable"><b>风格 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele" ng-click="isStyleFilter($event)">
+							<div class="filter-ele" ng-click="isStyleFilter($event)" style="max-height: 245px">
 								<span ng-repeat="item in styleList track by $index" title="{{item.styleName}}">
 									<label class="check-box" style="margin-top: -5px">
 										<input type="checkbox">
@@ -93,10 +92,10 @@
 					</div>
 					<div class="filter-brand filter-infoList" ng-show="isBrand">
 						<!--筛选标题-->
-						<p><b>品牌 ：&nbsp;</b></p>
+						<p class="brandLable"><b>品牌 ：&nbsp;</b></p>
 						<!--筛选内容-->
 						<div class="filter-condition row" style="width:calc(100% - 56px )">
-							<div class="filter-ele" ng-click="isBrandFilter($event)">
+							<div class="filter-ele" ng-click="isBrandFilter($event)" style="max-height: 245px">
 								<span ng-repeat="item in brandsList" title="{{item.brandName}}">
 									<label class="check-box" style="margin-top: -5px">
 										<input type="checkbox">
@@ -117,19 +116,29 @@
 				<!--component-infoList(构件信息展示)-->
 				<div class="component-info">
 					<ul class="clearfix">
-						<li ng-repeat="itemList in componentList track by $index">
-							<div class="preview-model">
-								<div class="preview-big"><img src=""/></div>
+						<li ng-repeat="itemList in componentList track by $index" repeat-finish="renderFinish()">
+							<div class="preview-model" data-id="{{itemList.componentId}}">
+								<div class="statusLable" ng-show="status == 1 || status == 2" style="position: absolute; right: 3%;top: 0;width: 70px;height: 25px;text-align: center;line-height: 25px; color:white;background: rgba(0,0,0,0.5)">已下载</div>
+								<div class="proContiner" style="display:none;position: absolute;left: 0;top: 0;width: 270px;height: 366px;background: rgba(0,0,0,0.5)">
+									<div class="progress progress-striped" style="position: absolute; top: 30%;left:4%;width: 250px;height: 20px;margin: 0;">
+										<div class="progress-bar progress-bar-info" role="progressbar"
+											 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+											 style="width: 1%;">
+											<span class="sr-only">30% 完成（信息）</span>
+										</div>
+									</div>
+								</div>
+								<div class="preview-big"><img ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></div>
 								<div class="preview-small">
-									<span ng-repeat="item in itemList.attachmentInfo track by $index"><img ng-src={{item.displayUrl}}?name={{item.fileName}}/></span>
+									<span ng-repeat="item in itemList.attachmentInfo track by $index"><img ng-show="item.fileType == 0 || item.fileType == 2 || item.fileType == 3 || item.fileType == 4 || item.fileType == 5" ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></span>
 								</div>
 								<p class="preview-descText" >{{itemList.componentDisplayName}}</p>
 							</div>
 							<div class="preview-tool">
-								<a ng-click="componetModal()" style="cursor: pointer"><span class="icon-describe"></span>更多详情</a>
-								<a ng-click="down()" style="cursor: pointer"> <span class="icon-describe"></span>下载</a>
-								<!--<a ng-show="status == 0" ng-click="apply()" style="cursor: pointer"> <span class="icon-describe"></span>应用</a>
-								<a ng-show="status == 1" ng-click="update()" style="cursor: pointer"> <span class="icon-describe"></span>更新</a>-->
+								<a ng-click="componetModal(itemList.componentId)" style="cursor: pointer"><span class="icon-describe"></span>更多详情</a>
+								<a  ng-click="down(itemList.componentId,$event)" style="cursor: pointer"> <span class="icon-describe"></span>下载</a>
+								<!--<a ng-show="status == 1" ng-click="down(itemList.componentId)" style="cursor: pointer"> <span class="icon-describe"></span>更新</a>-->
+								<!--<a ng-show="status == 2" ng-click="apply(itemList.subClassName,itemList.guid,itemList.componentId,itemList.originEpId)" style="cursor: pointer"> <span class="icon-describe"></span>应用</a>-->
 							</div>
 						</li>
 					</ul>
@@ -137,7 +146,7 @@
 			</div>
 			<div class="pagination">
 				<div class="clearfix">
-					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" items-per-page="20" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
 					<span>共 {{numPages}} 页 </span>
 					<div class="pagination-dump">
 						<p class="dump-inp inline"> ,  跳转到   <input type="text" class="form-control inline"> </p>
@@ -150,11 +159,23 @@
 	</article>
 	<div class="return-top" ng-click="reTop()"><img src="imgs/icon/icon-top.jpg" alt=""></div>
 </div>
-<div class="progressWrap">
-	<div class="progress progress-striped active">
-		<div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
-			<span id="proglabel">正在启动，请稍后......</span>
-		</div>
-	</div>
-</div>
+<script type="text/javascript">
+	var appElement = document.querySelector('[ng-controller=uploadComCtrl]');//获取$scope变量
+	var $scope = angular.element(appElement).scope();
+	//下载进度条函数
+	function downloadProcess(componentId, percent){
+		var progress = $('*[data-id="componentId"]').find('.proContiner');
+		if(percent == 0.2){
+			progtess.hide();
+			alert("下载失败！");
+		}else{
+			var text = value * 100 + "%";
+			$(".proContiner .progress-bar").css("width",text);
+			if(percent == 1){
+				progress.hide();
+			}
+		}
+	}
+</script>
+
 

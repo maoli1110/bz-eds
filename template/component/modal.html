@@ -1,0 +1,49 @@
+<div >
+    <div class="modal-header">
+        <p class="modal-title modal-close" ng-click="cancel()" id="modal-title"></p>
+    </div>
+    <div class="modal-body" id="modal-body" >
+        <ul class="clearfix modal-left" style="height: 340px;">
+            <li>
+              <div class="preview-model">
+                  <div class="preview-big"><img ng-src={{item.displayUrl}}?name={{item.fileName}}/></div>
+                  <div class="preview-small">
+                      <span ng-repeat="item in list.attachmentInfo track by $index"><img ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></span>
+                  </div>
+                </div>
+            </li>
+        </ul>
+        <div class="modal-right" >
+            <div class="author-info">
+                <h4>{{list.componentDisplayName}}</h4>
+                <h5>作者：{{list.author}}</h5>
+                <h5>上传时间：2017.02.17</h5>
+            </div>
+            <div class="modal-modify">
+                <p>-------------<span class="modify-text">构件详情</span>---------------</p>
+            </div>
+            <div class="pro-info" style="overflow-y: scroll;">
+                <div><p>大类：<span>{{list.compClassName}}</span></p><p>小类：<span>{{list.subClassName}}</span></p></div>
+                <div><p>尺寸：<span>2000*800*1200</span></p></div>
+                <div><p>品牌：<span>版筑软件</span></p></div>
+                <div><p>系列：<span>版筑软件</span></p></div>
+                <div><p>规格：<span>版筑软件</span></p></div>
+                <div><p>型号：<span>版筑软件</span></p></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok(list.subClassName,list.guid,list.md5,list.componentId,list.originEpName,list.lastestClientVersion)">应用</button>
+        <button class="btn btn-primary" type="button" ng-click="ok(list.subClassName,list.guid,list.md5,list.componentId,list.originEpName,list.lastestClientVersion)">应用</button>
+        <button class="btn btn-primary" type="button" ng-click="ok(list.subClassName,list.guid,list.md5,list.componentId,list.originEpName,list.lastestClientVersion)">应用</button>
+        <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+    </div>
+</div>
+<!--
+<div class="progressWrap">
+    <div class="progress progress-striped active">
+        <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+            <span id="proglabel">正在启动，请稍后......</span>
+        </div>
+    </div>
+</div>-->

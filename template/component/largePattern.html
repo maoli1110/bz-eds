@@ -33,10 +33,10 @@
             <!--侧边栏菜单-->
             <ul>
                 <p>审核状态</p>
-                <li class="menusName">全部</li>
-                <li class="menusName">待审核</li>
-                <li class="menusName">已通过</li>
-                <li class="menusName">未通过</li>
+                <li class="menusName" ng-click="getComponent(null)">全部</li>
+                <li class="menusName" ng-click="getComponent(1)">待审核</li>
+                <li class="menusName" ng-click="getComponent(2)">已通过</li>
+                <li class="menusName" ng-click="getComponent(3)">未通过</li>
             </ul>
             <!--component-btns（侧边栏构件按钮组）-->
             <div class="component-btns">
@@ -124,16 +124,16 @@
                 <!--component-infoList(构件信息展示)-->
                 <div class="component-info">
                     <ul class="clearfix">
-                        <li ng-repeat="itemList in componentList track by $index" profit>
+                        <li ng-repeat="itemList in componentList track by $index">
                             <div class="preview-model">
-                                <div class="preview-big"><img ng-src={{itemList.previewSrc}}/><b></b></div>
+                                <div class="preview-big"><img ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></div>
                                 <div class="preview-small">
-                                    <span ng-repeat="itemList in componentList track by $index"><img ng-src={{itemList.previewSrc}} alt=""/></span>
+                                    <span ng-repeat="item in itemList.attachmentInfo track by $index"><img ng-show="item.fileType == 0 || item.fileType == 2 || item.fileType == 3 || item.fileType == 4 || item.fileType == 5" ng-src="{{item.displayUrl}}?name={{item.fileName}}"/></span>
                                 </div>
-                                <p class="preview-descText" >{{itemList.previewText}}</p>
+                                <p class="preview-descText" >{{itemList.componentDisplayName}}</p>
                             </div>
                             <div class="preview-tool">
-                                <a ng-click="componetModal()"><span class="icon-describe"></span>详细信息</a>
+                                <a ng-click="componetModal(itemList.componentId)" style="cursor: pointer"><span class="icon-describe"></span>更多详情</a>
                             </div>
                         </li>
                     </ul>
@@ -141,10 +141,10 @@
             </div>
             <div class="pagination">
                 <div class="clearfix">
-                    <ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+                    <ul uib-pagination total-items="bigTotalItems" force-ellipses="true" items-per-page="20" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
                     <span>共 {{numPages}} 页 </span>
                     <div class="pagination-dump">
-                        <p class="dump-inp inline"> , 跳转到   <input type="text" class="form-control inline"> </p>
+                        <p class="dump-inp inline"> ,  跳转到   <input type="text" class="form-control inline"> </p>
                         <button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
                     </div>
                 </div>

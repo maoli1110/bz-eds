@@ -1,9 +1,31 @@
 'use strict';
 /**
- * component
+ * largePattern
  */
-angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibModal','commonService','$timeout','$compile',
-    function ($scope, $http,$uibModal,commonService,$timeout,$compile) {
+angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$rootScope','$uibModal','commonService','$timeout','$compile','$state',
+    function ($scope, $http,$rootScope,$uibModal,commonService,$timeout,$compile,$state) {
+
+        /*
+         * 构件库数据展示
+         * */
+        commonService.largePattern(
+            {
+                "componentDisplayName":null,
+                "status":null,
+                "compClassName":null,
+                "subClassName":null,
+                "brandName":null,
+                "styleName":null,
+                "currentPage":1,
+                "pageSize":20
+            }
+        ).then(function(data){
+            $scope.componentList = data.data.itemList;
+            //所有页面中的项目总数
+            $scope.bigTotalItems = data.data.totalRowCount;
+            console.info(data.data);
+        })
+
         /*
          * 左侧菜单
          * param:一个带有数据的数组
@@ -36,36 +58,85 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
             $(this).val('');
         })
 
+        //左侧审核状态切换
+        $scope.getComponent = function(status){
+            commonService.largePattern(
+                {
+                    "componentDisplayName":null,
+                    "status":status,
+                    "compClassName":null,
+                    "subClassName":null,
+                    "brandName":null,
+                    "styleName":null,
+                    "currentPage":1,
+                    "pageSize":20
+                }
+            ).then(function(data){
+                $scope.componentList = data.data.itemList;
+                //所有页面中的项目总数
+                $scope.bigTotalItems = data.data.totalRowCount;
+            })
+        }
+
         /*
          * 分页器
          * */
-        $scope.totalItems = 64;
-        $scope.currentPage = 1;
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
-        $scope.pageChanged = function() {
-            //console.log('Page changed to: ' + $scope.currentPage);
+        $scope.pageChanged = function (pageNo) {
+            commonService.largePattern(
+                {
+                    "componentDisplayName":null,
+                    "status":null,
+                    "compClassName":null,
+                    "subClassName":null,
+                    "brandName":null,
+                    "styleName":null,
+                    "currentPage":pageNo,
+                    "pageSize":20
+                }
+            ).then(function(data){
+                $scope.componentList = data.data.itemList;
+                console.info( $scope.componentList);
+            })
         };
+        //分页大小限制号码。
         $scope.maxSize = 5;
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
-        /*分页器跳转
-         * params  value
-         * return currentPage
-         * */
-        function getDumpVal(){
-            dumpVal =  $('.dump-inp input').val();
-            return dumpVal;
 
-        }
         /*分页器跳转
          * params  value
          * return currentPage
          * */
-        $scope.setPage(getDumpVal());
-        $scope.getDumpOk = function(){
+        var dumpVal;
+        function getDumpVal() {
+            dumpVal = $('.dump-inp input').val();
+            return dumpVal;
+        }
+
+        /*分页器跳转
+         * params  value
+         * return currentPage
+         * */
+        //$scope.setPage(getDumpVal());
+        $scope.getDumpOk = function () {
             $scope.setPage(getDumpVal());
+            var page = parseInt(getDumpVal());
+            commonService.largePattern(
+                {
+                    "componentDisplayName":null,
+                    "status":null,
+                    "compClassName":null,
+                    "subClassName":null,
+                    "brandName":null,
+                    "styleName":null,
+                    "currentPage":page,
+                    "pageSize":20
+                }
+            ).then(function(data){
+                $scope.componentList = data.data.itemList;
+                console.info( $scope.componentList);
+            })
         };
 
         /*
@@ -329,16 +400,17 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
          * 初始化模态框
          * 初始化参数配置
          * */
-        $scope.componetModal = function () {
+        $scope.componetModal = function (componentId) {
+            $scope.items = componentId;
             var modalInstance = $uibModal.open({
                 windowClass: 'component-modal largePattern-modal',
                 backdrop: 'static',
                 animation: false,
                 size: 'lg',
                 templateUrl: 'template/core/largeModal.html',
-                controller: 'modalCtrl',
+                controller: 'largeModalCtrl',
                 resolve: {
-                    items: function () {
+                    items: function (componentId) {
                         return $scope.items;
                     }
                 }
@@ -381,14 +453,9 @@ angular.module('core').controller('largePatternCtrl', ['$scope', '$http','$uibMo
         $('.return-top').click(function() {
             $('.component-list').animate({ scrollTop: 0 }, 500);
         })
-        /*
-         * 构件库数据展示
-         * */
-        commonService.componentList().then(function(data){
-            $scope.componentList = data.data;
-            //console.info( $scope.componentList);
-        })
 
 
+        //心跳
+        commonService.heartBeat();
 
     }]);

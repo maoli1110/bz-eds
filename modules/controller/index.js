@@ -1,12 +1,13 @@
-/**
+/*
+/!**
  * Created by sdergt on 2017/3/8.
- */
+ *!/
 $(function(){
-    /*
+    /!*
     * 左侧菜单
     * param:一个带有数据的数组
     * return 一个字符串拼接的变量
-    * */
+    * *!/
     var  siderbarArr = [];//菜单项
     var  filterCount = 1;
 
@@ -26,9 +27,9 @@ $(function(){
        }
         return li;
     }
-    /*
+    /!*
     *菜单事件动画
-    * */
+    * *!/
     function  menusEvent(obj,event){
         //menusCliCount =1;
         obj.on(event,function(){
@@ -48,9 +49,9 @@ $(function(){
             success:function(data){
                 //processData(data);
                 $('.component-info ul').append(processData(data));
-                /*
+                /!*
                  *商品放大镜效果
-                 * */
+                 * *!/
                 $('.component-info ul li .preview-small span').hover(function(){
                     var previewSrc = $(this).find('img').attr('src');
                     $(this).parent().siblings().find('img').attr('src',previewSrc)
@@ -91,24 +92,24 @@ $(function(){
         {menus:'A企业库',child:['甲分公司库','乙分公司库','丙分公司库']},
         {menus:'B企业库',child:['甲分公司库','乙分公司库','丙分公司库']},
     ]
-    /*ajax
+    /!*ajax
     * ajax请求列表数据
-    * */
+    * *!/
     getAjax('data.json')
     //插入菜单
     $('.main-siderbar ul').append(manageMenus(siderbarArr));
     //菜单点击事件
     menusEvent($('.main-siderbar ul>li'),'click')
-    /*
+    /!*
     *筛选状态
-    * */
+    * *!/
     $('.filter-condition .filter-ele>span').click(function(){
         $('.filter-status .filter-ele').append('<b class="glyphicon glyphicon-menu-right"></b><span>'+$(this).text()+'</span>');
         $(this).parent().parent().parent().hide()
     })
-    /*
+    /!*
     * .filter-down更多选项
-    * */
+    * *!/
     $('.filter-down').bind('click',function(){
         filterCount++;
         if(filterCount%2==0){
@@ -125,4 +126,4 @@ $(function(){
         }
     })
 
-})
+})*/

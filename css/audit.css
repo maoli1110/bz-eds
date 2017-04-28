@@ -76,7 +76,11 @@
 }
 .audit table.table tr td> label+span{
 	display: inline-block;
-	width: 74%;
+	width: 40%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
 }
 .audit table tr td{
 	font-size:14px;font-family:'microsoft yahei'

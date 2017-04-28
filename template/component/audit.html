@@ -20,7 +20,24 @@
 <!--component-base构件库简写-->
 <div class="component-base audit" side-style>
 	<!--header 页面中的头部-->
-	<header ng-include="'template/core/header.html'" class="component-logo"></header>
+	<!--<header ng-include="'template/core/header.html'" class="component-logo"></header>-->
+	<div class="component-logo">
+		<div class="component-computer-logo  clearfix">
+			<div class="col-xs-3">
+			<span>
+				<img src="imgs/audit.jpg" style="">
+				<h1 class="">我的审核</h1>
+			</span>
+
+			</div>
+			<div class="col-xs-9 component-search">
+				<form role="form">
+					<input type="text" placeholder="输入构件名称" class="form-control col-xs-3 searchtext" ng-model="searchText">
+					<div class="absol search-btn" ng-click="search(searchText)"><img src="imgs/icon/icon-search.png" alt="" class="icon-search"></div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<!---页面内容main-->
 	<article class="componet-base-main">
 		<!--main-siderbar(侧边栏)-->
@@ -28,7 +45,7 @@
 			<ul>
 				<p>审核状态</p>
 				<li>
-				<p class="menusName" ng-click="getComponent(0)"><span class="strioke"></span>全部</p>
+				<p class="menusName" ng-click="getComponent(null)"><span class="strioke"></span>全部</p>
 				<p class="menusName" ng-click="getComponent(1)"><span class="strioke"></span>待审核</p>
 				<p class="menusName" ng-click="getComponent(2)"><span class="strioke"></span>已通过</p>
 				<p class="menusName" ng-click="getComponent(3)"><span class="strioke"></span>未通过</p>
@@ -53,16 +70,15 @@
 						<!--<div class="pop-signal" ng-init="sum1 = 0" ng-click="sum1 = sum1 + 1" ng-model="sum1">{{sum1}}</div>-->
 						<div class="pop-signal edit" ng-click="editAudit()">审核<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
 						<ul ng-show="flag.auditStatus" class="pop-signal">
-							<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
-							<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
+							<li class="pop-signal" ng-click="getAuditList(2)">已通过</li>
+							<li class="pop-signal" ng-click="getAuditList(3)">未通过</li>
 						</ul>
 					</li>
 					<li style="width: 320px;margin-left: 15px">
 						<div class="companySource">
 							来源企业：<select>
-							<option ng-click="companySelect('不限')">不限</option>
-							<option ng-click="companySelect('班筑软件')">班筑软件</option>
-							<option ng-repeat="item in sourceList track by $index"  ng-click="companySelect(item.originEpName)">{{item.originEpName}}</option>
+							<option ng-click="companySelect(null)">不限</option>
+							<option ng-repeat="item in sourceList track by $index" ng-click="companySelect(item.originEpId)">{{item.originEpName}}</option>
 						</select>
 						</div>
 					</li>
@@ -73,19 +89,20 @@
 				<table class="table" style="margin-bottom:0">
 					<thead>
 						<tr style="height:47px;">
-							<th width="15%">
+							<th width="10%">
 								<!-- <label class="rela all-selected"><input type="checkbox" ng-click="allSelected()"><div class="simulated-box"></div></div></label> -->
 								<span>构件名称</span>
 							</th>
-							<th width="10%">大类</th>
-							<th width="10%">小类</th>
-							<th width="10%">品牌</th>
-							<th width="10%">型号</th>
-							<th width="5%" style="min-width:70px">图形</th>
-							<th width="10%">作者</th>
-							<th width="10%">审核状态</th>
-							<th width="10%">审核意见</th>
-							<th width="10%">上传时间</th>
+							<th width="9%">大类</th>
+							<th width="9%">小类</th>
+							<th width="9%">品牌</th>
+							<th width="9%">型号</th>
+							<th width="9%" style="min-width:70px">图形</th>
+							<th width="9%">作者</th>
+							<th width="9%">来源企业</th>
+							<th width="9%">审核状态</th>
+							<th width="9%">审核意见</th>
+							<th width="9%"  style="cursor: pointer" ng-click="order()">上传时间</th>
 						</tr>
 					</thead>
 				</table>
@@ -94,29 +111,30 @@
 				<div class="table-list table-body">
 					<table class="table">
 						<tbody>
-							<tr ng-repeat="item in auditList track by $index">
-								<td width="15%">
+							<tr ng-repeat="item in auditList track by $index" data-id="{{item.componentId}}">
+								<td width="10%" title="item.componentDisplayName">
 									<label class="rela multi-choice">
 										<input type="checkbox" ng-click="updateSelection($event, item)">
 										<div class="simulated-box"></div>
 									</label>
-									<span >{{item.componentName}}</span>
+									<span title="item.componentDisplayName">{{item.componentDisplayName}}</span>
 								</td>
-								<td width="10%">{{item.largeClass}}</td>
-								<td width="10%">{{item.smallClass}}</td>
-								<td width="10%">{{item.brand}}</td>
-								<td width="10%">{{item.model}}</td>
-								<td width="5%" style="min-width:70px;"><img ng-src="{{item.picture}}" alt=""></td>
-								<td width="10%">{{item.author}}</td>
-								<td width="10%" class="aduitStatus" style="position: relative" ng-click="listStatus = !listStatus;">
-									<div class="tdStatus">{{item.status}}<span class="glyphicon glyphicon-menu-down pop-signal"></span></div>
+								<td width="9%">{{item.compClassName}}</td>
+								<td width="9%">{{item.subClassName}}</td>
+								<td width="9%">{{item.brandName}}</td>
+								<td width="9%">{{item.model}}</td>
+								<td width="9%" style="min-width:70px;"><img style="width: 40px" ng-repeat=" items in item.attachment  track by $index" ng-src="{{items.displayUrl}}?name={{items.fileName}}" ng-show="items.fileType == 0"/></td>
+								<td width="9%">{{item.author}}</td>
+								<td width="9%">{{item.originEpName}}</td>
+								<td width="9%" class="aduitStatus" style="position: relative;cursor: pointer" ng-click="listStatus = !listStatus;" >
+									<div class="tdStatus">{{item.status}}<span ng-show="item.status == '未审核'" class="glyphicon glyphicon-menu-down pop-signal"></span></div>
 									<ul class="pop-signal" ng-show="listStatus" style="width: 87%;font-size: 16px">
-										<li class="pop-signal" ng-click="getAuditList('pass',0)">已通过</li>
-										<li class="pop-signal" ng-click="getAuditList('noPass',0)">未通过</li>
+										<li class="pop-signal" ng-click="getAuditList(2,item.componentId)">已通过</li>
+										<li class="pop-signal" ng-click="getAuditList(3,item.componentId)">未通过</li>
 									</ul>
 								</td>
-								<td width="10%" ng-click="showModal()"><span class="icon-sign"></span></td>
-								<td width="10%">{{item.updateTime}}</td>
+								<td width="9%" ng-click="showModal(item.componentId,item.opinion)"><span class="icon-sign"></span></td>
+								<td width="9%">{{item.uploadTime}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -124,15 +142,13 @@
 			</div>
 			<div class="pagination">
 				<div class="clearfix">
-					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" ng-model="currentPage" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
+					<ul uib-pagination total-items="bigTotalItems" force-ellipses="true" items-per-page="20" ng-model="currentPage" ng-change="pageChanged(currentPage)" first-text="首页"  last-text="尾页" previous-text="上一页"  next-text="下一页" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>
 					<span>共 {{numPages}} 页 </span>
 					<div class="pagination-dump">
 						<p class="dump-inp inline"> ,  跳转到   <input type="text" class="form-control inline"> </p>
 						<button type="button " class="inline btn btn-default btn-sm" ng-click="getDumpOk()">确定</button>
 					</div>
 				</div>
-
-
 			</div>
 		</section>
 	</article>

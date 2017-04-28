@@ -21,6 +21,7 @@
     }
     .uploadCom-modal .uploadComSet{
         margin-left: 2%;
+        display: none;
     }
     .uploadCom-modal .modal-left{
         width: 100%;
@@ -60,6 +61,39 @@
         top:55%;
         left:16%;
     }
+    .proText{
+        width: 300px;
+        position: absolute;
+        left: 249px;
+        top: 25%;
+    }
+    .proText p{
+        height:30px;
+        line-height: 30px;
+    }
+    .proBtn{
+        width: 100px;
+        text-align: center;
+        line-height: 50px;
+        background: #4990e2;
+        position: relative;
+        left: 530px;
+        top: 266px;
+        color: white;
+        border-right:6px;
+    }
+    .proBtn:hover{
+        background: #8c8c8c;
+    }
+    .progressWrap .proModal{
+        width: 200px;
+        height: 100px;
+        position: fixed;
+        left: 40%;
+        top: 30%;
+        background: rgba(0,0,0,0.5);
+    }
+    .progressWrap .proModal
 </style>
 <div>
     <div class="uploadCom">
@@ -81,7 +115,7 @@
     </div>
     <div class="uploadComSet" >
         <div class="modal-header">
-            <p class="modal-title modal-close" ng-click="cancelSet()"></p>
+            <p class="modal-title modal-close" ng-click="cancel()"></p>
             <span class="max" ng-click="maxSet()" ng-show="statusSet == 0"></span>
             <span class="revert" ng-click="revertSet()" ng-show="statusSet == 1"></span>
         </div>
@@ -93,14 +127,69 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
-            <button class="btn btn-warning" type="button" ng-click="cancelSet()">取消</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
         </div>
     </div>
 </div>
-<div class="progressWrap" style="display: none;">
+<div class="progressWrap" style="display: none">
+    <div class="proModal" style="display: none; width:400px;height: 270px; position: fixed;left: 40%;top: 70%;background: rgba(255,255,255,1);border: 3px solid #ccc">
+        <div class="modal-header">
+            <p class="modal-title modal-close" ng-click="btnCancel()"></p>
+        </div>
+        <div class="modal-body" style="height: 150px;"><h3>当前有构件正在上传，是否取消上传？</h3></div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="btnOk()">确定</button>
+            <button class="btn btn-warning cancel" type="button" ng-click="btnCancel()">取消</button>
+        </div>
+    </div>
     <div class="progress progress-striped active">
         <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
-            <span id="proglabel">正在启动，请稍后......</span>
+            <span id="proglabel"></span>
         </div>
     </div>
+    <div class="proText">
+        <p ng-repeat="item in uploadStatus">{{item.name}}:{{item.status}}</p>
+    </div>
+    <div class="proBtn" ng-click="close()">关闭</div>
 </div>
+
+<script type="text/javascript" >
+    var appElement = document.querySelector('[ng-controller=uploadComCtrl]');//获取$scope变量
+    var $scope = angular.element(appElement).scope();
+    //上传进度条函数
+    function uploadProgress(currentNum,totals,name,status){
+        var value = currentNum / totals;
+        var text = value * 100 + "%";
+        $(".progressWrap #prog").css("width",text);
+        /* if(value == 1){
+         return;
+         }*/
+        var objStatus = {
+            name:name,
+            status:status
+        }
+        var list = [];
+        list.push(objStatus);
+        for(var i = 0; i < list.length-1;i ++){
+            for(var j = i+1;j < list.length;j++){
+                if(list[i].name = list[j].name){
+                    list.splice(j, 1);
+                }
+            }
+        }
+        $scope.uploadStatus = list;
+        alert($scope.uploadStatusarr.join(','));
+    }
+
+//    uploadProgress(1,1,'我的构建',1);
+
+    function jsExt()
+    {
+        alert("aaa");
+    }
+
+
+</script>
+
+
+
